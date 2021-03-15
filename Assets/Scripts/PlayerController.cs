@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference movementControl;
     [SerializeField] private InputActionReference jumpControl;
     [SerializeField] private CharacterController controller;
+    [SerializeField] private GameObject poggers;
     [SerializeField] private Vector3 playerVelocity;
     [SerializeField] private bool groundedPlayer;
     [SerializeField] private float playerSpeed = 10.0f;
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     private Transform cameraMainTransform;
     [SerializeField] private float rotationSpeed = 4f;
 
+    public bool crossed = false;
+    public GameObject player;
     private void OnEnable()
     {
         movementControl.action.Enable();
@@ -31,8 +34,19 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
+        //Player = controller.transform.gameObject;
         cameraMainTransform = Camera.main.transform;
         LockMouse();
+    }
+
+    private void FixedUpdate()
+    {
+
+        if (crossed == true)
+        {
+            player.transform.localPosition = poggers.transform.position;
+            crossed = false;
+        }
     }
 
     void Update()
@@ -65,11 +79,45 @@ public class PlayerController : MonoBehaviour
             Quaternion rotation = Quaternion.Euler(0f, targetAngle, 0f);
             transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
         }
+
+
+        //Debug.Log(player.transform.localPosition);
     }
     private void LockMouse()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag.Equals("Phase Enter"))
+        {
+            /***
+            GameObject entrance = other.gameObject;
+            //Debug.Log(entrance);
+            GameObject exit = entrance.transform.parent.GetChild(0).gameObject;
+            //Debug.Log(exit);
+            Debug.Log("player posit1" + Player.transform.position);
+            Debug.Log("Existe posit1" + exit.transform.position);
+            Player.transform.position = exit.transform.position;
+            Debug.Log("player posit2" + Player.transform.position);
+            Debug.Log("Existe posit2" + exit.transform.position);
+            ***/
+
+            //controller.gameObject.transform.position = poggers.transform.position;
+
+            //GameObject exit = other.gameObject.transform.parent.transform.GetChild(0);
+            Debug.Log("crossed");
+            crossed = true;
+
+        }
+    }
+
+    private void TeleportPlayer()
+    {
+
+    }
+
 }
 
