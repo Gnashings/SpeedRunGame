@@ -10,11 +10,13 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private InputActionReference movementControl;
     [SerializeField] private InputActionReference actionOne;
+    [SerializeField] private InputActionReference actionTwo;
     [SerializeField] private InputActionReference jumpControl;
     [SerializeField] private CharacterController controller;
     [SerializeField] private Vector3 playerVelocity;
     [SerializeField] private bool groundedPlayer;
     [SerializeField] private bool timeCheat = false;
+    [SerializeField] private bool canPhase = false;
     [SerializeField] private float playerSpeed = 10.0f;
     [SerializeField] private float jumpHeight = 10.0f;
     [SerializeField] private float gravityValue = -9.81f;
@@ -22,7 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Canvas UIdisplay;
 
     private Vector3 teleport;
-    public bool crossed = false;
+    private bool crossed = false;
     public GameObject player;
     private Transform cameraMainTransform;
     private Text scoreText;
@@ -35,7 +37,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        Time.timeScale = 1f;
         controller = gameObject.GetComponent<CharacterController>();
         cameraMainTransform = Camera.main.transform;
         UIdisplay = (Canvas)FindObjectOfType(typeof(Canvas));
@@ -44,9 +45,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-
         LockMouse();
-        //StartCoroutine(TimeSlow());
     }
 
     private void FixedUpdate()
@@ -60,8 +59,14 @@ public class PlayerController : MonoBehaviour
         Move();
         if (actionOne.action.triggered)
         {
-            //TimePower();
+            TimePower();
         }
+
+        if (actionTwo.action.triggered)
+        {
+            PhasePower();
+        }
+
         Debug.Log(Time.timeScale);
     }
 
@@ -107,9 +112,14 @@ public class PlayerController : MonoBehaviour
         timeCheat = !timeCheat;
     }
 
+    private void PhasePower()
+    {
+        canPhase = !canPhase;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Equals("Phase Enter"))
+        if (other.tag.Equals("Phase Enter") && canPhase)
         {
             GameObject entrance = other.gameObject;
             GameObject exit = entrance.transform.parent.GetChild(0).gameObject;
@@ -136,6 +146,7 @@ public class PlayerController : MonoBehaviour
     {
         movementControl.action.Enable();
         actionOne.action.Enable();
+        actionTwo.action.Enable();
         jumpControl.action.Enable();
     }
 
@@ -143,6 +154,7 @@ public class PlayerController : MonoBehaviour
     {
         movementControl.action.Disable();
         actionOne.action.Disable();
+        actionTwo.action.Disable();
         jumpControl.action.Disable();
     }
     
@@ -152,8 +164,10 @@ public class PlayerController : MonoBehaviour
         timer += Time.deltaTime;
         if (timeCheat == true)
         {
-            //SlowMo();
+            SlowMo();
         }
+        else
+            ResumeTime();
         scoreTime = timer - timer % 1;
         scoreText.text = scoreTime.ToString();
         //Debug.Log(timer - timer % 1);
@@ -162,7 +176,7 @@ public class PlayerController : MonoBehaviour
 
     private void ResumeTime()
     {
-        //Time.timeScale = 1f;
+        Time.timeScale = 1f;
     }
 
     private void SlowMo()
