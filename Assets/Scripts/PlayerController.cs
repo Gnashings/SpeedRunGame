@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,23 +17,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float playerSpeed = 10.0f;
     [SerializeField] private float jumpHeight = 10.0f;
     [SerializeField] private float gravityValue = -9.81f;
-    
+  
     [SerializeField] private float rotationSpeed = 4f;
     private Vector3 teleport;
     public bool crossed = false;
     public GameObject player;
     private Transform cameraMainTransform;
 
-    private void OnEnable()
-    {
-        movementControl.action.Enable();
-        jumpControl.action.Enable();
-    }
-    private void OnDisable()
-    {
-        movementControl.action.Disable();
-        jumpControl.action.Disable();
-    }
+
 
     private void Start()
     {
@@ -40,6 +32,8 @@ public class PlayerController : MonoBehaviour
         //Player = controller.transform.gameObject;
         cameraMainTransform = Camera.main.transform;
         LockMouse();
+        StartCoroutine(TimeSlow());
+
     }
 
     private void FixedUpdate()
@@ -113,6 +107,22 @@ public class PlayerController : MonoBehaviour
             player.transform.localPosition = teleport;
             crossed = false;
         }
+    }
+
+    private void OnEnable()
+    {
+        movementControl.action.Enable();
+        jumpControl.action.Enable();
+    }
+    private void OnDisable()
+    {
+        movementControl.action.Disable();
+        jumpControl.action.Disable();
+    }
+
+    IEnumerator TimeSlow()
+    {
+        yield return new WaitForSeconds(2);
     }
 
 }
