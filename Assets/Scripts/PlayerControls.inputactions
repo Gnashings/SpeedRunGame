@@ -30,9 +30,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Actions",
+                    "name": "ActionOne",
                     "type": "Button",
                     "id": "4aef1213-5d14-4229-be9b-b8054a9418f1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "ActionTwo",
+                    "type": "Button",
+                    "id": "9d07e908-b0d0-4129-be38-6a30ff94a994",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -123,7 +131,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Actions",
+                    "action": "ActionOne",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d55012fd-2c19-403d-a71f-c1574e680c80",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ActionTwo",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
