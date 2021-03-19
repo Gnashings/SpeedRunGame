@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using System;
 
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(InputActionReference))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private InputActionReference movementControl;
@@ -18,29 +19,43 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool timeCheat = false;
     [SerializeField] private bool canPhase = false;
     [SerializeField] private float playerSpeed = 10.0f;
-    [SerializeField] private float jumpHeight = 10.0f;
-    [SerializeField] private float gravityValue = -9.81f;
-    [SerializeField] private float rotationSpeed = 4f;
+    [SerializeField] private float jumpHeight = 3.0f;
+    [SerializeField] private float gravityValue = -30f;
+    [SerializeField] private float rotationSpeed = 20f;
     [SerializeField] private Canvas UIdisplay;
 
     private Vector3 teleport;
     private bool crossed = false;
     public GameObject player;
-    private Transform cameraMainTransform;
-    private Text scoreText;
+    Transform cameraMainTransform;
     float slowdownFactor = 0.05f;
+
 
     //DELEEEEET
     float totalTime;
     float scoreTime;
     float timer;
 
+    //Canvas UI
+    Slider recharge;
+    Text scoreText;
+    Image chargeOne;
+    Image chargeTwo;
+
     private void Awake()
     {
         controller = gameObject.GetComponent<CharacterController>();
         cameraMainTransform = Camera.main.transform;
+
+        //Canvas UI
         UIdisplay = (Canvas)FindObjectOfType(typeof(Canvas));
         scoreText = GameObject.Find("Canvas/Text").GetComponent<Text>();
+        recharge = GameObject.Find("Canvas/TimeBreakSlider").GetComponent<Slider>();
+        chargeOne = GameObject.Find("Canvas/Charge One").GetComponent<Image>();
+        chargeTwo = GameObject.Find("Canvas/Charge Two").GetComponent<Image>();
+        //00ff00
+        //Canvas UI set value
+        recharge.value = 0.0f;
     }
 
     private void Start()
@@ -52,6 +67,21 @@ public class PlayerController : MonoBehaviour
     {
         TimeTracker();
         TeleportPlayer();
+        recharge.maxValue = 1000;
+        recharge.minValue = 0;
+
+        if(recharge.value >= 500)
+        {
+            chargeOne.color = new Color (0.0f, 0.7f, 0.0f);
+        }
+        if(recharge.value == 1000)
+        {
+            chargeTwo.color = new Color (0.0f, 0.7f, 0.0f);
+        }
+
+        recharge.value += 1 + Time.unscaledDeltaTime;
+
+
     }
 
     void Update()
@@ -66,8 +96,7 @@ public class PlayerController : MonoBehaviour
         {
             PhasePower();
         }
-
-        Debug.Log(Time.timeScale);
+        //Debug.Log(Time.timeScale);
     }
 
     private void Move()
