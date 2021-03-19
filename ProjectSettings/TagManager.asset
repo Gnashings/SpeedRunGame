@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Phase Enter
   - Phase Exit
+  - Collectible
   layers:
   - Default
   - TransparentFX

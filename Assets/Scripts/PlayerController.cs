@@ -39,8 +39,11 @@ public class PlayerController : MonoBehaviour
     //Canvas UI
     Slider recharge;
     Text scoreText;
+    Text itemTotal;
     Image chargeOne;
     Image chargeTwo;
+    float itemCount;
+
 
     private void Awake()
     {
@@ -50,10 +53,11 @@ public class PlayerController : MonoBehaviour
         //Canvas UI
         UIdisplay = (Canvas)FindObjectOfType(typeof(Canvas));
         scoreText = GameObject.Find("Canvas/Text").GetComponent<Text>();
-        recharge = GameObject.Find("Canvas/TimeBreakSlider").GetComponent<Slider>();
+        recharge = GameObject.Find("Canvas/TimeDilation Slider").GetComponent<Slider>();
         chargeOne = GameObject.Find("Canvas/Charge One").GetComponent<Image>();
         chargeTwo = GameObject.Find("Canvas/Charge Two").GetComponent<Image>();
-        //00ff00
+        itemTotal = GameObject.Find("Canvas/Item Total").GetComponent<Text>();
+
         //Canvas UI set value
         recharge.value = 0.0f;
     }
@@ -159,6 +163,13 @@ public class PlayerController : MonoBehaviour
             crossed = true;
             //tbr
             //playerSpeed = playerSpeed * 5;
+        }
+
+        if (other.tag.Equals("Collectible"))
+        {
+            Destroy(other.gameObject);
+            itemCount++;
+            itemTotal.text = itemCount.ToString();
         }
     }
 
