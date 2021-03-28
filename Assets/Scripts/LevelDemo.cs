@@ -12,7 +12,6 @@ public class LevelDemo : MonoBehaviour
 {
     [Header("Bridges")]
     [SerializeField] public List<Bridge> bridge;
-    [SerializeField] public int bridgeIndex;
     [Header("Objective")]
     [SerializeField] int totalRequiredCollectables;
     [SerializeField] public List<Collectible> collectItem;
@@ -26,14 +25,12 @@ public class LevelDemo : MonoBehaviour
     [SerializeField] public float spawnAfter;
     [SerializeField] public float spawnEvery;
     [SerializeField] public bool spawnEnemy = true;
-    private float range = 20.0f;
+    private readonly float range = 20.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-
         InvokeRepeating("DroneSpawner", spawnAfter, spawnEvery);
-
 
         if (bridge != null && bridge.Count >= 2)
         {
@@ -42,11 +39,9 @@ public class LevelDemo : MonoBehaviour
             //Debug.Log("Removing Bridge at index: " + bridgeIndex);
             //bridge[bridgeIndex].gameObject.SetActive(false);
 
-
             for (int b = 0; b <= bridge.Count - 2; b += 2)
             {
                 int back = Random.Range(0, 2);
-                Debug.Log(back);
                 if (back == 1)
                 {
                     bridge[b].gameObject.SetActive(false);
@@ -56,7 +51,6 @@ public class LevelDemo : MonoBehaviour
                     bridge[b + 1].gameObject.SetActive(false);
                     continue;
             }
-
         }
 
         //method this later
@@ -145,16 +139,5 @@ public class LevelDemo : MonoBehaviour
         }
         return finalPosition;
     }
-
-    public void BridgeLoader()
-        {
-            if (bridge != null && bridge.Count >= 2)
-            {
-                //range must be zero to the bridge.length, as the final number isn't inclusive
-                //bridgeIndex = Random.Range(0, 2);
-                Debug.Log("Removing Bridge at index: " + bridgeIndex);
-                bridge[bridgeIndex].gameObject.SetActive(false);
-            }
-        }
 
     }

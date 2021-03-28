@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System;
+using System.Runtime.CompilerServices;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(InputActionReference))]
@@ -26,6 +27,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Canvas UIdisplay;
     public Transform detectPlayerSphere;
     public float radius = 5f;
+    
+    [Header("PLAYER STATES")]
+    [SerializeField] private bool isJumping = false;
+    [SerializeField] private bool isFalling = false;
+    [SerializeField] private bool isLanded = false;
 
     private Vector3 teleport;
     private bool crossed = false;
@@ -43,23 +49,23 @@ public class PlayerController : MonoBehaviour
     Slider recharge;
     Text scoreText;
     Text itemTotal;
-    Image chargeOne;
-    Image chargeTwo;
+    RawImage chargeOne;
+    RawImage chargeTwo;
     float itemCount;
-
+    
 
     private void Awake()
     {
         controller = gameObject.GetComponent<CharacterController>();
         playerAnim = gameObject.GetComponent<PlayerAnimation>();
         cameraMainTransform = Camera.main.transform;
-
+     
         //Canvas UI
         UIdisplay = (Canvas)FindObjectOfType(typeof(Canvas));
         scoreText = GameObject.Find("Canvas/Text").GetComponent<Text>();
         recharge = GameObject.Find("Canvas/TimeDilation Slider").GetComponent<Slider>();
-        chargeOne = GameObject.Find("Canvas/Charge One").GetComponent<Image>();
-        chargeTwo = GameObject.Find("Canvas/Charge Two").GetComponent<Image>();
+        chargeOne = GameObject.Find("Canvas/Charge One").GetComponent<RawImage>();
+        chargeTwo = GameObject.Find("Canvas/Charge Two").GetComponent<RawImage>();
         itemTotal = GameObject.Find("Canvas/Item Total").GetComponent<Text>();
 
         //Canvas UI set value
@@ -96,7 +102,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (controller.isGrounded == false)
+        {
+            isJumping = false;
+        }
         Move();
+
+            
         if (actionOne.action.triggered)
         {
             TimePower();
@@ -112,23 +124,39 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
+        if (groundedPlayer && playerVelocity.y <= 0)
         {
             playerVelocity.y = 0f;
         }
-
+        
         Vector2 movement = movementControl.action.ReadValue<Vector2>();
         Vector3 move = new Vector3(movement.x, 0, movement.y);
         move = cameraMainTransform.forward * move.z + cameraMainTransform.right * move.x;
         move.y = 0;
         controller.Move(move * Time.unscaledDeltaTime * playerSpeed);
-        
-        // it jumps
+
+        if (isJumping == true)
+        {
+            playerAnim.Freefall();
+        }
+        if (isJumping == false)
+        {
+            
+            if (move.z == 0 && move.x == 0)
+            {
+                playerAnim.Idle();
+            }
+            else
+                playerAnim.Running();
+        }
+
+
         // changes the height position of the player..
         if (jumpControl.action.triggered && groundedPlayer)
         {
+            playerAnim.Freefall();
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-            playerAnim.InAir();
+            
         }
 
         playerVelocity.y += gravityValue * Time.unscaledDeltaTime;
