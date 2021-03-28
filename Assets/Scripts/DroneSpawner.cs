@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bridge : MonoBehaviour
-{ 
-
+public class DroneSpawner : MonoBehaviour
+{
+    public GameObject enemy;
 
     // Start is called before the first frame update
     void Start()
@@ -16,5 +16,10 @@ public class Bridge : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SpawnDrone()
+    {
+        Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
     }
 }

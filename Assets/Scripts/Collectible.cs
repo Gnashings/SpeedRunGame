@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bridge : MonoBehaviour
-{ 
-
-
+public class Collectible : MonoBehaviour
+{
     // Start is called before the first frame update
     void Start()
     {
@@ -16,5 +14,10 @@ public class Bridge : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnDestroy()
+    {
+        Debug.LogWarning("Not reported to the global status.");
     }
 }

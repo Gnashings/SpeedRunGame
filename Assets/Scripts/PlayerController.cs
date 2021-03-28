@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravityValue = -30f;
     [SerializeField] private float rotationSpeed = 20f;
     [SerializeField] private Canvas UIdisplay;
+    public Transform detectPlayerSphere;
+    public float radius = 5f;
 
     private Vector3 teleport;
     private bool crossed = false;
@@ -65,6 +67,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         LockMouse();
+        Physics.IgnoreLayerCollision(0, 9);
+        Physics.GetIgnoreLayerCollision(8, 10);
     }
 
     private void FixedUpdate()
@@ -117,7 +121,7 @@ public class PlayerController : MonoBehaviour
         move.y = 0;
         controller.Move(move * Time.unscaledDeltaTime * playerSpeed);
 
-        // Changes the height position of the player..
+        // changes the height position of the player..
         if (jumpControl.action.triggered && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
@@ -126,7 +130,7 @@ public class PlayerController : MonoBehaviour
         playerVelocity.y += gravityValue * Time.unscaledDeltaTime;
         controller.Move(playerVelocity * Time.unscaledDeltaTime);
 
-        //unbinds camera rotations based off movement
+        // unbinds camera rotations based off movement
         if (movement != Vector2.zero)
         {
             float targetAngle = Mathf.Atan2(movement.x, movement.y) * Mathf.Rad2Deg + cameraMainTransform.eulerAngles.y;
@@ -237,6 +241,18 @@ public class PlayerController : MonoBehaviour
     private void LoadCanvasInformation()
     {
 
+    }
+
+
+
+    void OnDrawGizmosSelected()
+    {
+        if (detectPlayerSphere == null)
+        {
+            detectPlayerSphere = transform;
+        }
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(detectPlayerSphere.position, radius);
     }
 
 }
