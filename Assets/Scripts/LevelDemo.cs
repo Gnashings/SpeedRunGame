@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -30,16 +31,35 @@ public class LevelDemo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //method this later
+
         InvokeRepeating("DroneSpawner", spawnAfter, spawnEvery);
+
+
         if (bridge != null && bridge.Count >= 2)
         {
             //range must be zero to the bridge.length, as the final number isn't inclusive
-            bridgeIndex = Random.Range(0, 2);
-            Debug.Log("Removing Bridge at index: " + bridgeIndex);
-            bridge[bridgeIndex].gameObject.SetActive(false);
+            //bridgeIndex = Random.Range(0, 2);
+            //Debug.Log("Removing Bridge at index: " + bridgeIndex);
+            //bridge[bridgeIndex].gameObject.SetActive(false);
+
+
+            for (int b = 0; b <= bridge.Count - 2; b += 2)
+            {
+                int back = Random.Range(0, 2);
+                Debug.Log(back);
+                if (back == 1)
+                {
+                    bridge[b].gameObject.SetActive(false);
+                    continue;
+                }
+                else
+                    bridge[b + 1].gameObject.SetActive(false);
+                    continue;
+            }
+
         }
 
+        //method this later
         if (collectItem != null && collectItem.Count >= 2)
         {   
             //allows us to count how many loadables are left to remove
@@ -54,14 +74,16 @@ public class LevelDemo : MonoBehaviour
                 //if we reach the half way mark, guarantee the next collectable will be removed
                 if (collectItem.Count - i == collectItem.Count / 2)
                 {
-                    Destroy(collectItem[i].gameObject);
+                    //Destroy(collectItem[i].gameObject);
+                    collectItem[i].gameObject.SetActive(false);
                     loadCollectables -= 1;
                     continue;
                 }
 
                 if (Random.Range(0, 2) == 1)
                 {
-                    Destroy(collectItem[i].gameObject);
+                    //Destroy(collectItem[i].gameObject);
+                    collectItem[i].gameObject.SetActive(false);
                     loadCollectables -= 1;
                 }
             }
@@ -82,19 +104,20 @@ public class LevelDemo : MonoBehaviour
                 //if we reach the half way mark, guarantee the next collectable will be removed
                 if (altCollectItem.Count - k == altCollectItem.Count / 2)
                 {
-                    Destroy(altCollectItem[k].gameObject);
+                    //Destroy(altCollectItem[k].gameObject);
+                    altCollectItem[k].gameObject.SetActive(false);
                     loadAltCollectables -= 1;
                     continue;
                 }
 
                 if (Random.Range(0, 2) == 1)
                 {
-                    Destroy(altCollectItem[k].gameObject);
+                    //Destroy(altCollectItem[k].gameObject);
+                    altCollectItem[k].gameObject.SetActive(false);
                     loadAltCollectables -= 1;
                 }
             }
         }
-
 
     }
 
