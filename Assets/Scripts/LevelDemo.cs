@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -12,11 +13,11 @@ public class LevelDemo : MonoBehaviour
     [SerializeField] public List<Bridge> bridge;
     [SerializeField] public int bridgeIndex;
     [Header("Objective")]
+    [SerializeField] int totalRequiredCollectables;
     [SerializeField] public List<Collectible> collectItem;
-    [SerializeField] public int collectionCount;
-    [Header("Objective Alt")]
+    [Header("Objective AltWorld")]
+    [SerializeField] int totalAltRequiredCollectables;
     [SerializeField] public List<Collectible> altCollectItem;
-    [SerializeField] public int altCollectionCount;
     [Header("Kill Box")]
     [SerializeField] public List<GameObject> DroneSpawn;
     [SerializeField] public GameObject enemy;
@@ -29,7 +30,7 @@ public class LevelDemo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //method this later
         InvokeRepeating("DroneSpawner", spawnAfter, spawnEvery);
         if (bridge != null && bridge.Count >= 2)
         {
@@ -40,16 +41,61 @@ public class LevelDemo : MonoBehaviour
         }
 
         if (collectItem != null && collectItem.Count >= 2)
-        {
-            int randomCollectionStart = Random.Range(0, 2);
-            //range must be zero to the collectItem.length, as the final number isn't inclusive
-            collectionCount = Random.Range(0, collectItem.Count);
+        {   
+            //allows us to count how many loadables are left to remove
+            int loadCollectables = totalRequiredCollectables;
 
-            for (int i = 0; i >= collectionCount; i++)
+            for (int i = 0; i <= collectItem.Count - 1; i++)
             {
-                
+                if (loadCollectables == 0 || collectItem.Count <= totalRequiredCollectables)
+                {
+                    break;
+                }
+                //if we reach the half way mark, guarantee the next collectable will be removed
+                if (collectItem.Count - i == collectItem.Count / 2)
+                {
+                    Destroy(collectItem[i].gameObject);
+                    loadCollectables -= 1;
+                    continue;
+                }
+
+                if (Random.Range(0, 2) == 1)
+                {
+                    Destroy(collectItem[i].gameObject);
+                    loadCollectables -= 1;
+                }
             }
         }
+
+        //method this later
+        if (altCollectItem != null && altCollectItem.Count >= 2)
+        {
+            //allows us to count how many loadables are left to remove
+            int loadAltCollectables = totalAltRequiredCollectables;
+
+            for (int k = 0; k <= altCollectItem.Count - 1; k++)
+            {
+                if (loadAltCollectables == 0 || altCollectItem.Count <= totalAltRequiredCollectables)
+                {
+                    break;
+                }
+                //if we reach the half way mark, guarantee the next collectable will be removed
+                if (altCollectItem.Count - k == altCollectItem.Count / 2)
+                {
+                    Destroy(altCollectItem[k].gameObject);
+                    loadAltCollectables -= 1;
+                    continue;
+                }
+
+                if (Random.Range(0, 2) == 1)
+                {
+                    Destroy(altCollectItem[k].gameObject);
+                    loadAltCollectables -= 1;
+                }
+            }
+        }
+
+
     }
 
     public void DroneSpawner()
