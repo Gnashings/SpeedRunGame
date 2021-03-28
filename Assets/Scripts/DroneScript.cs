@@ -42,11 +42,12 @@ public class DroneScript : MonoBehaviour
         ChasePlayer();
         //droneVelocity.y += gravityValue * Time.deltaTime;
         //drone.Move(droneVelocity * Time.deltaTime);
+        //InAttackRadius();
     }
 
     void Update()
     {
-        //InAttackRadius();
+
     }
 
     public void FloatUp()
