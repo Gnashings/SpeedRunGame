@@ -14,12 +14,16 @@ public class LevelDemo : MonoBehaviour
     [Header("Objective")]
     [SerializeField] public List<Collectible> collectItem;
     [SerializeField] public int collectionCount;
+    [Header("Objective Alt")]
+    [SerializeField] public List<Collectible> altCollectItem;
+    [SerializeField] public int altCollectionCount;
     [Header("Kill Box")]
     [SerializeField] public List<GameObject> DroneSpawn;
     [SerializeField] public GameObject enemy;
     [SerializeField] private int spawnIndex;
     [SerializeField] public float spawnAfter;
     [SerializeField] public float spawnEvery;
+    [SerializeField] public bool spawnEnemy = true;
     private float range = 20.0f;
 
     // Start is called before the first frame update
@@ -37,23 +41,27 @@ public class LevelDemo : MonoBehaviour
 
         if (collectItem != null && collectItem.Count >= 2)
         {
+            int randomCollectionStart = Random.Range(0, 2);
             //range must be zero to the collectItem.length, as the final number isn't inclusive
-            collectionCount = Random.Range(0, 2);
-            {
+            collectionCount = Random.Range(0, collectItem.Count);
 
+            for (int i = 0; i >= collectionCount; i++)
+            {
+                
             }
         }
-        //Instantiate(enemy, new Vector3(-2.343854f, 3.784546f, -0.07437605f), Quaternion.identity);
     }
 
     public void DroneSpawner()
     {
-        spawnIndex = Random.Range(0, DroneSpawn.Count - 1);
-        Vector3 spawnPoint = DroneSpawn[spawnIndex].gameObject.transform.position;
-        Debug.Log(DroneSpawn[spawnIndex] + " " + spawnPoint);
-        //Instantiate(enemy, new Vector3(-2.343854f, 3.784546f, -0.07437605f), Quaternion.identity);
-        //Instantiate(enemy, spawnPoint, Quaternion.identity);
-        Instantiate(enemy, RandomNavmeshLocation(range), Quaternion.identity);
+        if (spawnEnemy == true)
+        {
+            spawnIndex = Random.Range(0, DroneSpawn.Count);
+            Vector3 spawnPoint = DroneSpawn[spawnIndex].gameObject.transform.position;
+            //Spawning index output
+            //Debug.Log(DroneSpawn[spawnIndex] + " " + spawnPoint);
+            Instantiate(enemy, RandomNavmeshLocation(range), Quaternion.identity);
+        }
     }
 
     public Vector3 RandomNavmeshLocation(float radius)
