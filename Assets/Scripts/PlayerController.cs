@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference actionTwo;
     [SerializeField] private InputActionReference jumpControl;
     [SerializeField] private CharacterController controller;
+    [SerializeField] private PlayerAnimation playerAnim;
     [SerializeField] private Vector3 playerVelocity;
     [SerializeField] private bool groundedPlayer;
     [SerializeField] private bool timeCheat = false;
@@ -50,6 +51,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         controller = gameObject.GetComponent<CharacterController>();
+        playerAnim = gameObject.GetComponent<PlayerAnimation>();
         cameraMainTransform = Camera.main.transform;
 
         //Canvas UI
@@ -120,11 +122,13 @@ public class PlayerController : MonoBehaviour
         move = cameraMainTransform.forward * move.z + cameraMainTransform.right * move.x;
         move.y = 0;
         controller.Move(move * Time.unscaledDeltaTime * playerSpeed);
-
+        
+        // it jumps
         // changes the height position of the player..
         if (jumpControl.action.triggered && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            playerAnim.InAir();
         }
 
         playerVelocity.y += gravityValue * Time.unscaledDeltaTime;

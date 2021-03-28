@@ -18,6 +18,6 @@ public class Collectible : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.LogWarning("Not reported to the global status.");
+        //Debug.LogWarning("Not reported to the global status.");
     }
 }
