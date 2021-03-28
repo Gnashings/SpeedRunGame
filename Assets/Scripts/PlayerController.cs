@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using System;
 
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(InputActionReference))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private InputActionReference movementControl;
@@ -18,40 +19,77 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool timeCheat = false;
     [SerializeField] private bool canPhase = false;
     [SerializeField] private float playerSpeed = 10.0f;
-    [SerializeField] private float jumpHeight = 10.0f;
-    [SerializeField] private float gravityValue = -9.81f;
-    [SerializeField] private float rotationSpeed = 4f;
+    [SerializeField] private float jumpHeight = 3.0f;
+    [SerializeField] private float gravityValue = -30f;
+    [SerializeField] private float rotationSpeed = 20f;
     [SerializeField] private Canvas UIdisplay;
+    public Transform detectPlayerSphere;
+    public float radius = 5f;
 
     private Vector3 teleport;
     private bool crossed = false;
     public GameObject player;
-    private Transform cameraMainTransform;
-    private Text scoreText;
+    Transform cameraMainTransform;
     float slowdownFactor = 0.05f;
+
 
     //DELEEEEET
     float totalTime;
     float scoreTime;
     float timer;
 
+    //Canvas UI
+    Slider recharge;
+    Text scoreText;
+    Text itemTotal;
+    Image chargeOne;
+    Image chargeTwo;
+    float itemCount;
+
+
     private void Awake()
     {
         controller = gameObject.GetComponent<CharacterController>();
         cameraMainTransform = Camera.main.transform;
+
+        //Canvas UI
         UIdisplay = (Canvas)FindObjectOfType(typeof(Canvas));
         scoreText = GameObject.Find("Canvas/Text").GetComponent<Text>();
+        recharge = GameObject.Find("Canvas/TimeDilation Slider").GetComponent<Slider>();
+        chargeOne = GameObject.Find("Canvas/Charge One").GetComponent<Image>();
+        chargeTwo = GameObject.Find("Canvas/Charge Two").GetComponent<Image>();
+        itemTotal = GameObject.Find("Canvas/Item Total").GetComponent<Text>();
+
+        //Canvas UI set value
+        recharge.value = 0.0f;
     }
 
     private void Start()
     {
         LockMouse();
+        Physics.IgnoreLayerCollision(0, 9);
+        Physics.GetIgnoreLayerCollision(8, 10);
     }
 
     private void FixedUpdate()
     {
         TimeTracker();
         TeleportPlayer();
+        recharge.maxValue = 1000;
+        recharge.minValue = 0;
+
+        if(recharge.value >= 500)
+        {
+            chargeOne.color = new Color (0.0f, 0.7f, 0.0f);
+        }
+        if(recharge.value == 1000)
+        {
+            chargeTwo.color = new Color (0.0f, 0.7f, 0.0f);
+        }
+
+        recharge.value += 1 + Time.unscaledDeltaTime;
+
+
     }
 
     void Update()
@@ -66,8 +104,7 @@ public class PlayerController : MonoBehaviour
         {
             PhasePower();
         }
-
-        Debug.Log(Time.timeScale);
+        //Debug.Log(Time.timeScale);
     }
 
     private void Move()
@@ -84,7 +121,7 @@ public class PlayerController : MonoBehaviour
         move.y = 0;
         controller.Move(move * Time.unscaledDeltaTime * playerSpeed);
 
-        // Changes the height position of the player..
+        // changes the height position of the player..
         if (jumpControl.action.triggered && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
@@ -93,7 +130,7 @@ public class PlayerController : MonoBehaviour
         playerVelocity.y += gravityValue * Time.unscaledDeltaTime;
         controller.Move(playerVelocity * Time.unscaledDeltaTime);
 
-        //unbinds camera rotations based off movement
+        // unbinds camera rotations based off movement
         if (movement != Vector2.zero)
         {
             float targetAngle = Mathf.Atan2(movement.x, movement.y) * Mathf.Rad2Deg + cameraMainTransform.eulerAngles.y;
@@ -132,6 +169,13 @@ public class PlayerController : MonoBehaviour
             crossed = true;
             //tbr
             //playerSpeed = playerSpeed * 5;
+        }
+
+        if (other.tag.Equals("Collectible"))
+        {
+            Destroy(other.gameObject);
+            itemCount++;
+            itemTotal.text = itemCount.ToString();
         }
     }
 
@@ -199,6 +243,18 @@ public class PlayerController : MonoBehaviour
     private void LoadCanvasInformation()
     {
 
+    }
+
+
+
+    void OnDrawGizmosSelected()
+    {
+        if (detectPlayerSphere == null)
+        {
+            detectPlayerSphere = transform;
+        }
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(detectPlayerSphere.position, radius);
     }
 
 }
