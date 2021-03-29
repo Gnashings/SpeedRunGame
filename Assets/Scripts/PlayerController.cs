@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour
             teleport = PortalExit.transform.position;
 
             Debug.Log("Portal");
-            flipped = true;
+            crossed = true;
         }
 
         if (other.tag.Equals("Collectible"))
@@ -257,6 +257,7 @@ public class PlayerController : MonoBehaviour
             {
                 SceneManager.LoadScene("WinScreen");
             }
+
             itemCount++;
             itemTotal.text = itemCount.ToString();
         }
