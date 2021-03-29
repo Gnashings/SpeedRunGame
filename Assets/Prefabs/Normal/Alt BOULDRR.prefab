@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4080038175057775629}
   - component: {fileID: 2268620501268756679}
   - component: {fileID: 4016729201301888351}
-  - component: {fileID: 5433972194453481668}
   - component: {fileID: 11154466493653694}
   m_Layer: 0
   m_Name: Alt BOULDRR
@@ -98,27 +97,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6236982333847069958, guid: 1712058b5c513904cb6a5de8e7fd3e77, type: 3}
---- !u!114 &5433972194453481668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 322920121333274898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62d70652a29126b45ad015a08edad99c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bridge: []
-  bridgeIndex: 0
-  collectItem: []
-  collectionCount: 0
-  DroneSpawn: []
-  enemy: {fileID: 0}
-  spawnIndex: 0
-  spawnAfter: 0
-  spawnEvery: 0
 --- !u!205 &11154466493653694
 LODGroup:
   m_ObjectHideFlags: 0
