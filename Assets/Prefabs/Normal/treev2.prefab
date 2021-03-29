@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 1195096962215630748}
   - component: {fileID: 3995010710396609366}
   - component: {fileID: 5881187770229743433}
-  m_Layer: 0
+  - component: {fileID: 8366201606019988403}
+  m_Layer: 10
   m_Name: treev2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,3 +110,17 @@ LODGroup:
     renderers:
     - renderer: {fileID: 3995010710396609366}
   m_Enabled: 1
+--- !u!136 &8366201606019988403
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3202584228076028547}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 8.007854
+  m_Height: 68.34448
+  m_Direction: 1
+  m_Center: {x: -0.000000044992916, y: 26.222504, z: 0.0000000035446832}
