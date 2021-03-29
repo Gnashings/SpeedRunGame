@@ -99,6 +99,7 @@ MonoBehaviour:
     type: 3}
   actionTwo: {fileID: -8111570365346421517, guid: e6500109ad5072f40acb8083760ed4be,
     type: 3}
+  actionThree: {fileID: 0}
   jumpControl: {fileID: 3252600319625496365, guid: e6500109ad5072f40acb8083760ed4be,
     type: 3}
   controller: {fileID: 1414929503786416544}
@@ -117,6 +118,9 @@ MonoBehaviour:
   isJumping: 0
   isFalling: 0
   isLanded: 0
+  isRunning: 0
+  flipped: 0
+  crossed: 0
   player: {fileID: 1414929503786416606}
 --- !u!135 &87894590
 SphereCollider:

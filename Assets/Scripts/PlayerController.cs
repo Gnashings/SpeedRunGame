@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference movementControl;
     [SerializeField] private InputActionReference actionOne;
     [SerializeField] private InputActionReference actionTwo;
+    [SerializeField] private InputActionReference actionThree;
     [SerializeField] private InputActionReference jumpControl;
     [SerializeField] private CharacterController controller;
     [SerializeField] private PlayerAnimation playerAnim;
@@ -35,9 +36,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isFalling = false;
     [SerializeField] private bool isLanded = false;
     [SerializeField] private bool isRunning = false;
+    [SerializeField] private bool flipped = false;
+    [SerializeField] private bool crossed = false;
 
     private Vector3 teleport;
-    private bool crossed = false;
     public GameObject player;
     Transform cameraMainTransform;
     float slowdownFactor = 0.05f;
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
     Slider rechargeTwo;
     Text scoreText;
     Text itemTotal;
+    Text Dialog;
     RawImage chargeOne;
     RawImage chargeTwo;
     float itemCount;
@@ -72,6 +75,7 @@ public class PlayerController : MonoBehaviour
         chargeOne = GameObject.Find("Canvas/Charge One").GetComponent<RawImage>();
         chargeTwo = GameObject.Find("Canvas/Charge Two").GetComponent<RawImage>();
         itemTotal = GameObject.Find("Canvas/Item Total").GetComponent<Text>();
+        Dialog = GameObject.Find("Canvas/Dialog").GetComponent<Text>();
 
         //Canvas UI set value
         rechargeOne.value = 0.0f;
@@ -94,7 +98,7 @@ public class PlayerController : MonoBehaviour
         rechargeOne.minValue = 0;
         if (rechargeOne.value == 1000)
         {
-            chargeTwo.color = new Color (0.0f, 0.7f, 0.0f);
+            chargeOne.color = new Color (0.0f, 0.7f, 0.0f);
         }
         rechargeOne.value += 1 + Time.unscaledDeltaTime;
 
@@ -209,6 +213,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
     private void TimePower()
     {
         timeCheat = !timeCheat;
@@ -234,10 +239,21 @@ public class PlayerController : MonoBehaviour
             //playerSpeed = playerSpeed * 5;
         }
 
+        if (other.tag.Equals("Portal") && canPhase)
+        {
+            GameObject portalEntrance = other.gameObject;
+            GameObject PortalExit = portalEntrance.transform.parent.GetChild(0).gameObject;
+
+            teleport = PortalExit.transform.position;
+
+            Debug.Log("Portal");
+            flipped = true;
+        }
+
         if (other.tag.Equals("Collectible"))
         {
             Destroy(other.gameObject);
-            if (itemCount == 4 )
+            if (itemCount == 4)
             {
                 SceneManager.LoadScene("WinScreen");
             }
