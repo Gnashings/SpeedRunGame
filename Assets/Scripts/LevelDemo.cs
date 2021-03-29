@@ -120,8 +120,6 @@ public class LevelDemo : MonoBehaviour
         {
             spawnIndex = Random.Range(0, DroneSpawn.Count);
             Vector3 spawnPoint = DroneSpawn[spawnIndex].gameObject.transform.position;
-            //Spawning index output
-            //Debug.Log(DroneSpawn[spawnIndex] + " " + spawnPoint);
             Instantiate(enemy, RandomNavmeshLocation(range), Quaternion.identity);
         }
     }
