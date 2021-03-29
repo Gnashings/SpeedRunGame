@@ -28,9 +28,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravityValue = -30f;
     [SerializeField] private float rotationSpeed = 20f;
     [SerializeField] private Canvas UIdisplay;
+    [SerializeField] private float slowdownTimer = 2f;
+    [SerializeField] private float slowdownFactor = 0.05f;
     public Transform detectPlayerSphere;
     public float radius = 5f;
-    
+
     [Header("PLAYER STATES")]
     [SerializeField] private bool isJumping = false;
     [SerializeField] private bool isFalling = false;
@@ -38,11 +40,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isRunning = false;
     [SerializeField] private bool flipped = false;
     [SerializeField] private bool crossed = false;
+    [SerializeField] private bool inPortalRange = false;
 
     private Vector3 teleport;
     public GameObject player;
     Transform cameraMainTransform;
-    float slowdownFactor = 0.05f;
+
+    private bool sendOff; //teleports the player to another world
 
 
     //DELEEEEET
@@ -58,15 +62,16 @@ public class PlayerController : MonoBehaviour
     Text Dialog;
     RawImage chargeOne;
     RawImage chargeTwo;
+    RawImage worldSwapUI;
     float itemCount;
-    
+
 
     private void Awake()
     {
         controller = gameObject.GetComponent<CharacterController>();
         playerAnim = gameObject.GetComponent<PlayerAnimation>();
         cameraMainTransform = Camera.main.transform;
-     
+
         //Canvas UI
         UIdisplay = (Canvas)FindObjectOfType(typeof(Canvas));
         scoreText = GameObject.Find("Canvas/Text").GetComponent<Text>();
@@ -74,17 +79,18 @@ public class PlayerController : MonoBehaviour
         rechargeTwo = GameObject.Find("Canvas/TimeDilation Slider2").GetComponent<Slider>();
         chargeOne = GameObject.Find("Canvas/Charge One").GetComponent<RawImage>();
         chargeTwo = GameObject.Find("Canvas/Charge Two").GetComponent<RawImage>();
+        worldSwapUI = GameObject.Find("Canvas/Worldswap UI").GetComponent<RawImage>();
         itemTotal = GameObject.Find("Canvas/Item Total").GetComponent<Text>();
         Dialog = GameObject.Find("Canvas/Dialog").GetComponent<Text>();
 
         //Canvas UI set value
         rechargeOne.value = 0.0f;
-        rechargeTwo.value = 0.0f;
     }
 
     private void Start()
     {
         LockMouse();
+        worldSwapUI.enabled = false;
         Physics.IgnoreLayerCollision(0, 9);
         Physics.GetIgnoreLayerCollision(8, 10);
     }
@@ -92,27 +98,22 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         TimeTracker();
-        TeleportPlayer();
-
-        rechargeOne.maxValue = 1000;
-        rechargeOne.minValue = 0;
-        if (rechargeOne.value == 1000)
+        if (sendOff == true)
         {
-            chargeOne.color = new Color (0.0f, 0.7f, 0.0f);
+            if (inPortalRange == true)
+            {
+                TeleportPlayer();
+            }
+            else
+                sendOff = false;
         }
-        rechargeOne.value += 1 + Time.unscaledDeltaTime;
-
-        rechargeTwo.maxValue = 1000;
-        rechargeTwo.minValue = 0;
-        if (rechargeTwo.value == 1000)
-        {
-            chargeTwo.color = new Color(0.0f, 0.7f, 0.0f);
-        }
-        rechargeTwo.value += 1 + Time.unscaledDeltaTime;
+        ChargeTimePower();
     }
 
     void Update()
     {
+        ResumeTime();
+
         if (controller.isGrounded == true)
         {
             isJumping = false;
@@ -122,13 +123,19 @@ public class PlayerController : MonoBehaviour
 
         if (actionOne.action.triggered)
         {
-            TimePower();
+            TimePower(CheckTimePower());
         }
 
         if (actionTwo.action.triggered)
         {
             PhasePower();
         }
+
+        if (actionThree.action.triggered && inPortalRange == true)
+        {
+            WorldSwapPower();
+        }
+
     }
 
     private void Move()
@@ -214,14 +221,34 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
     }
 
-    private void TimePower()
+    private void TimePower(bool check)
     {
-        timeCheat = !timeCheat;
+        timeCheat = check;
+    }
+
+    public bool CheckTimePower()
+    {
+        if (rechargeOne.value == 1000)
+        {
+            rechargeOne.value = 0;
+            return true;
+        }
+        else if(rechargeTwo.value == 1000)
+        { 
+            rechargeTwo.value = 0;
+            return true;
+        }
+        else
+            return false;
     }
 
     private void PhasePower()
     {
         canPhase = !canPhase;
+    }
+    private void WorldSwapPower()
+    {
+        sendOff = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -239,15 +266,16 @@ public class PlayerController : MonoBehaviour
             //playerSpeed = playerSpeed * 5;
         }
 
-        if (other.tag.Equals("Portal") && canPhase)
+        if (other.tag.Equals("Portal"))
         {
+            inPortalRange = true;
+            worldSwapUI.enabled = true;
             GameObject portalEntrance = other.gameObject;
             GameObject PortalExit = portalEntrance.transform.parent.GetChild(0).gameObject;
 
-            teleport = PortalExit.transform.position;
-
-            Debug.Log("Portal");
+            Dialog.text = "press E to shift to another world";
             crossed = true;
+            teleport = PortalExit.transform.position;
         }
 
         if (other.tag.Equals("Collectible"))
@@ -267,6 +295,12 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("LoseScreen");
         }
     }
+    private void OnTriggerExit(Collider other)
+    {
+        worldSwapUI.enabled = false;
+        inPortalRange = false;
+        Dialog.text = "";
+    }
 
     private void TeleportPlayer()
     {
@@ -277,11 +311,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     private void OnEnable()
     {
         movementControl.action.Enable();
         actionOne.action.Enable();
         actionTwo.action.Enable();
+        actionThree.action.Enable();
         jumpControl.action.Enable();
     }
 
@@ -290,9 +326,10 @@ public class PlayerController : MonoBehaviour
         movementControl.action.Disable();
         actionOne.action.Disable();
         actionTwo.action.Disable();
+        actionThree.action.Disable();
         jumpControl.action.Disable();
     }
-    
+
     //calculates and sets time for player UI
     private void TimeTracker()
     {
@@ -301,8 +338,7 @@ public class PlayerController : MonoBehaviour
         {
             SlowMo();
         }
-        else
-            ResumeTime();
+            //ResumeTime();
         scoreTime = timer - timer % 1;
         scoreText.text = scoreTime.ToString();
         //Debug.Log(timer - timer % 1);
@@ -311,13 +347,41 @@ public class PlayerController : MonoBehaviour
 
     private void ResumeTime()
     {
-        Time.timeScale = 1f;
+        Time.timeScale += (1f / slowdownTimer) * Time.unscaledDeltaTime;
+        Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
+        if (Time.timeScale != 1)
+        {
+            timeCheat = false;
+        }
     }
 
     private void SlowMo()
     {
         Time.timeScale = slowdownFactor;
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
+    }
+
+    private void ChargeTimePower()
+    {
+        rechargeOne.maxValue = 1000;
+        rechargeOne.minValue = 0;
+        if (rechargeOne.value == 1000)
+        {
+            chargeOne.color = new Color(1.0f, 1.0f, 1.0f);
+        }
+        else
+            chargeOne.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+        rechargeOne.value += 1 + Time.unscaledDeltaTime;
+
+        rechargeTwo.maxValue = 1000;
+        rechargeTwo.minValue = 0;
+        if (rechargeTwo.value == 1000)
+        {
+            chargeTwo.color = new Color(1.0f, 1.0f, 1.0f);
+        }
+        else
+            chargeTwo.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+        rechargeTwo.value += 1 + Time.unscaledDeltaTime;
     }
 
     IEnumerator TimeSlow()
