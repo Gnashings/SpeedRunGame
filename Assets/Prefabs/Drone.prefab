@@ -134,7 +134,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6074753301192558030}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7724943641b50b149a837fef4f3dfe12, type: 3}
   m_Name: 
@@ -190,17 +190,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f3b7aae6ebbc632438f13a905accfc4d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.243855
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f3b7aae6ebbc632438f13a905accfc4d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.124546
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f3b7aae6ebbc632438f13a905accfc4d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.974375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f3b7aae6ebbc632438f13a905accfc4d,
         type: 3}
@@ -302,17 +302,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 9e449afce624a3b47a34ce6993610601,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.243855
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e449afce624a3b47a34ce6993610601,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.575
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e449afce624a3b47a34ce6993610601,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.974375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e449afce624a3b47a34ce6993610601,
         type: 3}
