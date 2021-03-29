@@ -11,15 +11,15 @@ GameObject:
   - component: {fileID: 7099139260036121345}
   - component: {fileID: 6136979255054339236}
   - component: {fileID: 8272577430760487022}
-  - component: {fileID: -2734930818338710026}
-  - component: {fileID: -6423113902718883731}
   - component: {fileID: 7895509341555253783}
+  - component: {fileID: 6300056072012194821}
+  - component: {fileID: 1161615360598870637}
   m_Layer: 0
   m_Name: bouldeer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7099139260036121345
 Transform:
@@ -84,41 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &-2734930818338710026
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7624283178471774651}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6236982333847069958, guid: 1712058b5c513904cb6a5de8e7fd3e77, type: 3}
---- !u!114 &-6423113902718883731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7624283178471774651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62d70652a29126b45ad015a08edad99c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bridge: []
-  bridgeIndex: 0
-  collectItem: []
-  collectionCount: 0
-  DroneSpawn: []
-  enemy: {fileID: 0}
-  spawnIndex: 0
-  spawnAfter: 0
-  spawnEvery: 0
 --- !u!205 &7895509341555253783
 LODGroup:
   m_ObjectHideFlags: 0
@@ -146,3 +111,31 @@ LODGroup:
     renderers:
     - renderer: {fileID: 8272577430760487022}
   m_Enabled: 1
+--- !u!64 &6300056072012194821
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7624283178471774651}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: -1
+  m_Mesh: {fileID: 6236982333847069958, guid: 1712058b5c513904cb6a5de8e7fd3e77, type: 3}
+--- !u!136 &1161615360598870637
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7624283178471774651}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.26775184
+  m_Height: 0.69
+  m_Direction: 0
+  m_Center: {x: 0.005014343, y: -0.026129683, z: -0.0381768}
