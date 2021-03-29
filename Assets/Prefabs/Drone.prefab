@@ -85,7 +85,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &1157984539
 CharacterController:
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6074753301192558030}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7724943641b50b149a837fef4f3dfe12, type: 3}
   m_Name: 
@@ -357,17 +357,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 9e449afce624a3b47a34ce6993610601,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e449afce624a3b47a34ce6993610601,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e449afce624a3b47a34ce6993610601,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9e449afce624a3b47a34ce6993610601,
         type: 3}
