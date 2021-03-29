@@ -69,27 +69,38 @@ public class PlayerAnimation : MonoBehaviour
         playerAnimation.SetBool("inAir"     , true );
         playerAnimation.SetBool("isOnGround", false);
         playerAnimation.SetBool("isReaching", false);
-        playerAnimation.SetBool("isJumping" , true );
+        playerAnimation.SetBool("isJumping" , false);
         playerAnimation.Play("JumpLoop");
     }
 
     public void JumpStart()
     {
         playerAnimation.SetBool("isRunning" , false);
-        playerAnimation.SetBool("inAir"     , false);
-        playerAnimation.SetBool("isOnGround", true );
+        playerAnimation.SetBool("inAir"     , true);
+        playerAnimation.SetBool("isOnGround", false );
         playerAnimation.SetBool("isReaching", false);
-        playerAnimation.SetBool("isJumping" , true );
+        playerAnimation.SetBool("isJumping" , false );
         playerAnimation.Play("JumpStart");
     }
 
-    public void Jumpsquat()
+    public void JumpSquat()
     {
         playerAnimation.SetBool("isRunning" , false);
         playerAnimation.SetBool("inAir"     , false);
         playerAnimation.SetBool("isOnGround", true );
         playerAnimation.SetBool("isReaching", false);
         playerAnimation.SetBool("isJumping" , false);
+        playerAnimation.SetBool("isIdle"    , false);
+        playerAnimation.Play("JumpEnd");
+    }
+    public void JumpSquatIdle()
+    {
+        playerAnimation.SetBool("isRunning" , false);
+        playerAnimation.SetBool("inAir"     , false);
+        playerAnimation.SetBool("isOnGround", true);
+        playerAnimation.SetBool("isReaching", false);
+        playerAnimation.SetBool("isJumping" , false);
+        playerAnimation.SetBool("isIdle"    , true);
         playerAnimation.Play("JumpEnd");
     }
 
@@ -111,6 +122,14 @@ public class PlayerAnimation : MonoBehaviour
         playerAnimation.SetBool("isReaching", false);
         playerAnimation.SetBool("isJumping" , false);
         playerAnimation.Play("Idle");
+    }
+
+    public void StartFreefall()
+    {
+        playerAnimation.SetBool("inAir", true);
+        playerAnimation.SetBool("isOnGround", false);
+        playerAnimation.Play("JumpLoop");
+        
     }
 
     public void Runstop()
