@@ -103,7 +103,6 @@ public class LevelDemo : MonoBehaviour
                     loadAltCollectables -= 1;
                     continue;
                 }
-
                 if (Random.Range(0, 2) == 1)
                 {
                     //Destroy(altCollectItem[k].gameObject);
