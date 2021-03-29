@@ -8,6 +8,8 @@ TagManager:
   - Phase Exit
   - Collectible
   - Enemy Path
+  - tree
+  - music
   layers:
   - Default
   - TransparentFX
