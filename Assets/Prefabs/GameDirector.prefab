@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 432375105861583561}
   - component: {fileID: 432375105861583560}
+  - component: {fileID: 1803275420}
+  - component: {fileID: 1803275421}
   m_Layer: 0
   m_Name: GameDirector
   m_TagString: Untagged
@@ -47,3 +49,56 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   bridgeIndex: 0
+  collectItem: []
+  collectionCount: 0
+--- !u!114 &1803275420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432375105861583563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1834e2fe5044b0747825398d192549be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelOne: 0
+  LevelTwo: 0
+  LevelThree: 0
+  currentScene:
+    m_Handle: 0
+--- !u!114 &1803275421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432375105861583563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d70652a29126b45ad015a08edad99c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bridge: []
+  totalRequiredCollectables: 4
+  collectItem:
+  - {fileID: 0}
+  - {fileID: 0}
+  totalAltRequiredCollectables: 2
+  altCollectItem:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  DroneSpawn:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  enemy: {fileID: 0}
+  spawnIndex: 0
+  spawnAfter: 2
+  spawnEvery: 2
+  spawnEnemy: 0
