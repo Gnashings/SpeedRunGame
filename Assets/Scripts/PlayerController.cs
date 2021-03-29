@@ -28,7 +28,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravityValue = -30f;
     [SerializeField] private float rotationSpeed = 20f;
     [SerializeField] private Canvas UIdisplay;
-    [SerializeField] private float slowdownFactor = 0.05f;
     public Transform detectPlayerSphere;
     public float radius = 5f;
     
@@ -39,13 +38,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isRunning = false;
     [SerializeField] private bool flipped = false;
     [SerializeField] private bool crossed = false;
-    [SerializeField] private bool inPortalRange = false;
 
     private Vector3 teleport;
     public GameObject player;
     Transform cameraMainTransform;
-
-    private bool sendOff; //teleports the player to another world
+    float slowdownFactor = 0.05f;
 
 
     //DELEEEEET
@@ -61,7 +58,6 @@ public class PlayerController : MonoBehaviour
     Text Dialog;
     RawImage chargeOne;
     RawImage chargeTwo;
-    RawImage worldSwapUI;
     float itemCount;
     
 
@@ -78,7 +74,6 @@ public class PlayerController : MonoBehaviour
         rechargeTwo = GameObject.Find("Canvas/TimeDilation Slider2").GetComponent<Slider>();
         chargeOne = GameObject.Find("Canvas/Charge One").GetComponent<RawImage>();
         chargeTwo = GameObject.Find("Canvas/Charge Two").GetComponent<RawImage>();
-        worldSwapUI = GameObject.Find("Canvas/Worldswap UI").GetComponent<RawImage>();
         itemTotal = GameObject.Find("Canvas/Item Total").GetComponent<Text>();
         Dialog = GameObject.Find("Canvas/Dialog").GetComponent<Text>();
 
@@ -90,7 +85,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         LockMouse();
-        worldSwapUI.enabled = false;
         Physics.IgnoreLayerCollision(0, 9);
         Physics.GetIgnoreLayerCollision(8, 10);
     }
@@ -98,15 +92,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         TimeTracker();
-        if (sendOff == true)
-        {
-            if (inPortalRange == true)
-            {
-                TeleportPlayer();
-            }
-            else
-                sendOff = false;
-        }
+        TeleportPlayer();
 
         rechargeOne.maxValue = 1000;
         rechargeOne.minValue = 0;
@@ -134,11 +120,6 @@ public class PlayerController : MonoBehaviour
 
         Move();
 
-        if (actionThree.action.triggered && inPortalRange == true)
-        {
-            WorldSwapPower();
-        }
-
         if (actionOne.action.triggered)
         {
             TimePower();
@@ -148,7 +129,6 @@ public class PlayerController : MonoBehaviour
         {
             PhasePower();
         }
-
     }
 
     private void Move()
@@ -202,7 +182,6 @@ public class PlayerController : MonoBehaviour
             playerAnim.StartFreefall();
             isFalling = true;
         }
-
         //TODO FIX THIS, ALSO FINISH JUMPSTART
         else if (isFalling == true && groundedPlayer == true)
         {
@@ -240,22 +219,9 @@ public class PlayerController : MonoBehaviour
         timeCheat = !timeCheat;
     }
 
-    void checkTimePower()
-    {
-        if (rechargeOne.value == 1000)
-        {
-
-        }
-    }
-
     private void PhasePower()
     {
         canPhase = !canPhase;
-    }
-
-    private void WorldSwapPower()
-    {
-        sendOff = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -273,16 +239,15 @@ public class PlayerController : MonoBehaviour
             //playerSpeed = playerSpeed * 5;
         }
 
-        if (other.tag.Equals("Portal"))
+        if (other.tag.Equals("Portal") && canPhase)
         {
-            inPortalRange = true;
-            worldSwapUI.enabled = true;
             GameObject portalEntrance = other.gameObject;
             GameObject PortalExit = portalEntrance.transform.parent.GetChild(0).gameObject;
 
-            Dialog.text = "what";
-            crossed = true;
             teleport = PortalExit.transform.position;
+
+            Debug.Log("Portal");
+            crossed = true;
         }
 
         if (other.tag.Equals("Collectible"))
@@ -292,6 +257,7 @@ public class PlayerController : MonoBehaviour
             {
                 SceneManager.LoadScene("WinScreen");
             }
+
             itemCount++;
             itemTotal.text = itemCount.ToString();
         }
@@ -300,14 +266,6 @@ public class PlayerController : MonoBehaviour
         {
             SceneManager.LoadScene("LoseScreen");
         }
-    }
-
-
-
-    private void OnTriggerExit(Collider other)
-    {
-        worldSwapUI.enabled = false;
-        inPortalRange = false;
     }
 
     private void TeleportPlayer()
@@ -324,7 +282,6 @@ public class PlayerController : MonoBehaviour
         movementControl.action.Enable();
         actionOne.action.Enable();
         actionTwo.action.Enable();
-        actionThree.action.Enable();
         jumpControl.action.Enable();
     }
 
@@ -333,7 +290,6 @@ public class PlayerController : MonoBehaviour
         movementControl.action.Disable();
         actionOne.action.Disable();
         actionTwo.action.Disable();
-        actionThree.action.Disable();
         jumpControl.action.Disable();
     }
     
@@ -349,6 +305,8 @@ public class PlayerController : MonoBehaviour
             ResumeTime();
         scoreTime = timer - timer % 1;
         scoreText.text = scoreTime.ToString();
+        //Debug.Log(timer - timer % 1);
+        
     }
 
     private void ResumeTime()
@@ -369,7 +327,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    ///     Loads the information from previous levels into the canvas.
+    /// Loads the information from previous levels into the canvas.
     /// </summary>
     private void LoadCanvasInformation()
     {
