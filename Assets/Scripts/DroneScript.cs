@@ -28,16 +28,13 @@ public class DroneScript : MonoBehaviour
         playerInfo = player.GetComponent<PlayerController>();
         if (navMeshAgent.isOnNavMesh == false)
         {
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
     }
 
     void FixedUpdate()
     {
         ChasePlayer();
-        //droneVelocity.y += gravityValue * Time.deltaTime;
-        //drone.Move(droneVelocity * Time.deltaTime);
-        //InAttackRadius();
     }
 
     void Update()
