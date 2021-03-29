@@ -240,6 +240,14 @@ public class PlayerController : MonoBehaviour
         timeCheat = !timeCheat;
     }
 
+    void checkTimePower()
+    {
+        if (rechargeOne.value == 1000)
+        {
+
+        }
+    }
+
     private void PhasePower()
     {
         canPhase = !canPhase;
@@ -293,6 +301,8 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("LoseScreen");
         }
     }
+
+
 
     private void OnTriggerExit(Collider other)
     {
