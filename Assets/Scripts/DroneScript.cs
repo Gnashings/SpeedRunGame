@@ -20,11 +20,6 @@ public class DroneScript : MonoBehaviour
     [SerializeField] private float hoverStop = 2f;
     private float distance;
 
-    void Start()
-    {
-
-    } 
-
     void Awake()
     {
         drone = GetComponent<CharacterController>();
@@ -85,7 +80,7 @@ public class DroneScript : MonoBehaviour
     {
         if (GetDistance() <= playerInfo.radius)
         {
-            Debug.LogWarning("Player in chase range");
+            Debug.LogWarning("Player in kill range");
             return true;
         }
         else
@@ -97,11 +92,6 @@ public class DroneScript : MonoBehaviour
 
     public float GetDistance()
     {
-        return distance = Vector3.Distance(getPlayerPosition(), playerInfo.detectPlayerSphere.position);
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-
+        return distance = Vector3.Distance(getPlayerPosition(), drone.transform.position);
     }
 }

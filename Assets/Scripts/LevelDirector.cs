@@ -32,10 +32,4 @@ public class LevelDirector : MonoBehaviour
             }
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
