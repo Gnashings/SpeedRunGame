@@ -370,7 +370,7 @@ public class PlayerController : MonoBehaviour
             chargeOne.color = new Color(1.0f, 1.0f, 1.0f);
         }
         else
-            chargeOne.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+            chargeOne.color = new Color(1.0f, 1.0f, 1.0f, 0.40f);
         rechargeOne.value += 1 + Time.unscaledDeltaTime;
 
         rechargeTwo.maxValue = 1000;
@@ -380,7 +380,7 @@ public class PlayerController : MonoBehaviour
             chargeTwo.color = new Color(1.0f, 1.0f, 1.0f);
         }
         else
-            chargeTwo.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+            chargeTwo.color = new Color(1.0f, 1.0f, 1.0f, 0.40f);
         rechargeTwo.value += 1 + Time.unscaledDeltaTime;
     }
 
