@@ -15,8 +15,8 @@ public class DroneSpawner : MonoBehaviour
     void Start()
     {
         InvokeRepeating("DroneSpawn", spawnAfter, spawnEvery);
-
     }
+
 
     public void DroneSpawn()
     {

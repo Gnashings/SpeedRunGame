@@ -10,15 +10,15 @@ public class DroneScript : MonoBehaviour
     [SerializeField] private NavMeshAgent navMeshAgent;
     [SerializeField] private GameObject player;
     [SerializeField] private PlayerController playerInfo;
-    private Vector3 droneVelocity;
-    private float gravityValue;
     public float burst = 10f;
     public float thrust = 5.0f;
     [Header("Hovering Timer")]
     [SerializeField] private float hover;
     [SerializeField] private float hoverTime;
-    [SerializeField] private float hoverStop = 2f;
-    private float distance;
+    [SerializeField] private bool willDie = true;
+    [SerializeField] float lifeSpan = 10f;
+    float killTimer = 0f;
+    float distance;
 
     void Awake()
     {
@@ -55,9 +55,19 @@ public class DroneScript : MonoBehaviour
         result = Vector3.zero;
         return false;
     }
+
     void FixedUpdate()
     {
         ChasePlayer();
+        if (willDie)
+        {
+            killTimer += Time.unscaledDeltaTime;
+
+            if (killTimer >= lifeSpan)
+            {
+                Destroy(transform.parent.gameObject);
+            }
+        }
     }
 
     void Update()
