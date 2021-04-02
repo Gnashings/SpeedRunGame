@@ -46,7 +46,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Action 3",
+                    "name": "ActionThree",
                     "type": "Button",
                     "id": "4e386752-d432-4ca7-80c1-c4d2dfb9a53a",
                     "expectedControlType": "Button",
@@ -289,7 +289,7 @@
                 {
                     "name": "",
                     "id": "75d9ba67-9b09-4f6a-82ed-845d80a00645",
-                    "path": "<Keyboard>/1",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -322,7 +322,7 @@
                 {
                     "name": "",
                     "id": "d55012fd-2c19-403d-a71f-c1574e680c80",
-                    "path": "<Keyboard>/2",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -359,7 +359,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Action 3",
+                    "action": "ActionThree",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -370,7 +370,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Action 3",
+                    "action": "ActionThree",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -381,7 +381,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Action 3",
+                    "action": "ActionThree",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
