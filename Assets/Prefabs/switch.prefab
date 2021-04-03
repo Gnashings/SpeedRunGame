@@ -30,7 +30,7 @@ Transform:
   - {fileID: 6160424879415737013}
   m_Father: {fileID: 8934982568044326558}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 52.832794}
 --- !u!1 &2387308267618792647
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,7 +60,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2445128275761411573}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 7.0496773e-15, y: 180, z: -89.730156}
 --- !u!1 &2631330567618831256
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +90,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7705184462833796614}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -136.22095}
 --- !u!1 &3282117353502317578
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +121,7 @@ Transform:
   - {fileID: 6751654164071870263}
   m_Father: {fileID: 8934982568044326558}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: -83.388145}
 --- !u!1 &8121327008663122980
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8121327008663122980}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.623333, y: 1.037, z: -1.904948}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8316955122559209695}
@@ -206,7 +206,7 @@ Transform:
   - {fileID: 1477836262225936290}
   m_Father: {fileID: 8934982568044326558}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 7.0496773e-15, y: 180, z: -89.730156}
 --- !u!1 &8624541871112199246
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +236,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6124589700079221753}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 83.38816, y: -90, z: 0}
 --- !u!1 &9002656945879997638
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,7 +287,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: b975c7fbcf8d1594e92e1470856f1c06, type: 3}
+  - {fileID: 2100000, guid: 64a3c91d31f2ae84c81a0872641c2740, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
