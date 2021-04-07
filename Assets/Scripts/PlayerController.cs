@@ -366,7 +366,7 @@ public class PlayerController : MonoBehaviour
             Dialog.text = "press E to shift to another world";
             crossed = true;
             teleport = PortalExit.transform.position;
-            lastTeleportPosition = teleport;
+            lastTeleportPosition = portalEntrance.transform.position;
         }
 
         if (other.tag.Equals("Collectible"))
