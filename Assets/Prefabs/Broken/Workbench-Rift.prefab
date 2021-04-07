@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4025779972847769996}
   - component: {fileID: 31993705568540201}
   - component: {fileID: 2852288549626503907}
+  - component: {fileID: 161335384224088350}
   m_Layer: 0
   m_Name: Workbench-Rift
   m_TagString: Untagged
@@ -81,3 +82,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &161335384224088350
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4365572584759706422}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9280516, y: 0.7470373, z: 1.1899275}
+  m_Center: {x: 0, y: 0.3677494, z: 0}
