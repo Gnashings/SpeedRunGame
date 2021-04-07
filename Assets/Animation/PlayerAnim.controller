@@ -8,7 +8,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: JumpStart
-  m_Speed: 1
+  m_Speed: 4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 956465916442206643}
@@ -21,8 +21,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1827226128182048838, guid: 390af6acaa98dfe47bfff96d22c0f267,
-    type: 3}
+  m_Motion: {fileID: 7400000, guid: d0f6c220d0cd81b4ab98728d21f0ed37, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -120,10 +119,10 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: isRunning
     m_EventTreshold: 0
-  - m_ConditionMode: 1
+  - m_ConditionMode: 2
     m_ConditionEvent: inAir
     m_EventTreshold: 0
-  - m_ConditionMode: 2
+  - m_ConditionMode: 1
     m_ConditionEvent: isOnGround
     m_EventTreshold: 0
   - m_ConditionMode: 2
@@ -138,9 +137,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 1.204572
-  m_TransitionOffset: 0
-  m_ExitTime: 0.4714604
+  m_TransitionDuration: 0.025675457
+  m_TransitionOffset: 0.017268913
+  m_ExitTime: 0.002243032
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -274,7 +273,7 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: inAir
     m_EventTreshold: 0
-  - m_ConditionMode: 1
+  - m_ConditionMode: 2
     m_ConditionEvent: isJumping
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
@@ -953,7 +952,7 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: inAir
     m_EventTreshold: 0
-  - m_ConditionMode: 2
+  - m_ConditionMode: 1
     m_ConditionEvent: isOnGround
     m_EventTreshold: 0
   - m_ConditionMode: 2
@@ -1114,37 +1113,37 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: inAir
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isOnGround
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isReaching
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isJumping
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isIdle
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -1172,9 +1171,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isJumping
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: isRunning
-    m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: isOnGround
     m_EventTreshold: 0
@@ -1187,11 +1183,11 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.50583225
+  m_TransitionDuration: 0.12970573
   m_TransitionOffset: 0
-  m_ExitTime: 0.7052417
+  m_ExitTime: 0.0010749793
   m_HasExitTime: 0
-  m_HasFixedDuration: 1
+  m_HasFixedDuration: 0
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
@@ -1327,12 +1323,6 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: isJumping
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: isOnGround
-    m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: inAir
     m_EventTreshold: 0
@@ -1358,7 +1348,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: JumpEnd
-  m_Speed: 1
+  m_Speed: 5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8025902989582783521}
@@ -2004,11 +1994,11 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: isIdle
+  - m_ConditionMode: 2
+    m_ConditionEvent: inAir
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: inAir
+    m_ConditionEvent: isOnGround
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4918483477086000028}
