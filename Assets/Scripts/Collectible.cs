@@ -4,20 +4,16 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
+    public GameObject gamedir;
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        gamedir = GameObject.Find("GameDirector");
     }
 
     private void OnDestroy()
     {
-        //Debug.LogWarning("Not reported to the global status.");
+        Debug.LogWarning("Not reported to the global status.");
+        gamedir.BroadcastMessage("Poggo", true);
     }
 }

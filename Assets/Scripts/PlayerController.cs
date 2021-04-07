@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     //[SerializeField] private bool flipped = false;
     [SerializeField] private bool inPortalRange = false;
     [SerializeField] private bool timeCheat = false;
-    [SerializeField] private bool canPhase = false;
+    [SerializeField] public bool canPhase = false;
 
     //[Header("UI ELEMENTS")]
     Slider rechargeOne;
@@ -129,18 +129,12 @@ public class PlayerController : MonoBehaviour
     {
         HandleTimeEvents();
         ChargeTimePower();
+        Move();
 
         if (crossed == true)
         {
             CountDownRiftTime();
         }
-
-        if (controller.isGrounded == true)
-        {
-            isJumping = false;
-        }
-
-        Move();
 
         if (actionOne.action.triggered && timeCheat == false)
         {
@@ -220,57 +214,42 @@ public class PlayerController : MonoBehaviour
         move.y = 0;
         controller.Move(move * Time.unscaledDeltaTime * playerSpeed);
 
-        if (isJumping == false)
-        {
-            if (groundedPlayer == false)
-            {
-                playerAnim.StartFreefall();  
-                isFalling = true;
-            }
-            if (groundedPlayer == true)
-            {
-                if (isFalling == true)
-                {
-                    playerAnim.JumpSquat();
-                    isFalling = false;
-                }
 
-                if(move.x == 0 && move.z == 0 && isFalling == false)
-                {
-                    isRunning = false;
-;                }
-                if (move.x != 0 && move.z != 0 && isFalling == false)
-                {
-                    isRunning = true;
-                    playerAnim.IsRunning();
-                }
-                else if (isRunning == false)
-                {
-                    playerAnim.NotRunning();
-                }
-            }
-            else
-                playerAnim.IsRunning();
-        }
-        else if (isJumping == true && groundedPlayer == false)
+        //assuming player fell off a cliff
+        if (groundedPlayer == false)
         {
-            playerAnim.StartFreefall();
             isFalling = true;
+            playerAnim.Freefall();
         }
-        //TODO FIX THIS, ALSO FINISH JUMPSTART
-        else if (isFalling == true && groundedPlayer == true)
+        if (groundedPlayer == true)
         {
-            playerAnim.JumpSquat();
+            //you hit the ground if you were falling
+            if (isFalling == true)
+            {
+                isFalling = false;
+                playerAnim.JumpEnd();
+            }
+            //you are not moving
+            if(move.x == 0 && move.z == 0)
+            {
+                isRunning = false;
+                playerAnim.NotRunning();
+            }
+            //otherwise you are running
+            if (move.x != 0 && move.z != 0)
+            {
+                isRunning = true;
+                playerAnim.IsRunning();
+            }
         }
 
-        // changes the height position of the player
+        // start your jump
         if (jumpControl.action.triggered && groundedPlayer)
         {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-            isJumping = true;
             playerAnim.JumpStart();
         }
 
+        //player gravity
         playerVelocity.y += gravityValue * Time.unscaledDeltaTime;
         controller.Move(playerVelocity * Time.unscaledDeltaTime);
 
@@ -282,6 +261,12 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.unscaledDeltaTime * rotationSpeed);
         }
     }
+
+    public void Jump()
+    {
+        playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+        isJumping = true;
+    }    
 
 
     //calculates and sets time for player UI
