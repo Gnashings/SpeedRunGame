@@ -413,7 +413,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.tag.Equals("Enemy"))
         {
-            SceneManager.LoadScene("LoseScreen");
+            YouDie();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -429,6 +429,11 @@ public class PlayerController : MonoBehaviour
         {
             player.transform.localPosition = teleport;
         }
+    }
+
+    public void YouDie()
+    {
+        SceneManager.LoadScene("LoseScreen");
     }
 
 
