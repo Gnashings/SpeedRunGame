@@ -29,9 +29,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool groundedPlayer;
     [SerializeField] private bool isJumping = false;
     [SerializeField] private bool isFalling = false;
-    //[SerializeField] private bool isLanded = false;
     [SerializeField] private bool isRunning = false;
-    //[SerializeField] private bool flipped = false;
+    [SerializeField] public bool slowed = false;
     [SerializeField] private bool inPortalRange = false;
     [SerializeField] private bool timeCheat = false;
     [SerializeField] public bool canPhase = false;
@@ -55,6 +54,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravityValue = -30f;
     [SerializeField] private float rotationSpeed = 20f;
     [SerializeField] private Vector3 playerVelocity;
+    [Tooltip("Divided by this value.")]
+    [SerializeField] private float slowBy = 2f;
+    [SerializeField] private float totalTimeSlowed = 3f;
+    private float timeSlowed;
     private Vector3 teleport;
 
     [Header("TIME SLOW")]
@@ -67,6 +70,7 @@ public class PlayerController : MonoBehaviour
     [Header("RIFTING")]
     [SerializeField] private bool crossed = false;
     [SerializeField] private float allowedTimeInRift = 5.0f;
+
     private Vector3 portalEntrancePosition;
     private bool sendOff;                                           //teleports the player to another world
     private float timeInRift;
@@ -114,6 +118,11 @@ public class PlayerController : MonoBehaviour
         {
             CountDownRiftTime();
         }
+        if (slowed == true)
+        {
+            SlowedTimer();
+        }
+
         if (sendOff == true)
         {
             if (inPortalRange == true)
@@ -189,7 +198,19 @@ public class PlayerController : MonoBehaviour
         else
         {
             kickOut = true;
-            Debug.Log(kickOut);
+        }
+    }
+
+    private void SlowedTimer()
+    {
+        if(timeSlowed <= totalTimeSlowed)
+        {
+            timeSlowed += Time.deltaTime;
+        }
+        else
+        {
+            timeSlowed = 0;
+            slowed = false;
         }
     }
 
@@ -215,8 +236,13 @@ public class PlayerController : MonoBehaviour
         Vector3 move = new Vector3(movement.x, 0, movement.y);
         move = cameraMainTransform.forward * move.z + cameraMainTransform.right * move.x;
         move.y = 0;
-        controller.Move(move * Time.unscaledDeltaTime * playerSpeed);
 
+        if (slowed == true)
+        {
+            controller.Move(move * Time.unscaledDeltaTime * playerSpeed/slowBy);
+        }
+        else
+            controller.Move(move * Time.unscaledDeltaTime * playerSpeed);
 
         //assuming player fell off a cliff
         if (groundedPlayer == false)

@@ -17,9 +17,8 @@ public class Laser : MonoBehaviour
     public Transform firepoint;
 
     Vector3 originalPosition;
-    public Collider playerCol;
+    Collider playerCol;
     RaycastHit hit;
-
 
     private void Awake()
     {
@@ -35,6 +34,8 @@ public class Laser : MonoBehaviour
 
     private void FixedUpdate()
     {
+        ShootLaser();
+
         if (canMove == true)
         {
             if (movingUp == true)
@@ -56,10 +57,7 @@ public class Laser : MonoBehaviour
                     MoveDown();
             }
         }
-    }
-
-    private void Update()
-    {
+        //shoot.transform.position = originalPosition;
     }
 
     private void MoveDown()
@@ -72,44 +70,26 @@ public class Laser : MonoBehaviour
         transform.root.Translate(Vector3.up * movementSpeed * 0.01f);
     }
 
-    void OnDrawGizmos()
+    void ShootLaser()
     {
         Gizmos.color = Color.red;
         Vector3 fwd = transform.TransformDirection(Vector3.up);
-        bool HitDetect = Physics.BoxCast(playerCol.bounds.center, transform.localScale, fwd, out hit, transform.rotation, 100);
 
-        if (HitDetect)
+        if (Physics.Raycast(transform.position, fwd, out hit, 100))
         {
-            shoot.enabled = true;
-            //Debug.DrawRay(transform.position, fwd * hit.distance, Color.red);
-            shoot.SetPosition(0, transform.position);
-            shoot.SetPosition(1, hit.point);
-            Debug.Log("hit");
-            Gizmos.DrawRay(playerCol.transform.position, fwd * hit.distance);
-            Gizmos.DrawWireCube(playerCol.transform.position + fwd * hit.distance, transform.localScale);
-            if (hit.collider.tag.Equals("Player"))
+            if(hit.collider)
             {
-
-            }
-        }    
-
-        /*
-         *         if (Physics.Raycast(transform.position, fwd, out hit, 100))
-        {
-            //if(hit.collider)
-            //{
-    
                 shoot.enabled = true;
                 Debug.DrawRay(transform.position, fwd * hit.distance, Color.red);
                 shoot.SetPosition(0, transform.position);
                 shoot.SetPosition(1, hit.point);
-                Debug.Log("hit");
-            if (hit.collider.tag.Equals("Player"))
+                //grab the player, turn his bool on to slow his speed down.
+                if (hit.collider.tag.Equals("Player"))
                 {
-                    
+                    PlayerController playerInfo = hit.collider.transform.GetComponent<PlayerController>();
+                    playerInfo.slowed = true;
                 }
-            //}
+            }
         }
-         */
     }
 }
