@@ -43,5 +43,5 @@ Material:
     m_Colors:
     - _Asymmetry: {r: 0, g: 0.25, b: 0.5, a: 0}
     - _Color: {r: 0.975, g: 0.1131, b: 0.1131, a: 1}
-    - _OutlineColor: {r: 0, g: 0.040882874, b: 0.312, a: 1}
+    - _OutlineColor: {r: 0.91372555, g: 0.10588236, b: 0.10588236, a: 1}
   m_BuildTextureStacks: []
