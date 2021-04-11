@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.XR.Haptics;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 /// <summary>
 /// Handles and tracks reports by level director.
@@ -18,30 +17,17 @@ public class GlobalStatus : MonoBehaviour
     public bool LevelOne;
     public bool LevelTwo;
     public bool LevelThree;
-    public bool poggo;
 
     public Scene currentScene;
-    Text confirm;
+
     //public GameObject enemy;
 
     // Start is called before the first frame update
     void Start()
     {
-        confirm = GameObject.Find("Canvas/Dialog").GetComponent<Text>();
+        //Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+        //InvokeRepeating("DroneSpawner", 1.0f, 0.5f);
     }
-
-    void Update()
-    {
-        if (poggo == true)
-        {
-            confirm.text = "recieved";
-        }
-    }
-    void OnSceneLoaded()
-    {
-        
-    }
-
     void Awake()
     {
         if (Instance == null)
@@ -97,13 +83,6 @@ public class GlobalStatus : MonoBehaviour
         {
 
         }
-    }
-
-    void Poggo(bool completed)
-    {
-        GameObject player = GameObject.Find("Player");
-        PlayerController playerInfo = player.GetComponent<PlayerController>();
-        playerInfo.canPhase = true;
     }
 
 }

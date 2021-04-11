@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3861781948210740883}
   m_Layer: 0
-  m_Name: Microscope
+  m_Name: Red Microscope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 1235775705644699795}
   - component: {fileID: 506897965495050470}
   - component: {fileID: 1524196058731044540}
-  - component: {fileID: 8815662281938291592}
   m_Layer: 0
   m_Name: pCube19_pCube19
   m_TagString: Untagged
@@ -113,16 +112,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8815662281938291592
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9111743098667271266}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.68009, y: 5.25098, z: 2.8409102}
-  m_Center: {x: -0.030214965, y: 2.62549, z: 0.00000500679}

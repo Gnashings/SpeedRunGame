@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     //[SerializeField] private bool flipped = false;
     [SerializeField] private bool inPortalRange = false;
     [SerializeField] private bool timeCheat = false;
-    [SerializeField] public bool canPhase = false;
+    [SerializeField] private bool canPhase = false;
 
     //[Header("UI ELEMENTS")]
     Slider rechargeOne;
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
     [Header("RIFTING")]
     [SerializeField] private bool crossed = false;
     [SerializeField] private float allowedTimeInRift = 5.0f;
-    private Vector3 portalEntrancePosition;
+    private Vector3 lastTeleportPosition;
     private bool sendOff;                                           //teleports the player to another world
     private float timeInRift;
     private bool kickOut = false;
@@ -110,10 +110,6 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         UpdateUITImer();
-        if (crossed == true)
-        {
-            CountDownRiftTime();
-        }
         if (sendOff == true)
         {
             if (inPortalRange == true)
@@ -127,19 +123,24 @@ public class PlayerController : MonoBehaviour
         {
             KickPlayerFromRift();
         }
-
     }
 
     void Update()
     {
         HandleTimeEvents();
         ChargeTimePower();
-        Move();
-        if (actionThree.action.triggered && inPortalRange == true)
+
+        if (crossed == true)
         {
-            WorldSwapPower();
-            crossed = true;
+            CountDownRiftTime();
         }
+
+        if (controller.isGrounded == true)
+        {
+            isJumping = false;
+        }
+
+        Move();
 
         if (actionOne.action.triggered && timeCheat == false)
         {
@@ -149,6 +150,11 @@ public class PlayerController : MonoBehaviour
         if (actionTwo.action.triggered)
         {
             PhasePower();
+        }
+
+        if (actionThree.action.triggered && inPortalRange == true)
+        {
+            WorldSwapPower();
         }
 
     }
@@ -189,18 +195,15 @@ public class PlayerController : MonoBehaviour
         else
         {
             kickOut = true;
-            Debug.Log(kickOut);
         }
     }
 
     //sets the players position to the previous gate
     private void KickPlayerFromRift()
     {
-        player.transform.localPosition = portalEntrancePosition;
+        player.transform.localPosition = lastTeleportPosition;
         crossed = false;
         kickOut = false;
-        timeInRift = 0.0f;
-        Debug.Log("returned");
     }
 
     private void Move()
@@ -217,42 +220,57 @@ public class PlayerController : MonoBehaviour
         move.y = 0;
         controller.Move(move * Time.unscaledDeltaTime * playerSpeed);
 
+        if (isJumping == false)
+        {
+            if (groundedPlayer == false)
+            {
+                playerAnim.StartFreefall();  
+                isFalling = true;
+            }
+            if (groundedPlayer == true)
+            {
+                if (isFalling == true)
+                {
+                    playerAnim.JumpSquat();
+                    isFalling = false;
+                }
 
-        //assuming player fell off a cliff
-        if (groundedPlayer == false)
-        {
-            isFalling = true;
-            playerAnim.Freefall();
-        }
-        if (groundedPlayer == true)
-        {
-            //you hit the ground if you were falling
-            if (isFalling == true)
-            {
-                isFalling = false;
-                playerAnim.JumpEnd();
+                if(move.x == 0 && move.z == 0 && isFalling == false)
+                {
+                    isRunning = false;
+;                }
+                if (move.x != 0 && move.z != 0 && isFalling == false)
+                {
+                    isRunning = true;
+                    playerAnim.IsRunning();
+                }
+                else if (isRunning == false)
+                {
+                    playerAnim.NotRunning();
+                }
             }
-            //you are not moving
-            if(move.x == 0 && move.z == 0)
-            {
-                isRunning = false;
-                playerAnim.NotRunning();
-            }
-            //otherwise you are running
-            if (move.x != 0 && move.z != 0)
-            {
-                isRunning = true;
+            else
                 playerAnim.IsRunning();
-            }
+        }
+        else if (isJumping == true && groundedPlayer == false)
+        {
+            playerAnim.StartFreefall();
+            isFalling = true;
+        }
+        //TODO FIX THIS, ALSO FINISH JUMPSTART
+        else if (isFalling == true && groundedPlayer == true)
+        {
+            playerAnim.JumpSquat();
         }
 
-        // start your jump
+        // changes the height position of the player
         if (jumpControl.action.triggered && groundedPlayer)
         {
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            isJumping = true;
             playerAnim.JumpStart();
         }
 
-        //player gravity
         playerVelocity.y += gravityValue * Time.unscaledDeltaTime;
         controller.Move(playerVelocity * Time.unscaledDeltaTime);
 
@@ -264,12 +282,6 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.unscaledDeltaTime * rotationSpeed);
         }
     }
-
-    public void Jump()
-    {
-        playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-        isJumping = true;
-    }    
 
 
     //calculates and sets time for player UI
@@ -346,7 +358,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        /**
         if (other.tag.Equals("Phase Enter") && canPhase)
         {
             GameObject entrance = other.gameObject;
@@ -359,7 +370,6 @@ public class PlayerController : MonoBehaviour
             //tbr
             //playerSpeed = playerSpeed * 5;
         }
-        **/
 
         if (other.tag.Equals("Portal"))
         {
@@ -369,8 +379,9 @@ public class PlayerController : MonoBehaviour
             GameObject PortalExit = portalEntrance.transform.parent.GetChild(0).gameObject;
 
             Dialog.text = "press E to shift to another world";
+            crossed = true;
             teleport = PortalExit.transform.position;
-            portalEntrancePosition = portalEntrance.transform.position;
+            lastTeleportPosition = teleport;
         }
 
         if (other.tag.Equals("Collectible"))
