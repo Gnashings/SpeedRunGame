@@ -55,7 +55,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void IsJumping()
     {
-        playerAnimation.SetBool("isJumping", true);
+        playerAnimation.SetBool("isJumping", false);
     }
 
     public void NotJumping()
@@ -72,14 +72,12 @@ public class PlayerAnimation : MonoBehaviour
 
     public void JumpStart()
     {
-        playerAnimation.SetBool("isOnGround", true );
         playerAnimation.SetBool("isReaching", false);
         playerAnimation.SetBool("isJumping" , true );
     }
 
     public void JumpEnd()
     {
-        playerAnimation.SetBool("isRunning" , false);
         playerAnimation.SetBool("inAir"     , false);
         playerAnimation.SetBool("isOnGround", true );
         playerAnimation.SetBool("isReaching", false);

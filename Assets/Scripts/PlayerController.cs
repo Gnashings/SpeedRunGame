@@ -122,6 +122,10 @@ public class PlayerController : MonoBehaviour
         {
             SlowedTimer();
         }
+        if(controller.isGrounded)
+        {
+            isJumping = false;
+        }
 
         if (sendOff == true)
         {
@@ -273,7 +277,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // start your jump
-        if (jumpControl.action.triggered && groundedPlayer)
+        if (jumpControl.action.triggered && groundedPlayer && isJumping == false)
         {
             playerAnim.JumpStart();
         }
