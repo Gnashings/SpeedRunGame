@@ -493,9 +493,9 @@ MonoBehaviour:
     H-4 Log 37: Subject 73 has developed an ability that shows promise of controlling
     these Rifts. For a few seconds the subject appears to move at an inhuman speed.
     Testing indicates that it is a Time Dilation that is occurring around the player.
-    New containment protocols need to be implemented.\u201D\r\n\r\n\u201CProject
-    H-4 Log 73: Subject 73 has managed to interact with the anomalies. The subject
-    can use these anomalies to move extraordinary distances instantly. This development
+    New containment protocols need to be implemented.\u201D\r\n\r\n\u201CProject H-4
+    Log 73: Subject 73 has managed to interact with the anomalies. The subject can
+    use these anomalies to move extraordinary distances instantly. This development
     will give us the leap we need to harness the Rifts.\u201D\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
