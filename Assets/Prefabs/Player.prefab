@@ -112,6 +112,7 @@ MonoBehaviour:
   isJumping: 0
   isFalling: 0
   isRunning: 0
+  slowed: 0
   inPortalRange: 0
   timeCheat: 0
   canPhase: 0
@@ -120,6 +121,8 @@ MonoBehaviour:
   gravityValue: -30
   rotationSpeed: 20
   playerVelocity: {x: 0, y: 0, z: 0}
+  slowBy: 2
+  totalTimeSlowed: 3
   slowdownTimer: 2
   slowdownFactor: 0.05
   timeReset: 2

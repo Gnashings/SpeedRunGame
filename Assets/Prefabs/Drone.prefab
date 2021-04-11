@@ -156,7 +156,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6074753301192558030}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7724943641b50b149a837fef4f3dfe12, type: 3}
   m_Name: 
@@ -169,7 +169,7 @@ MonoBehaviour:
   thrust: 5
   hover: 0
   hoverTime: 0
-  willDie: 1
+  willDie: 0
   lifeSpan: 10
 --- !u!1 &8537952178493737470
 GameObject:
