@@ -47,34 +47,15 @@ public class GlobalStatus : MonoBehaviour
     {
         if (LevelOne == true)
         {
-            SceneManager.LoadScene("WinScreen");
+            //SceneManager.LoadScene("WinScreen");
         }
         if (LevelTwo == true)
         {
-            SceneManager.LoadScene("WinScreen");
+            //SceneManager.LoadScene("WinScreen");
         }
         if (LevelThree == true)
         {
             SceneManager.LoadScene("WinScreen");
-        }
-    }
-
-    void OnSceneLoaded()
-    {
-        if (currentScene.name.Equals("HubLevel"))
-        {
-            if (LevelOne == true)
-            {
-                Debug.Log("TODO LEVEL ONE");
-            }
-            if (LevelTwo == true)
-            {
-                Debug.Log("TODO LEVEL TWO");
-            }
-            if (LevelThree == true)
-            {
-                Debug.Log("TODO LEVEL THREE");
-            }
         }
     }
 
@@ -83,19 +64,24 @@ public class GlobalStatus : MonoBehaviour
 
         playerInfo.canPhase = true;
 
-        if (playerInfo.switchCount == 3)
+        if (playerInfo.switchCount == 2)
         {
             LevelOne = true;
+            SceneManager.LoadScene("WinScreen");
+
         }
         else
             playerInfo.switchCount++;
+        Debug.Log(playerInfo.switchCount);
     }
 
     void CountCollectables()
     {
-        if(playerInfo.itemCount == 4)
+        if(playerInfo.itemCount == 3)
         {
             LevelTwo = true;
+            SceneManager.LoadScene("WinScreen");
+
         }
         else
             playerInfo.itemCount++;
@@ -103,9 +89,10 @@ public class GlobalStatus : MonoBehaviour
 
     void CountCheckpoints()
     {
-        if (playerInfo.objCount == 4)
+        if (playerInfo.objCount == 3)
         {
             LevelThree = true;
+            SceneManager.LoadScene("WinScreen");
         }
         else
             playerInfo.objCount++;

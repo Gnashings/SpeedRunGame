@@ -7,6 +7,7 @@ public class SwitchScipt : MonoBehaviour
     Animator anim;
     public GameObject director;
     public GlobalStatus globalStatus;
+    bool switchedOn = false;
 
     void Start()
     {
@@ -17,7 +18,12 @@ public class SwitchScipt : MonoBehaviour
 
     public void Confirm()
     {
-        anim.Play("TurnOn");
-        director.BroadcastMessage("CountSwitches");
+        if(switchedOn == false)
+        {
+            anim.Play("TurnOn");
+            director.BroadcastMessage("CountSwitches");
+        }
+
+        switchedOn = true;
     }
 }

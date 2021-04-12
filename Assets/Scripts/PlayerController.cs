@@ -46,8 +46,8 @@ public class PlayerController : MonoBehaviour
     RawImage chargeTwo;
     RawImage worldSwapUI;
     [HideInInspector] public int itemCount;
-    [HideInInspector] public int switchCount;
-    [HideInInspector] public int objCount;
+     public int switchCount;
+     public int objCount;
     float scoreTime;
     float timer;
 
@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour
     private float timeInRift;
     private bool kickOut = false;
     public bool reaching = false;
+    bool hitSwitch = false;
 
     private void Awake()
     {
@@ -434,15 +435,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     private void OnTriggerStay(Collider other)
     {
         if (other.tag.Equals("Switch"))
         {
             inSwitchRange = true;
             Dialog.text = "press E to shift to flip switch";
-            if (reaching == true)
+            if (reaching == true && hitSwitch == false)
             {
                 other.gameObject.BroadcastMessage("Confirm");
+                hitSwitch = true;
             }
         }
     }
@@ -452,6 +455,7 @@ public class PlayerController : MonoBehaviour
         worldSwapUI.enabled = false;
         inPortalRange = false;
         inSwitchRange = false;
+        hitSwitch = false;
         Dialog.text = "";
     }
 
