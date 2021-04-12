@@ -22,7 +22,10 @@ public class SpikeDoor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerController playerInfo = other.transform.GetComponent<PlayerController>();
-        playerInfo.YouDie();
+        if (other.gameObject.tag.Equals("Player"))
+        {
+            PlayerController playerInfo = other.transform.GetComponent<PlayerController>();
+            playerInfo.YouDie();
+        }
     }
 }

@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     RawImage chargeOne;
     RawImage chargeTwo;
     RawImage worldSwapUI;
-    [HideInInspector] public int itemCount;
+    public int itemCount;
      public int switchCount;
      public int objCount;
     float scoreTime;
@@ -423,8 +423,8 @@ public class PlayerController : MonoBehaviour
 
         if (other.tag.Equals("Collectible"))
         {
+            other.gameObject.BroadcastMessage("CountUp");
             Destroy(other.gameObject);
-
             itemCount++;
             itemTotal.text = itemCount.ToString();
         }

@@ -85,6 +85,7 @@ public class GlobalStatus : MonoBehaviour
         }
         else
             playerInfo.itemCount++;
+        Debug.Log(playerInfo.itemCount);
     }
 
     void CountCheckpoints()

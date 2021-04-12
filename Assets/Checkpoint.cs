@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    public GameObject gamedir;
-
+    public GameObject director;
+    public GlobalStatus globalStatus;
     void Start()
     {
-        gamedir = GameObject.Find("GameDirector");
+        director = GameObject.Find("GameDirector");
+        globalStatus = director.GetComponent<GlobalStatus>();
     }
 
     private void OnDestroy()
     {
-        gamedir.BroadcastMessage("CountCheckpoints");
+        director.BroadcastMessage("CountCheckpoints");
     }
 }

@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-    public GameObject gamedir;
+    public GameObject director;
+    public GlobalStatus globalStatus;
     // Start is called before the first frame update
     void Start()
     {
-        gamedir = GameObject.Find("GameDirector");
+        director = GameObject.Find("GameDirector");
+        globalStatus = director.GetComponent<GlobalStatus>();
+    }
+
+    public void CountUp()
+    {
+        director.BroadcastMessage("CountCollectables");
     }
 
     private void OnDestroy()
     {
-        gamedir.BroadcastMessage("CountCollectables");
+        //director.BroadcastMessage("CountCollectables");
     }
 }
