@@ -12,6 +12,7 @@ TagManager:
   - tree
   - music
   - Portal
+  - Switch
   layers:
   - Default
   - TransparentFX

@@ -41,6 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3299745461981862631}
   - component: {fileID: 3633378451118472903}
+  - component: {fileID: 8565747672148037476}
+  - component: {fileID: 2648122289038596712}
   m_Layer: 0
   m_Name: switch
   m_TagString: Untagged
@@ -85,6 +87,31 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &8565747672148037476
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418057649331373141}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2648122289038596712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418057649331373141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a75dafb786c13e4884396aac4958c45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2030848546596618622
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collectible : MonoBehaviour
+public class Checkpoint : MonoBehaviour
 {
     public GameObject gamedir;
-    // Start is called before the first frame update
+
     void Start()
     {
         gamedir = GameObject.Find("GameDirector");
@@ -13,6 +13,6 @@ public class Collectible : MonoBehaviour
 
     private void OnDestroy()
     {
-        gamedir.BroadcastMessage("CountCollectables");
+        gamedir.BroadcastMessage("CountCheckpoints");
     }
 }
