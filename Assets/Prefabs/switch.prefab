@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 2648122289038596712}
   m_Layer: 0
   m_Name: switch
-  m_TagString: Untagged
+  m_TagString: Switch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 1418057649331373141}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.623333, y: 1.037, z: -1.904948}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 1472101345036533651}
   - {fileID: 4391074269084291307}
@@ -112,6 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a75dafb786c13e4884396aac4958c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  director: {fileID: 0}
+  globalStatus: {fileID: 0}
 --- !u!1 &2030848546596618622
 GameObject:
   m_ObjectHideFlags: 0

@@ -45,15 +45,15 @@ public class GlobalStatus : MonoBehaviour
 
     void Update()
     {
-        if (LevelOne)
+        if (LevelOne == true)
         {
             SceneManager.LoadScene("WinScreen");
         }
-        if (LevelTwo)
+        if (LevelTwo == true)
         {
             SceneManager.LoadScene("WinScreen");
         }
-        if (LevelThree)
+        if (LevelThree == true)
         {
             SceneManager.LoadScene("WinScreen");
         }

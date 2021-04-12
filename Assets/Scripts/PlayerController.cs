@@ -142,6 +142,7 @@ public class PlayerController : MonoBehaviour
         {
             KickPlayerFromRift();
         }
+
     }
 
     void Update()
@@ -150,12 +151,7 @@ public class PlayerController : MonoBehaviour
         ChargeTimePower();
         Move();
 
-        if (switchCount == 4)
-        {
-            SceneManager.LoadScene("WinScreen");
-        }
-
-        if (actionThree.action.triggered && inSwitchRange)
+        if (actionThree.action.triggered && inSwitchRange && reaching != true)
         {
             reaching = true;
             playerAnim.IsReaching();

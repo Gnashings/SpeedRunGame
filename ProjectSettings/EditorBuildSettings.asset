@@ -27,6 +27,12 @@ EditorBuildSettings:
     path: Assets/Scenes/WinScreen.unity
     guid: 4d89f65819f6efc41935cc3fa8a03e60
   - enabled: 1
-    path: Assets/Scenes/HubLevel.unity
-    guid: c364f9849ed03024995dba93d6f6942c
+    path: Assets/Scenes/SpeedTest.unity
+    guid: b3afd2db4a1df524eb1b3bbc121ddbe5
+  - enabled: 1
+    path: Assets/Scenes/THEHUB.unity
+    guid: 55c0b726c06f9d94b8cee2bf221ce99f
+  - enabled: 1
+    path: Assets/Scenes/Logic Test.unity
+    guid: 2817c181288372f4b9151254fc84bdd6
   m_configObjects: {}
