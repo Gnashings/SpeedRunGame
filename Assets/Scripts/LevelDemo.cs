@@ -10,14 +10,19 @@ using Random = UnityEngine.Random;
 
 public class LevelDemo : MonoBehaviour
 {
+
     [Header("Bridges")]
     [SerializeField] public List<Bridge> bridge;
     [Header("Objective")]
     [SerializeField] int totalRequiredCollectables;
     [SerializeField] public List<Collectible> collectItem;
+    [SerializeField] int totalRequiredInteractables;
+    [SerializeField] public List<SwitchScipt> Interactables;
     [Header("Objective AltWorld")]
     [SerializeField] int totalAltRequiredCollectables;
     [SerializeField] public List<Collectible> altCollectItem;
+    [SerializeField] int totalAltRequiredInteractables;
+    [SerializeField] public List<SwitchScipt> altInteractables;
     [Header("Kill Box")]
     [SerializeField] public List<GameObject> DroneSpawn;
     [SerializeField] public GameObject enemy;
@@ -34,11 +39,6 @@ public class LevelDemo : MonoBehaviour
 
         if (bridge != null && bridge.Count >= 2)
         {
-            //range must be zero to the bridge.length, as the final number isn't inclusive
-            //bridgeIndex = Random.Range(0, 2);
-            //Debug.Log("Removing Bridge at index: " + bridgeIndex);
-            //bridge[bridgeIndex].gameObject.SetActive(false);
-
             for (int b = 0; b <= bridge.Count - 2; b += 2)
             {
                 int back = Random.Range(0, 2);
@@ -120,8 +120,6 @@ public class LevelDemo : MonoBehaviour
         {
             spawnIndex = Random.Range(0, DroneSpawn.Count);
             Vector3 spawnPoint = DroneSpawn[spawnIndex].gameObject.transform.position;
-            //Spawning index output
-            //Debug.Log(DroneSpawn[spawnIndex] + " " + spawnPoint);
             Instantiate(enemy, RandomNavmeshLocation(range), Quaternion.identity);
         }
     }
@@ -139,4 +137,4 @@ public class LevelDemo : MonoBehaviour
         return finalPosition;
     }
 
-    }
+}

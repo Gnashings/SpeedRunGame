@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isRunning = false;
     [SerializeField] public bool slowed = false;
     [SerializeField] private bool inPortalRange = false;
+    [SerializeField] private bool inSwitchRange = false;
     [SerializeField] private bool timeCheat = false;
     [SerializeField] public bool canPhase = false;
 
@@ -44,7 +45,9 @@ public class PlayerController : MonoBehaviour
     RawImage chargeOne;
     RawImage chargeTwo;
     RawImage worldSwapUI;
-    float itemCount;
+    [HideInInspector] public int itemCount;
+    [HideInInspector] public int switchCount;
+    [HideInInspector] public int objCount;
     float scoreTime;
     float timer;
 
@@ -75,7 +78,7 @@ public class PlayerController : MonoBehaviour
     private bool sendOff;                                           //teleports the player to another world
     private float timeInRift;
     private bool kickOut = false;
-
+    public bool reaching = false;
 
     private void Awake()
     {
@@ -100,7 +103,6 @@ public class PlayerController : MonoBehaviour
         rechargeTwo.value = 0.0f;
         rechargeTwo.minValue = 0;
         rechargeTwo.maxValue = maxChargeValue;
-
     }
 
     private void Start()
@@ -140,7 +142,6 @@ public class PlayerController : MonoBehaviour
         {
             KickPlayerFromRift();
         }
-
     }
 
     void Update()
@@ -148,6 +149,23 @@ public class PlayerController : MonoBehaviour
         HandleTimeEvents();
         ChargeTimePower();
         Move();
+
+        if (switchCount == 4)
+        {
+            SceneManager.LoadScene("WinScreen");
+        }
+
+        if (actionThree.action.triggered && inSwitchRange)
+        {
+            reaching = true;
+            playerAnim.IsReaching();
+        }
+
+        if (inSwitchRange == false)
+        {
+            reaching = false;
+        }
+
         if (actionThree.action.triggered && inPortalRange == true)
         {
             WorldSwapPower();
@@ -165,7 +183,6 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
 
     //governs the changes in Deltatime
     private void HandleTimeEvents()
@@ -299,8 +316,7 @@ public class PlayerController : MonoBehaviour
     {
         playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
         isJumping = true;
-    }    
-
+    }
 
     //calculates and sets time for player UI
     private void UpdateUITImer()
@@ -347,7 +363,6 @@ public class PlayerController : MonoBehaviour
         rechargeTwo.value = rechargeTwo.value + Time.unscaledDeltaTime;
     }
 
-
     //checks to see if the time power is able to be used
     public bool TimePower()
     {
@@ -369,9 +384,15 @@ public class PlayerController : MonoBehaviour
     {
         canPhase = !canPhase;
     }
+
     private void WorldSwapPower()
     {
         sendOff = true;
+    }
+
+    private void UwU()
+    {
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -406,10 +427,6 @@ public class PlayerController : MonoBehaviour
         if (other.tag.Equals("Collectible"))
         {
             Destroy(other.gameObject);
-            if (itemCount == 4)
-            {
-                SceneManager.LoadScene("WinScreen");
-            }
 
             itemCount++;
             itemTotal.text = itemCount.ToString();
@@ -420,10 +437,25 @@ public class PlayerController : MonoBehaviour
             YouDie();
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag.Equals("Switch"))
+        {
+            inSwitchRange = true;
+            Dialog.text = "press E to shift to flip switch";
+            if (reaching == true)
+            {
+                other.gameObject.BroadcastMessage("Confirm");
+            }
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         worldSwapUI.enabled = false;
         inPortalRange = false;
+        inSwitchRange = false;
         Dialog.text = "";
     }
 
@@ -471,6 +503,12 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public void StopReaching()
+    {
+        playerAnim.NotReaching();
+        reaching = false;
     }
 
     void OnDrawGizmosSelected()

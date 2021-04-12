@@ -11,4 +11,9 @@ public class AnimationEvents : MonoBehaviour
     {
         player.Jump();
     }
+
+    public void QuitReaching()
+    {
+        player.StopReaching();
+    }
 }

@@ -18,29 +18,11 @@ public class GlobalStatus : MonoBehaviour
     public bool LevelOne;
     public bool LevelTwo;
     public bool LevelThree;
-    public bool poggo;
 
     public Scene currentScene;
     Text confirm;
-    //public GameObject enemy;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        confirm = GameObject.Find("Canvas/Dialog").GetComponent<Text>();
-    }
-
-    void Update()
-    {
-        if (poggo == true)
-        {
-            confirm.text = "recieved";
-        }
-    }
-    void OnSceneLoaded()
-    {
-        
-    }
+    GameObject player;
+    PlayerController playerInfo;
 
     void Awake()
     {
@@ -49,61 +31,84 @@ public class GlobalStatus : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             Instance = this;
         }
-        else if(Instance != this)
+        else if (Instance != this)
         {
             Destroy(gameObject);
         }
 
+        player = GameObject.Find("Player");
+        playerInfo = player.GetComponent<PlayerController>();
         LevelOne = false;
         LevelTwo = false;
         LevelThree = false;
     }
 
-    void OnLevelWasLoaded(int level)
+    void Update()
     {
-        //Hub Level
-        if (level == 0)
+        if (LevelOne)
         {
-            Debug.Log("Level Zero");
-            //TODO Impliment shutoff for level director
-            if (LevelOne == true)
-            {
-                //TODO Impliment level lockout for level director
-            }
-            if (LevelTwo == true)
-            {
-                //TODO Impliment level lockout for level director
-            }
-            if (LevelThree == true)
-            {
-                //TODO Impliment level lockout for level director
-            }
-        }   
-
-        //Level One
-        if (level == 1)
-        {
-
+            Debug.Log(LevelOne);
         }
-
-        //Level Two
-        if (level == 2)
+        if (LevelTwo)
         {
-
+            Debug.Log(LevelTwo);
         }
-
-        //Level Three
-        if (level == 3)
+        if (LevelThree)
         {
-
+            Debug.Log(LevelThree);
         }
     }
 
-    void Poggo(bool completed)
+    void OnSceneLoaded()
     {
-        GameObject player = GameObject.Find("Player");
-        PlayerController playerInfo = player.GetComponent<PlayerController>();
+        if (currentScene.name.Equals("HubLevel"))
+        {
+            if (LevelOne == true)
+            {
+                Debug.Log("TODO LEVEL ONE");
+            }
+            if (LevelTwo == true)
+            {
+                Debug.Log("TODO LEVEL TWO");
+            }
+            if (LevelThree == true)
+            {
+                Debug.Log("TODO LEVEL THREE");
+            }
+        }
+    }
+
+    void CountSwitches()
+    {
+
         playerInfo.canPhase = true;
+
+        if (playerInfo.switchCount == 3)
+        {
+            LevelOne = true;
+        }
+        else
+            playerInfo.switchCount++;
+    }
+
+    void CountCollectables()
+    {
+        if(playerInfo.itemCount == 4)
+        {
+            LevelTwo = true;
+        }
+        else
+            playerInfo.itemCount++;
+    }
+
+    void CountCheckpoints()
+    {
+        if (playerInfo.objCount == 4)
+        {
+            LevelThree = true;
+        }
+        else
+            playerInfo.objCount++;
     }
 
 }
