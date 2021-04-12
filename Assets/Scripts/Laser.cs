@@ -62,12 +62,12 @@ public class Laser : MonoBehaviour
 
     private void MoveDown()
     {
-        transform.root.Translate(Vector3.down * movementSpeed * 0.01f);
+        transform.root.Translate(Vector3.down * movementSpeed * Time.deltaTime);
     }
 
     private void MoveUp()
     {
-        transform.root.Translate(Vector3.up * movementSpeed * 0.01f);
+        transform.root.Translate(Vector3.up * movementSpeed * Time.deltaTime);
     }
 
     void ShootLaser()
