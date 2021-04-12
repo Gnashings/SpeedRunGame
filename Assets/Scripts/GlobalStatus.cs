@@ -47,15 +47,15 @@ public class GlobalStatus : MonoBehaviour
     {
         if (LevelOne)
         {
-            Debug.Log(LevelOne);
+            SceneManager.LoadScene("WinScreen");
         }
         if (LevelTwo)
         {
-            Debug.Log(LevelTwo);
+            SceneManager.LoadScene("WinScreen");
         }
         if (LevelThree)
         {
-            Debug.Log(LevelThree);
+            SceneManager.LoadScene("WinScreen");
         }
     }
 
