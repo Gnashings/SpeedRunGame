@@ -370,6 +370,6 @@ MonoBehaviour:
   movementSpeed: 2
   upperLimit: 2
   lowerLimit: 2
-  canMove: 0
+  canMove: 1
   shoot: {fileID: 978853741}
   firepoint: {fileID: 0}
