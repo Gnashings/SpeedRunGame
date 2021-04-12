@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1760702076374870811}
   - component: {fileID: 4578949693199687633}
   - component: {fileID: 1426603771514959205}
+  - component: {fileID: 8141957821427918311}
   m_Layer: 0
   m_Name: Cabinet-Rift
   m_TagString: Untagged
@@ -95,3 +96,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.2795894, y: 0.25616768, z: 0.17272055}
   m_Center: {x: 0, y: 0.12808384, z: 0}
+--- !u!205 &8141957821427918311
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2633284222271536644}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0.12808384, z: 0}
+  m_Size: 0.27958947
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.080076255
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 4578949693199687633}
+  m_Enabled: 1
