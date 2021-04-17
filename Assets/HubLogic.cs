@@ -5,17 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class HubLogic : MonoBehaviour
 {
-    bool lvlOneDoor;
-    bool lvlTwoDoor;
-    bool lvlThreeDoor;
-
     public GameObject door1;
     public GameObject door2;
     public GameObject door3;
 
     public GameObject director;
     public GlobalStatus globalStatus;
-
 
     private void Awake()
     {
@@ -25,23 +20,41 @@ public class HubLogic : MonoBehaviour
         director = GameObject.Find("GameDirector");
         globalStatus = director.GetComponent<GlobalStatus>();
 
-        lvlOneDoor = false;
-        lvlTwoDoor = false;
-        lvlThreeDoor = false;
-        
-        if(globalStatus.LevelOne == true)
+        ShutLevelDoors();
+        ResetPlayerCollectibles();
+    }
+
+    private void ShutLevelDoors()
+    {
+        if (LevelStats.LevelOneCompleted == true)
         {
             door1.SetActive(false);
         }
-        if (globalStatus.LevelTwo == true)
+        if (LevelStats.LevelTwoCompleted == true)
         {
             door2.SetActive(false);
         }
-        if (globalStatus.LevelThree == true)
+        if (LevelStats.LevelThreeCompleted == true)
         {
             door3.SetActive(false);
         }
     }
 
+    //sees if the player completed a level or not
+    private void ResetPlayerCollectibles()
+    {
+        if (LevelStats.LevelOneCompleted == false)
+        {
+            LevelStats.Switches = 0;
+        }
+        if (LevelStats.LevelTwoCompleted == false)
+        {
+            LevelStats.Checkpoints = 0;
+        }
+        if (LevelStats.LevelThreeCompleted == false)
+        {
+            LevelStats.Items = 0;
+        }
 
+    }
 }

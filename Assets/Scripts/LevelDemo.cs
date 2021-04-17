@@ -6,6 +6,7 @@ using System.Data;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class LevelDemo : MonoBehaviour
@@ -14,14 +15,12 @@ public class LevelDemo : MonoBehaviour
     [Header("Bridges")]
     [SerializeField] public List<Bridge> bridge;
     [Header("Objective")]
-    [SerializeField] int totalRequiredCollectables;
+    [SerializeField] int totalNormalCollectables;
     [SerializeField] public List<Collectible> collectItem;
-    [SerializeField] int totalRequiredInteractables;
     [SerializeField] public List<SwitchScipt> Interactables;
     [Header("Objective AltWorld")]
-    [SerializeField] int totalAltRequiredCollectables;
+    [SerializeField] int totalAltCollectables;
     [SerializeField] public List<Collectible> altCollectItem;
-    [SerializeField] int totalAltRequiredInteractables;
     [SerializeField] public List<SwitchScipt> altInteractables;
     [Header("Kill Box")]
     [SerializeField] public List<GameObject> DroneSpawn;
@@ -32,7 +31,19 @@ public class LevelDemo : MonoBehaviour
     [SerializeField] public bool spawnEnemy = true;
     private readonly float range = 20.0f;
 
-    // Start is called before the first frame update
+    //win condition checks
+    private bool usingItems = false;
+    private bool usingCheckpoints = false;
+    private bool usingSwitches = false;
+    private int totalCollectables = 0;
+    private PlayerController player;
+    GameObject[] switches;
+    GameObject[] checkpoints;
+    void Awake()
+    {
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
+    }
+
     void Start()
     {
         InvokeRepeating("DroneSpawner", spawnAfter, spawnEvery);
@@ -57,11 +68,11 @@ public class LevelDemo : MonoBehaviour
         if (collectItem != null && collectItem.Count >= 2)
         {   
             //allows us to count how many loadables are left to remove
-            int loadCollectables = totalRequiredCollectables;
+            int loadCollectables = totalNormalCollectables;
 
             for (int i = 0; i <= collectItem.Count - 1; i++)
             {
-                if (loadCollectables == 0 || collectItem.Count <= totalRequiredCollectables)
+                if (loadCollectables == 0 || collectItem.Count <= totalNormalCollectables)
                 {
                     break;
                 }
@@ -87,11 +98,11 @@ public class LevelDemo : MonoBehaviour
         if (altCollectItem != null && altCollectItem.Count >= 2)
         {
             //allows us to count how many loadables are left to remove
-            int loadAltCollectables = totalAltRequiredCollectables;
+            int loadAltCollectables = totalAltCollectables;
 
             for (int k = 0; k <= altCollectItem.Count - 1; k++)
             {
-                if (loadAltCollectables == 0 || altCollectItem.Count <= totalAltRequiredCollectables)
+                if (loadAltCollectables == 0 || altCollectItem.Count <= totalAltCollectables)
                 {
                     break;
                 }
@@ -112,6 +123,56 @@ public class LevelDemo : MonoBehaviour
             }
         }
 
+        //final check to ensure that any potential objectives are found.
+        switches = GameObject.FindGameObjectsWithTag("Switch");
+        checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+        if (switches != null && switches.Length != 0)
+        {
+            Debug.Log("counted switches: " + switches.Length);
+            usingSwitches = true;
+        }
+
+        if (checkpoints != null && checkpoints.Length != 0)
+        {
+            Debug.Log("counted checkpoints: " + checkpoints.Length);
+            usingCheckpoints = true;
+        }
+
+        //totals all the required collectables.
+        totalCollectables = totalNormalCollectables + totalAltCollectables;
+        if(totalCollectables != 0)
+        {
+            usingItems = true;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        CheckWinConditions();
+    }
+
+    private void CheckWinConditions()
+    {
+        if (usingSwitches == true && LevelStats.Switches == switches.Length)
+        {
+            LevelStats.LevelOneCompleted = true;
+            SceneManager.LoadScene("WinScreen");
+            Debug.Log("SWITCH CONDITION MET " + LevelStats.Switches);
+        }
+
+        if (usingCheckpoints == true && LevelStats.Checkpoints == checkpoints.Length)
+        {
+            LevelStats.LevelTwoCompleted = true;
+            SceneManager.LoadScene("WinScreen");
+            Debug.Log("COLLECT CONDITION MET " + LevelStats.Checkpoints);
+        }
+
+        if (usingItems == true && LevelStats.Items == totalCollectables)
+        {
+            LevelStats.LevelThreeCompleted = true;
+            SceneManager.LoadScene("WinScreen");
+            Debug.Log("ITEM CONDITION MET " + LevelStats.Items);
+        }
     }
 
     public void DroneSpawner()

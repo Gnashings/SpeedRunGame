@@ -29747,6 +29747,11 @@ PrefabInstance:
       propertyPath: speed
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 760456800163190497, guid: d2c9bc8ec41b4fd40aed118576c74799,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 952961851259728482, guid: d2c9bc8ec41b4fd40aed118576c74799,
         type: 3}
       propertyPath: m_Name
@@ -32592,6 +32597,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1803275421, guid: 3243f719bf8eca5448b54c4891020aca, type: 3}
       propertyPath: collectItem.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803275421, guid: 3243f719bf8eca5448b54c4891020aca, type: 3}
+      propertyPath: altCollectItem.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1803275421, guid: 3243f719bf8eca5448b54c4891020aca, type: 3}

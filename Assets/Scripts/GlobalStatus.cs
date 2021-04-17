@@ -12,12 +12,14 @@ using UnityEngine.UI;
 /// </summary>
 public class GlobalStatus : MonoBehaviour
 {
-    public static GlobalStatus Instance;
+    //public static GlobalStatus Instance;
 
     //level completion checks
     public bool LevelOne;
     public bool LevelTwo;
     public bool LevelThree;
+
+    public int items;
 
     public Scene currentScene;
     Text confirm;
@@ -26,6 +28,7 @@ public class GlobalStatus : MonoBehaviour
 
     void Awake()
     {
+        /*
         if (Instance == null)
         {
             DontDestroyOnLoad(gameObject);
@@ -35,6 +38,7 @@ public class GlobalStatus : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        */
 
         player = GameObject.Find("Player");
         playerInfo = player.GetComponent<PlayerController>();
@@ -75,7 +79,7 @@ public class GlobalStatus : MonoBehaviour
         Debug.Log(playerInfo.switchCount);
     }
 
-    void CountCollectables()
+    public void CountCollectables()
     {
         if(playerInfo.itemCount == 3)
         {

@@ -14,6 +14,7 @@ TagManager:
   - Portal
   - Switch
   - Door
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

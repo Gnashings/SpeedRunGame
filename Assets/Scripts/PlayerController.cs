@@ -1,17 +1,13 @@
-﻿using System.Collections;
-using UnityEditor;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using System;
-using System.Runtime.CompilerServices;
-using System.Net;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(InputActionReference))]
 public class PlayerController : MonoBehaviour
 {
+    #pragma warning disable 0649
     [Header("PLAYER INPUT")]
     [SerializeField] public GameObject player;
     [SerializeField] private InputActionReference movementControl;
@@ -21,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference jumpControl;
     [SerializeField] private CharacterController controller;
     [SerializeField] private PlayerAnimation playerAnim;
+    
     Transform cameraMainTransform;
     public Transform detectPlayerSphere;
     public float radius = 5f;                                           //radius of detection
@@ -35,7 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool inSwitchRange = false;
     [SerializeField] private bool timeCheat = false;
     [SerializeField] public bool canPhase = false;
-
+    #pragma warning restore 0649
     //[Header("UI ELEMENTS")]
     Slider rechargeOne;
     Slider rechargeTwo;
@@ -71,7 +68,7 @@ public class PlayerController : MonoBehaviour
     float timeWarpCountdown = 0.0f;
 
     [Header("RIFTING")]
-    [SerializeField] private bool crossed = false;
+    [SerializeField] public bool crossed = false;
     [SerializeField] private float allowedTimeInRift = 5.0f;
 
     private Vector3 portalEntrancePosition;
@@ -104,6 +101,7 @@ public class PlayerController : MonoBehaviour
         rechargeTwo.value = 0.0f;
         rechargeTwo.minValue = 0;
         rechargeTwo.maxValue = maxChargeValue;
+
     }
 
     private void Start()
@@ -313,6 +311,7 @@ public class PlayerController : MonoBehaviour
     {
         playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
         isJumping = true;
+        Debug.Log(LevelStats.Items);
     }
 
     //calculates and sets time for player UI
@@ -389,7 +388,7 @@ public class PlayerController : MonoBehaviour
 
     private void UwU()
     {
-        
+        Debug.LogWarning("UwU");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -423,10 +422,14 @@ public class PlayerController : MonoBehaviour
 
         if (other.tag.Equals("Collectible"))
         {
-            other.gameObject.BroadcastMessage("CountUp");
-            Destroy(other.gameObject);
-            itemCount++;
-            itemTotal.text = itemCount.ToString();
+            Destroy(other.transform.parent.gameObject);
+            itemTotal.text = LevelStats.Items.ToString();
+        }
+
+        if (other.tag.Equals("Checkpoint"))
+        {
+            Destroy(other.transform.parent.gameObject);
+            itemTotal.text = LevelStats.Checkpoints.ToString();
         }
 
         if (other.tag.Equals("Enemy"))

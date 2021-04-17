@@ -58,7 +58,12 @@ public class DroneScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        ChasePlayer();
+        
+        if(playerInfo.crossed != true)
+        {
+            ChasePlayer();
+        }
+
         if (willDie)
         {
             killTimer += Time.unscaledDeltaTime;
