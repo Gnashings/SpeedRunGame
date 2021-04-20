@@ -17,7 +17,6 @@ public class DroneSpawner : MonoBehaviour
         InvokeRepeating("DroneSpawn", spawnAfter, spawnEvery);
     }
 
-
     public void DroneSpawn()
     {
         if (spawnEnemy == true)
