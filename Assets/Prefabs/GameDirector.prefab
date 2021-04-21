@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 432375105861583561}
-  - component: {fileID: 1803275420}
   - component: {fileID: 1803275421}
   m_Layer: 0
   m_Name: GameDirector
@@ -32,24 +31,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1803275420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 432375105861583563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1834e2fe5044b0747825398d192549be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelOne: 0
-  LevelTwo: 0
-  LevelThree: 0
-  poggo: 0
-  currentScene:
-    m_Handle: 0
 --- !u!114 &1803275421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,16 +44,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bridge: []
-  totalRequiredCollectables: 4
+  totalNormalCollectables: 0
   collectItem:
   - {fileID: 0}
   - {fileID: 0}
-  totalAltRequiredCollectables: 2
+  Interactables: []
+  totalAltCollectables: 0
   altCollectItem:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  altInteractables: []
   DroneSpawn:
   - {fileID: 0}
   - {fileID: 0}
