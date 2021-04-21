@@ -12,9 +12,9 @@ public class GasFloor : MonoBehaviour
         killBox = GetComponent<Collider>();    
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        transform.root.Translate(Vector3.down * -speed * 0.01f);
+        transform.root.Translate(Vector3.down * -speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
