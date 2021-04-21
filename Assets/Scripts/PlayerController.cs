@@ -43,8 +43,8 @@ public class PlayerController : MonoBehaviour
     RawImage chargeTwo;
     RawImage worldSwapUI;
     public int itemCount;
-     public int switchCount;
-     public int objCount;
+    public int switchCount;
+    public int objCount;
     float scoreTime;
     float timer;
 
@@ -101,7 +101,6 @@ public class PlayerController : MonoBehaviour
         rechargeTwo.value = 0.0f;
         rechargeTwo.minValue = 0;
         rechargeTwo.maxValue = maxChargeValue;
-
     }
 
     private void Start()
@@ -176,7 +175,6 @@ public class PlayerController : MonoBehaviour
         {
             PhasePower();
         }
-
     }
 
     //governs the changes in Deltatime
@@ -264,6 +262,7 @@ public class PlayerController : MonoBehaviour
         if (groundedPlayer == false)
         {
             isFalling = true;
+            playerAnim.NotRunning();
             playerAnim.Freefall();
         }
         if (groundedPlayer == true)
@@ -291,7 +290,8 @@ public class PlayerController : MonoBehaviour
         // start your jump
         if (jumpControl.action.triggered && groundedPlayer && isJumping == false)
         {
-            playerAnim.JumpStart();
+            playerAnim.Freefall();
+            Jump();
         }
 
         //player gravity
@@ -311,7 +311,6 @@ public class PlayerController : MonoBehaviour
     {
         playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
         isJumping = true;
-        Debug.Log(LevelStats.Items);
     }
 
     //calculates and sets time for player UI

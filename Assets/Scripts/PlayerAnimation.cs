@@ -23,16 +23,6 @@ public class PlayerAnimation : MonoBehaviour
         playerAnimation.SetBool("isRunning", false);
     }
 
-    public void InAir()
-    {
-        playerAnimation.SetBool("inAir", true);
-    }
-
-    public void NotInAir()
-    {
-        playerAnimation.SetBool("inAir", false);
-    }
-
     public void IsOnGround()
     {
         playerAnimation.SetBool("isOnGround", true);
@@ -53,19 +43,8 @@ public class PlayerAnimation : MonoBehaviour
         playerAnimation.SetBool("isReaching", false);
     }
 
-    public void IsJumping()
-    {
-        playerAnimation.SetBool("isJumping", false);
-    }
-
-    public void NotJumping()
-    {
-        playerAnimation.SetBool("isJumping", false);
-    }
-
     public void Freefall()
     {
-        playerAnimation.SetBool("inAir"     , true );
         playerAnimation.SetBool("isOnGround", false);
         playerAnimation.SetBool("isReaching", false);
     }
@@ -73,33 +52,18 @@ public class PlayerAnimation : MonoBehaviour
     public void JumpStart()
     {
         playerAnimation.SetBool("isReaching", false);
-        playerAnimation.SetBool("isJumping" , true );
     }
 
     public void JumpEnd()
     {
-        playerAnimation.SetBool("inAir"     , false);
         playerAnimation.SetBool("isOnGround", true );
         playerAnimation.SetBool("isReaching", false);
-        playerAnimation.SetBool("isJumping" , false);
     }
 
     public void JumpSquatIdle()
     {
         playerAnimation.SetBool("isRunning" , false);
-        playerAnimation.SetBool("inAir"     , false);
         playerAnimation.SetBool("isOnGround", true);
         playerAnimation.SetBool("isReaching", false);
-        playerAnimation.SetBool("isJumping" , false);
-    }
-
-    public void Runstop()
-    {
-
-    }
-
-    public void StopAnimations()
-    {
-
     }
 }
