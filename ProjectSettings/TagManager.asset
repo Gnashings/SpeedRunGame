@@ -16,6 +16,7 @@ TagManager:
   - Door
   - Checkpoint
   - Swappable
+  - Kill Box
   layers:
   - Default
   - TransparentFX

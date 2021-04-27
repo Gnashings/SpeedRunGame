@@ -10,15 +10,31 @@ public class DroneScript : MonoBehaviour
     [SerializeField] private NavMeshAgent navMeshAgent;
     [SerializeField] private GameObject player;
     [SerializeField] private PlayerController playerInfo;
-    public float burst = 10f;
-    public float thrust = 5.0f;
-    [Header("Hovering Timer")]
-    [SerializeField] private float hover;
-    [SerializeField] private float hoverTime;
+
+    [Header("States")]
+    [SerializeField] bool isChasing;
+    [SerializeField] bool isAiming;
+    [SerializeField] bool isAttacking;
+    [SerializeField] bool isRecovering;
+    [SerializeField] bool isCharging;
+    [SerializeField] bool attacked;
+
+    [Header("Attacking Stats")]
+    [SerializeField] float aggroRange;
+    [SerializeField] float chargeSpeed;
+    [SerializeField] float aimDelay;
+    [SerializeField] float recoveryTime;
+    [SerializeField] float chargeTime;
+
+    [Header("Death Timer")]
     [SerializeField] private bool willDie = true;
     [SerializeField] float lifeSpan = 10f;
     float killTimer = 0f;
-    float distance;
+    float aimTimer = 0f;
+    float recTimer = 0f;
+    float chargingTimer = 0f;
+    float originalSpeed;
+    float originalAngle;
 
     void Awake()
     {
@@ -39,6 +55,9 @@ public class DroneScript : MonoBehaviour
                 Destroy(transform.gameObject);
             Destroy(transform.parent.gameObject);
         }
+        originalSpeed = navMeshAgent.speed;
+        originalAngle = navMeshAgent.angularSpeed;
+        isChasing = true;
     }
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
@@ -58,11 +77,39 @@ public class DroneScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        
-        if(playerInfo.crossed != true)
+        if(attacked == true)
+        {
+            if (navMeshAgent.hasPath == false)
+            {
+                isRecovering = true;
+            }
+        }
+
+        if(isCharging)
+        {
+            ChargePlayer();
+        }
+
+        if(isRecovering == true)
+        {
+            Recovery();
+        }
+
+        if(isAttacking == true)
+        {
+            AttackState();
+        }
+
+        if (isAiming)
+        {
+            AimAttack();
+        }
+
+        if (playerInfo.crossed == false && isChasing == true)
         {
             ChasePlayer();
         }
+
 
         if (willDie)
         {
@@ -73,30 +120,20 @@ public class DroneScript : MonoBehaviour
                 Destroy(transform.parent.gameObject);
             }
         }
+
+
     }
 
     void Update()
     {
-
-    }
-
-    public void FloatUp()
-    {
-        hover += Time.deltaTime;
-        hoverTime = hover - hover % 1;
-        if (hoverTime % 2 == 0)
-        {
-            //drone.AddForce(0, thrust, 0);
-        }
-        //Debug.Log(hoverTime);
-
-        Debug.Log(navMeshAgent.isOnNavMesh);
     }
 
     public void MoveAt(Vector3 Direction)
     {
         navMeshAgent.SetDestination(Direction);
     }
+
+
 
     public Vector3 getPlayerPosition()
     {
@@ -105,28 +142,97 @@ public class DroneScript : MonoBehaviour
 
     void ChasePlayer()
     {
-        //drone.MoveAt(drone.getPlayerPosition());
-        if (navMeshAgent.isOnNavMesh)
+        if (InAttackRadius())
         {
+            navMeshAgent.isStopped = true;
+            isAttacking = true;
+            isChasing = false;
+        }
+        else if (navMeshAgent.isOnNavMesh)
+        {
+            navMeshAgent.isStopped = false;
             navMeshAgent.SetDestination(player.transform.position);
         }
     }
+
+    void ChargePlayer()
+    {
+        navMeshAgent.speed = navMeshAgent.speed * chargeSpeed;
+        navMeshAgent.angularSpeed = 360f;
+
+        isAiming = false;
+
+        navMeshAgent.isStopped = false;
+        navMeshAgent.SetDestination(player.transform.position);
+        if (navMeshAgent.hasPath)
+        {
+            attacked = true;
+            chargingTimer += Time.deltaTime;
+            if (chargingTimer >= chargeTime)
+            {
+                isCharging = false;
+                isAttacking = false;
+            }
+        }
+    }
+
+    void AttackState()
+    {
+        navMeshAgent.isStopped = true;
+        if(isAiming == false)
+        {
+            isAiming = true;
+        }
+    }
+
+    void AimAttack()
+    {
+        transform.LookAt(player.transform);
+        aimTimer += Time.deltaTime;
+        if (aimTimer >= aimDelay)
+        {
+            isCharging = true;
+        }
+    }
+
+    void Recovery()
+    {
+        aimTimer = 0.0f;
+        chargingTimer = 0.0f;
+        navMeshAgent.isStopped = true;
+        recTimer += Time.deltaTime;
+        navMeshAgent.speed = originalSpeed;
+        navMeshAgent.angularSpeed = originalAngle;
+        transform.LookAt(player.transform);
+        if (recTimer >= recoveryTime)
+        {
+            isRecovering = false;
+            isChasing = true;
+            attacked = false;
+            navMeshAgent.isStopped = false;
+            recTimer = 0.0f;
+        }
+    }
+
+    void RemoveSelf()
+    {
+        gameObject.SetActive(false);
+    }
+
     public bool InAttackRadius()
     {
-        if (GetDistance() <= playerInfo.radius)
+        if (GetDistance() <= aggroRange)
         {
-            Debug.LogWarning("Player in kill range");
             return true;
         }
         else
         {
-            Debug.LogWarning("Player NOT in attack range");
             return false;
         }
     }
 
     public float GetDistance()
     {
-        return distance = Vector3.Distance(getPlayerPosition(), drone.transform.position);
+        return Vector3.Distance(getPlayerPosition(), drone.transform.position);
     }
 }
