@@ -216,9 +216,9 @@ public class DroneScript : MonoBehaviour
         }
     }
 
-    void RemoveSelf()
+    void Rifted(bool change)
     {
-        gameObject.SetActive(false);
+        gameObject.SetActive(change);
     }
 
     public bool InAttackRadius()
