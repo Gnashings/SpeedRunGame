@@ -142,6 +142,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BouldersOnlyAlt
       objectReference: {fileID: 0}
+    - target: {fileID: 322920121333274898, guid: dc6b4204ea5813b47b72d968c61bc662,
+        type: 3}
+      propertyPath: m_TagString
+      value: Alt Object
+      objectReference: {fileID: 0}
     - target: {fileID: 1094637008075424680, guid: dc6b4204ea5813b47b72d968c61bc662,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1410,12 +1415,12 @@ PrefabInstance:
     - target: {fileID: 3925767718032440594, guid: 508a6baec5010ea41aab99ac5bf092f8,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000017639554
+      value: 0.000000017639547
       objectReference: {fileID: 0}
     - target: {fileID: 3925767718032440594, guid: 508a6baec5010ea41aab99ac5bf092f8,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000018464854
+      value: -0.0000000018464847
       objectReference: {fileID: 0}
     - target: {fileID: 3925767718032440594, guid: 508a6baec5010ea41aab99ac5bf092f8,
         type: 3}
@@ -3163,6 +3168,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: Collect Object (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4350820117377421824, guid: f0528d8c0f38c234b83e045bb7c93638,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350820117377421830, guid: f0528d8c0f38c234b83e045bb7c93638,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350820117377421830, guid: f0528d8c0f38c234b83e045bb7c93638,
+        type: 3}
+      propertyPath: m_NormalDirection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350820117377421831, guid: f0528d8c0f38c234b83e045bb7c93638,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350820117377421831, guid: f0528d8c0f38c234b83e045bb7c93638,
+        type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350820117377421831, guid: f0528d8c0f38c234b83e045bb7c93638,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6096608951081494377, guid: f0528d8c0f38c234b83e045bb7c93638,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3619,6 +3654,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BouldersOnlyAlt
+      objectReference: {fileID: 0}
+    - target: {fileID: 322920121333274898, guid: dc6b4204ea5813b47b72d968c61bc662,
+        type: 3}
+      propertyPath: m_TagString
+      value: Alt Object
       objectReference: {fileID: 0}
     - target: {fileID: 1094637008075424680, guid: dc6b4204ea5813b47b72d968c61bc662,
         type: 3}
@@ -4365,7 +4405,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595675291}
-  m_LocalRotation: {x: 0.104109846, y: -0.00000003449211, z: 0.0000000036105887, w: 0.99456584}
+  m_LocalRotation: {x: 0.104109846, y: 0.000000034492107, z: -0.0000000036105885,
+    w: 0.99456584}
   m_LocalPosition: {x: 296.6, y: 25.28, z: 214.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -5510,6 +5551,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BouldersOnlyAlt
+      objectReference: {fileID: 0}
+    - target: {fileID: 322920121333274898, guid: dc6b4204ea5813b47b72d968c61bc662,
+        type: 3}
+      propertyPath: m_TagString
+      value: Alt Object
       objectReference: {fileID: 0}
     - target: {fileID: 1094637008075424680, guid: dc6b4204ea5813b47b72d968c61bc662,
         type: 3}

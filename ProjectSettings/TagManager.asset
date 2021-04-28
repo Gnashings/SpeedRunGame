@@ -17,6 +17,8 @@ TagManager:
   - Checkpoint
   - Swappable
   - Kill Box
+  - Alt Object
+  - Alt Collect
   layers:
   - Default
   - TransparentFX
