@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2268620501268756679}
   - component: {fileID: 4016729201301888351}
   - component: {fileID: 11154466493653694}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Alt BOULDRR
   m_TagString: Untagged
   m_Icon: {fileID: 0}

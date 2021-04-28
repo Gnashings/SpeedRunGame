@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7895509341555253783}
   - component: {fileID: 6300056072012194821}
   - component: {fileID: 1161615360598870637}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bouldeer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

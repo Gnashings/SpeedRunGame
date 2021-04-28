@@ -11,7 +11,6 @@ using Random = UnityEngine.Random;
 
 public class LevelDemo : MonoBehaviour
 {
-
     [Header("Bridges")]
     [SerializeField] public List<Bridge> bridge;
     [Header("Objective")]

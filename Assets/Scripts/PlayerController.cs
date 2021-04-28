@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditorInternal;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,12 +11,14 @@ public class PlayerController : MonoBehaviour
     #pragma warning disable 0649
     [Header("PLAYER INPUT")]
     [SerializeField] public GameObject player;
-    [SerializeField] private InputActionReference movementControl;
-    [SerializeField] private InputActionReference actionOne;
-    [SerializeField] private InputActionReference actionTwo;
-    [SerializeField] private InputActionReference actionThree;
-    [SerializeField] private InputActionReference jumpControl;
+    public InputActionReference movementControl;
+
+    [SerializeField] public InputActionReference actionOne;
+    [SerializeField] public InputActionReference actionTwo;
+    [SerializeField] public InputActionReference actionThree;
+    [SerializeField] public InputActionReference jumpControl;
     [SerializeField] private CharacterController controller;
+    [SerializeField] private PlayerActions playerActions;
     [SerializeField] private PlayerAnimation playerAnim;
     
     Transform cameraMainTransform;
@@ -32,7 +35,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool inSwitchRange = false;
     [SerializeField] private bool timeCheat = false;
     [SerializeField] public bool canPhase = false;
-    #pragma warning restore 0649
+    [SerializeField] public bool hitStun = false;
+
+#pragma warning restore 0649
     //[Header("UI ELEMENTS")]
     Slider rechargeOne;
     Slider rechargeTwo;
@@ -52,14 +57,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float playerSpeed = 10.0f;
     [SerializeField] private float jumpHeight = 3.0f;
     [SerializeField] private float gravityValue = -30f;
-    [SerializeField] private float rotationSpeed = 20f;
+    [SerializeField] public float rotationSpeed = 20f;
     [SerializeField] private Vector3 playerVelocity;
     [Tooltip("Divided by this value.")]
     [SerializeField] private float slowBy = 2f;
     [SerializeField] private float totalTimeSlowed = 3f;
+    public float distanceToGround = 1f;
     private float timeSlowed;
     private Vector3 teleport;
-
+    int GroundLayer;
     [Header("TIME SLOW")]
     [SerializeField] private float slowdownTimer = 2f;
     [SerializeField] private float slowdownFactor = 0.05f;
@@ -70,6 +76,11 @@ public class PlayerController : MonoBehaviour
     [Header("RIFTING")]
     [SerializeField] public bool crossed = false;
     [SerializeField] private float allowedTimeInRift = 5.0f;
+
+    [Header("DAMAGE VALUES")]
+    [SerializeField] float droneDamage;
+    [SerializeField] float gasDamage;
+    [SerializeField] float riftDamage;
 
     private Vector3 portalEntrancePosition;
     private bool sendOff;                                           //teleports the player to another world
@@ -82,7 +93,11 @@ public class PlayerController : MonoBehaviour
     {
         controller = gameObject.GetComponent<CharacterController>();
         playerAnim = gameObject.GetComponent<PlayerAnimation>();
+        playerActions = gameObject.GetComponent<PlayerActions>();
         cameraMainTransform = Camera.main.transform;
+        
+        GroundLayer = LayerMask.GetMask("Ground");
+
 
         //Canvas UI
         scoreText = GameObject.Find("Canvas/Text").GetComponent<Text>();
@@ -114,6 +129,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         UpdateUITImer();
+
         if (crossed == true)
         {
             CountDownRiftTime();
@@ -122,10 +138,11 @@ public class PlayerController : MonoBehaviour
         {
             SlowedTimer();
         }
-        if(controller.isGrounded)
+        if (OnGround())
         {
             isJumping = false;
         }
+        
 
         if (sendOff == true)
         {
@@ -141,14 +158,21 @@ public class PlayerController : MonoBehaviour
             KickPlayerFromRift();
         }
 
+
     }
 
     void Update()
     {
         HandleTimeEvents();
         ChargeTimePower();
-        Move();
-
+        
+        if (hitStun == false)
+        {
+            Move();
+        }
+        else
+            HitStun();
+        
         if (actionThree.action.triggered && inSwitchRange && reaching != true)
         {
             reaching = true;
@@ -175,6 +199,8 @@ public class PlayerController : MonoBehaviour
         {
             PhasePower();
         }
+        Forces();
+
     }
 
     //governs the changes in Deltatime
@@ -192,7 +218,6 @@ public class PlayerController : MonoBehaviour
                 timeWarpCountdown = 0.0f;
                 timeCheat = false;
             }
-
         }
 
         if (timeCheat == false)
@@ -238,14 +263,18 @@ public class PlayerController : MonoBehaviour
         Debug.Log("returned");
     }
 
+    float jumptimer = 0.0f;
+    float jumptime = .15f;
+
+
     private void Move()
     {
-        groundedPlayer = controller.isGrounded;
+        groundedPlayer = OnGround();
         if (groundedPlayer && playerVelocity.y <= 0)
         {
-            playerVelocity.y = 0f;
+            playerVelocity.y = gravityValue;
         }
-        
+
         Vector2 movement = movementControl.action.ReadValue<Vector2>();
         Vector3 move = new Vector3(movement.x, 0, movement.y);
         move = cameraMainTransform.forward * move.z + cameraMainTransform.right * move.x;
@@ -257,22 +286,30 @@ public class PlayerController : MonoBehaviour
         }
         else
             controller.Move(move * Time.unscaledDeltaTime * playerSpeed);
-
+           
         //assuming player fell off a cliff
-        if (groundedPlayer == false)
+        if (OnGround() == false)
         {
-            isFalling = true;
-            playerAnim.NotRunning();
-            playerAnim.Freefall();
+            jumptimer += Time.deltaTime;
+
+            if(jumptimer >= jumptime)
+            {
+                isFalling = true;
+                playerAnim.NotRunning();
+                playerAnim.Freefall();
+                jumptimer = 0.0f;
+            }
         }
         if (groundedPlayer == true)
         {
+            playerAnim.IsOnGround();
             //you hit the ground if you were falling
             if (isFalling == true)
             {
                 isFalling = false;
                 playerAnim.JumpEnd();
             }
+            
             //you are not moving
             if(move.x == 0 && move.z == 0)
             {
@@ -285,18 +322,52 @@ public class PlayerController : MonoBehaviour
                 isRunning = true;
                 playerAnim.IsRunning();
             }
+            
         }
-
+        
         // start your jump
-        if (jumpControl.action.triggered && groundedPlayer && isJumping == false)
+        if (jumpControl.action.triggered && OnGround() && isJumping == false)
         {
             playerAnim.Freefall();
             Jump();
         }
 
-        //player gravity
-        playerVelocity.y += gravityValue * Time.unscaledDeltaTime;
-        controller.Move(playerVelocity * Time.unscaledDeltaTime);
+        // unbinds camera rotations based off movement
+        if (movement != Vector2.zero)
+        {
+            float targetAngle = Mathf.Atan2(movement.x, movement.y) * Mathf.Rad2Deg + cameraMainTransform.eulerAngles.y;
+            Quaternion rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.unscaledDeltaTime * rotationSpeed);
+        }
+        
+    }
+
+    private void Run()
+    {
+        Vector2 movement = movementControl.action.ReadValue<Vector2>();
+        Vector3 move = new Vector3(movement.x, 0, movement.y);
+        move = cameraMainTransform.forward * move.z + cameraMainTransform.right * move.x;
+        move.y = 0;
+
+        if (slowed == true)
+        {
+            controller.Move(move * Time.unscaledDeltaTime * playerSpeed / slowBy);
+        }
+        else
+            controller.Move(move * Time.unscaledDeltaTime * playerSpeed);
+        
+        //you are not moving
+        if (move.x == 0 && move.z == 0)
+        {
+            isRunning = false;
+            playerAnim.NotRunning();
+        }
+        //otherwise you are running
+        if (move.x != 0 && move.z != 0)
+        {
+            isRunning = true;
+            playerAnim.IsRunning();
+        }
 
         // unbinds camera rotations based off movement
         if (movement != Vector2.zero)
@@ -307,10 +378,32 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Forces()
+    {
+        //player gravity
+        playerVelocity.y += gravityValue * Time.unscaledDeltaTime;
+        controller.Move(playerVelocity * Time.unscaledDeltaTime);
+    }
+
+    private void ResetVelocity()
+    {
+        playerVelocity.y = 0;
+    }
+
     public void Jump()
     {
-        playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+        playerVelocity.y += Mathf.Sqrt(jumpHeight * -5.0f * gravityValue);
         isJumping = true;
+    }
+
+    private void HitStun()
+    {
+        playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.5f * gravityValue);
+        isJumping = true;
+        if (OnGround() == true)
+        {
+            hitStun = false;
+        }
     }
 
     //calculates and sets time for player UI
@@ -385,11 +478,6 @@ public class PlayerController : MonoBehaviour
         sendOff = true;
     }
 
-    private void UwU()
-    {
-        Debug.LogWarning("UwU");
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         /**
@@ -433,10 +521,11 @@ public class PlayerController : MonoBehaviour
 
         if (other.tag.Equals("Enemy"))
         {
-            YouDie();
+            Damaged(droneDamage);
+            hitStun = true;
+            Debug.Log("pogg");
         }
     }
-
 
     private void OnTriggerStay(Collider other)
     {
@@ -449,6 +538,10 @@ public class PlayerController : MonoBehaviour
                 other.gameObject.BroadcastMessage("Confirm");
                 hitSwitch = true;
             }
+        }
+        if (other.tag.Equals("Gas"))
+        {
+            Damaged(gasDamage);
         }
     }
 
@@ -469,11 +562,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Damaged(float damage)
+    {
+        GetComponent<PlayerStats>().Health -= damage;
+    }
+
     public void YouDie()
     {
         SceneManager.LoadScene("LoseScreen");
     }
-
 
     private void OnEnable()
     {
@@ -493,14 +590,6 @@ public class PlayerController : MonoBehaviour
         jumpControl.action.Disable();
     }
 
-
-    /// <summary>
-    /// Loads the information from previous levels into the canvas.
-    /// </summary>
-    private void LoadCanvasInformation()
-    {
-
-    }
     private void LockMouse()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -523,5 +612,11 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(detectPlayerSphere.position, radius);
     }
 
+    public bool OnGround()
+    {
+        bool r;
+        r = Physics.CheckSphere(transform.position, distanceToGround, GroundLayer);
+        return r;
+    }
 }
 

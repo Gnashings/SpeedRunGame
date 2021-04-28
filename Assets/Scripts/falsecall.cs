@@ -13,7 +13,6 @@ public class falsecall : MonoBehaviour
         Fridges = GameObject.FindGameObjectsWithTag("Swappable");
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (swap == true)
