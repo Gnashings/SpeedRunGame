@@ -18,13 +18,14 @@ public class DroneScript : MonoBehaviour
     [SerializeField] bool isRecovering;
     [SerializeField] bool isCharging;
     [SerializeField] bool attacked;
-
+    #pragma warning disable 0649
     [Header("Attacking Stats")]
     [SerializeField] float aggroRange;
     [SerializeField] float chargeSpeed;
     [SerializeField] float aimDelay;
     [SerializeField] float recoveryTime;
     [SerializeField] float chargeTime;
+    #pragma warning restore 0649
 
     [Header("Death Timer")]
     [SerializeField] private bool willDie = true;
@@ -42,6 +43,7 @@ public class DroneScript : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player");
         playerInfo = player.GetComponent<PlayerController>();
+
         if (navMeshAgent.isOnNavMesh == false)
         {
             float range = 2000f;

@@ -4,9 +4,33 @@ using UnityEngine;
 
 public static class LevelStats
 {
-
+    private static float health, totalHealth;
     private static int items, switches, checkpoints;
-    private static bool levelOne, levelTwo, levelThree;
+    private static bool levelOne, levelTwo, levelThree, firstSpawn;
+
+    public static float Health
+    {
+        get
+        {
+            return health;
+        }
+        set
+        {
+            health = value;
+        }
+    }
+
+    public static float TotalHealth
+    {
+        get
+        {
+            return totalHealth;
+        }
+        set
+        {
+            totalHealth = value;
+        }
+    }
 
     public static int Items
     {
@@ -77,5 +101,16 @@ public static class LevelStats
             levelThree = value;
         }
     }
-    
+    public static bool FirstSpawn
+    {
+        get
+        {
+            return firstSpawn;
+        }
+        set
+        {
+            firstSpawn = value;
+        }
+    }
+
 }
