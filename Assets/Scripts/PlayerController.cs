@@ -342,52 +342,11 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    private void Run()
-    {
-        Vector2 movement = movementControl.action.ReadValue<Vector2>();
-        Vector3 move = new Vector3(movement.x, 0, movement.y);
-        move = cameraMainTransform.forward * move.z + cameraMainTransform.right * move.x;
-        move.y = 0;
-
-        if (slowed == true)
-        {
-            controller.Move(move * Time.unscaledDeltaTime * playerSpeed / slowBy);
-        }
-        else
-            controller.Move(move * Time.unscaledDeltaTime * playerSpeed);
-        
-        //you are not moving
-        if (move.x == 0 && move.z == 0)
-        {
-            isRunning = false;
-            playerAnim.NotRunning();
-        }
-        //otherwise you are running
-        if (move.x != 0 && move.z != 0)
-        {
-            isRunning = true;
-            playerAnim.IsRunning();
-        }
-
-        // unbinds camera rotations based off movement
-        if (movement != Vector2.zero)
-        {
-            float targetAngle = Mathf.Atan2(movement.x, movement.y) * Mathf.Rad2Deg + cameraMainTransform.eulerAngles.y;
-            Quaternion rotation = Quaternion.Euler(0f, targetAngle, 0f);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.unscaledDeltaTime * rotationSpeed);
-        }
-    }
-
     private void Forces()
     {
         //player gravity
         playerVelocity.y += gravityValue * Time.unscaledDeltaTime;
         controller.Move(playerVelocity * Time.unscaledDeltaTime);
-    }
-
-    private void ResetVelocity()
-    {
-        playerVelocity.y = 0;
     }
 
     public void Jump()

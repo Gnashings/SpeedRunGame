@@ -19,8 +19,9 @@ public class LevelDemo : MonoBehaviour
     [SerializeField] public List<SwitchScipt> Interactables;
     [Header("Objective AltWorld")]
     [SerializeField] int totalAltCollectables;
-    [SerializeField] public List<Collectible> altCollectItem;
+    [SerializeField] GameObject[] altCollectItem;
     [SerializeField] public List<SwitchScipt> altInteractables;
+    [HideInInspector] GameObject[] altObjects;
     [Header("Kill Box")]
     [SerializeField] public List<GameObject> DroneSpawn;
     [SerializeField] public GameObject enemy;
@@ -93,12 +94,41 @@ public class LevelDemo : MonoBehaviour
             }
         }
 
+        altCollectItem = GameObject.FindGameObjectsWithTag("Alt Collect");
+        if (altCollectItem != null)
+        {
+            //if(altCollectItem[0].GetComponent<SphereCollider>() != null)
+            //{
+            //    altCollectItem[0].GetComponent<SphereCollider>().enabled = false;
+            //}
+            if (altCollectItem[0].GetComponent<MonoBehaviour>() != null)
+            {
+                altCollectItem[0].GetComponent<MonoBehaviour>().enabled = false;
+            }
+        }
+
+        altObjects = GameObject.FindGameObjectsWithTag("Alt Object");
+        if (altObjects != null)
+        {
+            for (int i = 0; i < altObjects.Length; i++)
+            {
+                if (altObjects[i].GetComponent<MeshCollider>() != null)
+                {
+                    altObjects[i].GetComponent<MeshCollider>().enabled = false;
+                }
+                if (altObjects[i].GetComponent<MeshRenderer>() != null)
+                {
+                    altObjects[i].GetComponent<MeshRenderer>().enabled = false;
+                }
+            }
+        }
+        /*
         //method this later
         if (altCollectItem != null && altCollectItem.Count >= 2)
         {
             //allows us to count how many loadables are left to remove
             int loadAltCollectables = totalAltCollectables;
-
+       
             for (int k = 0; k <= altCollectItem.Count - 1; k++)
             {
                 if (loadAltCollectables == 0 || altCollectItem.Count <= totalAltCollectables)
@@ -121,6 +151,7 @@ public class LevelDemo : MonoBehaviour
                 }
             }
         }
+        */
 
         //final check to ensure that any potential objectives are found.
         switches = GameObject.FindGameObjectsWithTag("Switch");

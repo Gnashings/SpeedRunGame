@@ -19,13 +19,6 @@ public class PlayerActions : MonoBehaviour
         cameraMainTransform = Camera.main.transform;
     }
 
-    //state events
-    public void OnGroundState()
-    {
-        //Run();
-    }
-
-
     //methods to run in state events
     public void Run()
     {

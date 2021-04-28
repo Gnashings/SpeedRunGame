@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 11154466493653694}
   m_Layer: 8
   m_Name: Alt BOULDRR
-  m_TagString: Untagged
+  m_TagString: Alt Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,9 +27,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 322920121333274898}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 284.4904, y: 100.08, z: 919.9746}
-  m_LocalScale: {x: 50, y: 50, z: 50}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 3596054999584376518}
   m_Father: {fileID: 0}
@@ -120,7 +120,7 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 2268620501268756679}
-  - screenRelativeHeight: 0.1
+  - screenRelativeHeight: 0.020742083
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 2268620501268756679}
@@ -136,6 +136,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ghost-Boulder
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093490448648724697, guid: afd1734794c4a5240bb560df882e9f66,
+        type: 3}
+      propertyPath: m_TagString
+      value: Alt Object
       objectReference: {fileID: 0}
     - target: {fileID: 9093490448648724699, guid: afd1734794c4a5240bb560df882e9f66,
         type: 3}
