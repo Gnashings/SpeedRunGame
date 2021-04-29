@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
     RawImage chargeOne;
     RawImage chargeTwo;
     RawImage worldSwapUI;
+    RawImage frozenScreen;
     public int itemCount;
     public int switchCount;
     public int objCount;
@@ -106,6 +107,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource healSound;
     public AudioSource stimSound;
 
+
     private void Awake()
     {
         controller = gameObject.GetComponent<CharacterController>();
@@ -125,6 +127,7 @@ public class PlayerController : MonoBehaviour
         worldSwapUI = GameObject.Find("Canvas/Worldswap UI").GetComponent<RawImage>();
         itemTotal = GameObject.Find("Canvas/Item Total").GetComponent<Text>();
         Dialog = GameObject.Find("Canvas/Dialog").GetComponent<Text>();
+        frozenScreen = GameObject.Find("Canvas/FrozenScreen").GetComponent<RawImage>();
 
         //Canvas UI set value
         rechargeOne.value = 0.0f;
@@ -220,6 +223,8 @@ public class PlayerController : MonoBehaviour
     {
         if (timeCheat == true)
         {
+            frozenScreen.enabled = true;
+
             SlowDownTime();
             if (timeWarpCountdown <= slowdownTimer)
             {
@@ -234,6 +239,8 @@ public class PlayerController : MonoBehaviour
 
         if (timeCheat == false)
         {
+            frozenScreen.enabled = false;
+
             ResumeTime();
         }
     }
