@@ -50,11 +50,7 @@ MonoBehaviour:
   - {fileID: 0}
   Interactables: []
   totalAltCollectables: 0
-  altCollectItem:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  altCollectItem: []
   altInteractables: []
   DroneSpawn:
   - {fileID: 0}

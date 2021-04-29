@@ -157,6 +157,9 @@ MonoBehaviour:
   TotalHealth: 0
   totalHealthDecrease: 10
   totalHealthLimit: 90
+  regenThreshold: 25
+  regTimer: 0
+  regTime: 5
 --- !u!114 &5278854794869442794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +175,8 @@ MonoBehaviour:
   KillBoxes: []
   Swappable: []
   AltObjects: []
+  NormalObjects: []
+  AltCollectable: []
 --- !u!114 &317496749
 MonoBehaviour:
   m_ObjectHideFlags: 0
