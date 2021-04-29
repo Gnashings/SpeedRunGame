@@ -245,10 +245,30 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e5362b20a64c5094ca86fc018d5cff07, type: 2}
+    - target: {fileID: -1452619902025256971, guid: 757b8f9491b28214bb41ea2dcd04f575,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 757b8f9491b28214bb41ea2dcd04f575,
         type: 3}
       propertyPath: m_Name
       value: catwalk
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 757b8f9491b28214bb41ea2dcd04f575,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2201066766146468819, guid: 757b8f9491b28214bb41ea2dcd04f575,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447179309752529984, guid: 757b8f9491b28214bb41ea2dcd04f575,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 757b8f9491b28214bb41ea2dcd04f575, type: 3}
