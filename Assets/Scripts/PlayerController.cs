@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
     RawImage chargeTwo;
     RawImage worldSwapUI;
     RawImage frozenScreen;
+    RawImage gasScreen;
     public int itemCount;
     public int switchCount;
     public int objCount;
@@ -128,6 +129,7 @@ public class PlayerController : MonoBehaviour
         itemTotal = GameObject.Find("Canvas/Item Total").GetComponent<Text>();
         Dialog = GameObject.Find("Canvas/Dialog").GetComponent<Text>();
         frozenScreen = GameObject.Find("Canvas/FrozenScreen").GetComponent<RawImage>();
+        gasScreen = GameObject.Find("Canvas/GasScreen").GetComponent<RawImage>();
 
         //Canvas UI set value
         rechargeOne.value = 0.0f;
@@ -153,6 +155,8 @@ public class PlayerController : MonoBehaviour
         hpText.text = hptemp.ToString();
 
         healSound = GetComponent<AudioSource>();
+
+        gasScreen.enabled = false;
     }
 
     private void FixedUpdate()
@@ -537,6 +541,8 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.name.Equals("gasplanes"))
         {
+            gasScreen.enabled = true;
+
             Damaged(gasDamage);
         }
     }
