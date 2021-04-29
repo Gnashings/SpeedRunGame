@@ -102,6 +102,10 @@ public class PlayerController : MonoBehaviour
     float jumptime = .15f;
     bool dialogOn = false;
 
+    //sound
+    public AudioSource healSound;
+    public AudioSource stimSound;
+
     private void Awake()
     {
         controller = gameObject.GetComponent<CharacterController>();
@@ -144,6 +148,8 @@ public class PlayerController : MonoBehaviour
 
         float hptemp = GetComponent<PlayerStats>().TotalHealth;
         hpText.text = hptemp.ToString();
+
+        healSound = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -450,11 +456,15 @@ public class PlayerController : MonoBehaviour
 
     private void Heal()
     {
+        healSound.Play();
+        
         GetComponent<PlayerStats>().HealPlayer(healAmount);
     }
 
     private void Stim()
     {
+        stimSound.Play();
+
         GetComponent<PlayerStats>().StimPlayer(HPUpAmount);
         dialogOn = true;
         float hptemp = GetComponent<PlayerStats>().TotalHealth;
