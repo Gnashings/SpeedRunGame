@@ -108,6 +108,7 @@ public class PlayerController : MonoBehaviour
     //sound
     public AudioSource healSound;
     public AudioSource stimSound;
+    public AudioSource altSound;
 
 
     private void Awake()
@@ -499,6 +500,7 @@ public class PlayerController : MonoBehaviour
         if(crossed == true)
         {
             altScreen.enabled = true;
+            altSound.Play();
         }
         else
         {
