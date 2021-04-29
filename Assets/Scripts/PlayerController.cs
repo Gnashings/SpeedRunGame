@@ -1,8 +1,6 @@
 ﻿using System.Security.AccessControl;
 using System.Xml.Schema;
 using TMPro;
-using UnityEditor.Rendering;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
