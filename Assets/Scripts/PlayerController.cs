@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
     RawImage worldSwapUI;
     RawImage frozenScreen;
     RawImage gasScreen;
+    RawImage altScreen;
     public int itemCount;
     public int switchCount;
     public int objCount;
@@ -130,6 +131,7 @@ public class PlayerController : MonoBehaviour
         Dialog = GameObject.Find("Canvas/Dialog").GetComponent<Text>();
         frozenScreen = GameObject.Find("Canvas/FrozenScreen").GetComponent<RawImage>();
         gasScreen = GameObject.Find("Canvas/GasScreen").GetComponent<RawImage>();
+        altScreen = GameObject.Find("Canvas/AltWorldScreen").GetComponent<RawImage>();
 
         //Canvas UI set value
         rechargeOne.value = 0.0f;
@@ -157,6 +159,7 @@ public class PlayerController : MonoBehaviour
         healSound = GetComponent<AudioSource>();
 
         gasScreen.enabled = false;
+        altScreen.enabled = false;
     }
 
     private void FixedUpdate()
@@ -492,6 +495,15 @@ public class PlayerController : MonoBehaviour
     private void WorldSwapPower()
     {
         crossed = !crossed;
+
+        if(crossed == true)
+        {
+            altScreen.enabled = true;
+        }
+        else
+        {
+            altScreen.enabled = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
