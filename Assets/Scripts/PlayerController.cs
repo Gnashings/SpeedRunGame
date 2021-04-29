@@ -109,6 +109,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource healSound;
     public AudioSource stimSound;
     public AudioSource altSound;
+    public AudioSource freezeSound;
 
 
     private void Awake()
@@ -232,6 +233,7 @@ public class PlayerController : MonoBehaviour
         if (timeCheat == true)
         {
             frozenScreen.enabled = true;
+            freezeSound.Play();
 
             SlowDownTime();
             if (timeWarpCountdown <= slowdownTimer)

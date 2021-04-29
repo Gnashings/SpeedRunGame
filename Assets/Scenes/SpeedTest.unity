@@ -4200,7 +4200,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1793287125}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &537217607
+--- !u!82 &537217616
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4210,10 +4210,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 6c23ee7daa1053643811890869ffc16c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: cb23451c01bdddc4db5447a5676a45bd, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
-  m_Pitch: 1
+  m_Volume: 1
+  m_Pitch: 0
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -21768,13 +21768,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 361202199, guid: 39362bc39781e214287beac8078d226a, type: 3}
-      propertyPath: gasDamage
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 361202199, guid: 39362bc39781e214287beac8078d226a, type: 3}
-      propertyPath: altSound
+      propertyPath: freezeSound
       value: 
-      objectReference: {fileID: 537217607}
+      objectReference: {fileID: 537217616}
     - target: {fileID: 1414929503786416545, guid: 39362bc39781e214287beac8078d226a,
         type: 3}
       propertyPath: m_LocalPosition.x
