@@ -112,7 +112,6 @@ public class PlayerController : MonoBehaviour
         cameraMainTransform = Camera.main.transform;
         GroundLayer = LayerMask.GetMask("Ground");
 
-
         //Canvas UI
         healthbar = GameObject.Find("Canvas/HealthBar").GetComponent<Slider>();
         hpText = GameObject.Find("Canvas/TotalHPText").GetComponent<Text>();
@@ -490,13 +489,13 @@ public class PlayerController : MonoBehaviour
             itemTotal.text = LevelStats.Checkpoints.ToString();
         }
 
-        if (other.tag.Equals("Heal"))
+        if (other.gameObject.name.Equals("Heal"))
         {
             Destroy(other.gameObject);
             Heal();
         }
 
-        if (other.tag.Equals("Serum"))
+        if (other.gameObject.name.Equals("Serum"))
         {
             Destroy(other.gameObject);
             Stim();
@@ -546,8 +545,19 @@ public class PlayerController : MonoBehaviour
 
     private void DimensionSwapPower()
     {
-        Damaged(riftDamage);
+        if(GetComponent<PlayerStats>().Health >= 1)
+        {
+            Damaged(riftDamage);
+        }
+        else
+        {
+            //kicks you out
+            crossed = false;
+        }
+
     }
+
+
 
     private void Damaged(float damage)
     {

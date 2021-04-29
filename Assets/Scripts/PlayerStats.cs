@@ -5,11 +5,16 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
+
     [Header("Health")]
     [SerializeField] public float Health;
     [SerializeField] public float TotalHealth;
     [SerializeField] public float totalHealthDecrease = 10f;
     [SerializeField] public float totalHealthLimit = 90f;
+    [SerializeField] public float regenThreshold;
+    [SerializeField] float regTimer = 0.0f;
+    [SerializeField] float regTime = 5.0f;
+    PlayerController player;
     void Awake()
     {
         if (LevelStats.FirstSpawn == false)
@@ -26,11 +31,32 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         UpdateHealth();
+        player = GetComponent<PlayerController>();
     }
 
     void Update()
     {
-        
+        Regen();
+    }
+
+    private void Regen()
+    {
+        if (Health < regenThreshold)
+        {
+            if (player.crossed != true)
+            {
+                if (regTimer >= regTime)
+                {
+                    Health = regenThreshold;
+                }
+                regTimer += Time.unscaledDeltaTime;
+            }
+
+        }
+        else
+        {
+            regTimer = 0.0f;
+        }
     }
 
     public void HealPlayer(float heal)

@@ -8,6 +8,8 @@ public class DimensionSwap : MonoBehaviour
     public GameObject[] KillBoxes;
     public GameObject[] Swappable;
     public GameObject[] AltObjects;
+    public GameObject[] NormalObjects;
+    public GameObject[] AltCollectable;
     PlayerController player;
 
     void Awake()
@@ -15,6 +17,9 @@ public class DimensionSwap : MonoBehaviour
         KillBoxes = GameObject.FindGameObjectsWithTag("Kill Box");
         Swappable = GameObject.FindGameObjectsWithTag("Swappable");
         AltObjects = GameObject.FindGameObjectsWithTag("Alt Object");
+        NormalObjects = GameObject.FindGameObjectsWithTag("Normal World Only");
+        AltCollectable = GameObject.FindGameObjectsWithTag("Alt Collect");
+
         player = gameObject.GetComponent<PlayerController>();
     }
 
@@ -27,6 +32,8 @@ public class DimensionSwap : MonoBehaviour
             SwapObjectMaterials(true);
             ShutDownKillBoxes(false);
             ShowAltWorldObjects(true);
+            NormalWorldOnly(false);
+            ShowAltWorldCollectable(true);
         }
 
         if (player.crossed == false)
@@ -34,6 +41,8 @@ public class DimensionSwap : MonoBehaviour
             SwapObjectMaterials(false);
             ShutDownKillBoxes(true);
             ShowAltWorldObjects(false);
+            NormalWorldOnly(true);
+            ShowAltWorldCollectable(false);
         }
     }
 
@@ -45,14 +54,50 @@ public class DimensionSwap : MonoBehaviour
             {
                 AltObjects[i].GetComponent<MeshCollider>().enabled = change;
             }
+            if (AltObjects[i].GetComponent<SphereCollider>() != null)
+            {
+                AltObjects[i].GetComponent<SphereCollider>().enabled = change;
+            }
             if (AltObjects[i].GetComponent<MeshRenderer>() != null)
             {
                 AltObjects[i].GetComponent<MeshRenderer>().enabled = change;
+            }
+            if (AltObjects[i].GetComponent<SkinnedMeshRenderer>() != null)
+            {
+                AltObjects[i].GetComponent<SkinnedMeshRenderer>().enabled = change;
             }
             if (AltObjects[i].GetComponent<ParticleSystem>() != null)
             {
                 var emits = AltObjects[i].GetComponent<ParticleSystem>().emission;
                 emits.enabled = !change;
+            }
+        }
+    }
+
+    void ShowAltWorldCollectable(bool change)
+    {
+        for (int i = 0; i < AltCollectable.Length; i++)
+        {
+            if (AltCollectable[i].GetComponent<MeshCollider>() != null)
+            {
+                AltCollectable[i].GetComponent<MeshCollider>().enabled = change;
+            }
+            if (AltCollectable[i].GetComponent<SphereCollider>() != null)
+            {
+                AltCollectable[i].GetComponent<SphereCollider>().enabled = change;
+            }
+            if (AltCollectable[i].GetComponent<MeshRenderer>() != null)
+            {
+                AltCollectable[i].GetComponent<MeshRenderer>().enabled = change;
+            }
+            if (AltCollectable[i].GetComponent<SkinnedMeshRenderer>() != null)
+            {
+                AltCollectable[i].GetComponent<SkinnedMeshRenderer>().enabled = change;
+            }
+            if (AltCollectable[i].GetComponent<ParticleSystem>() != null)
+            {
+                var emits = AltCollectable[i].GetComponent<ParticleSystem>().emission;
+                emits.enabled = change;
             }
         }
     }
@@ -64,6 +109,34 @@ public class DimensionSwap : MonoBehaviour
             if (Swappable[i].GetComponent<MaterialChange>() != null)
             {
                 Swappable[i].GetComponent<MaterialChange>().check = change;
+            }
+        }
+    }
+
+    void NormalWorldOnly(bool change)
+    {
+        for (int i = 0; i < NormalObjects.Length; i++)
+        {
+            if (NormalObjects[i].GetComponent<MeshCollider>() != null)
+            {
+                NormalObjects[i].GetComponent<MeshCollider>().enabled = change;
+            }
+            if (NormalObjects[i].GetComponent<SphereCollider>() != null)
+            {
+                NormalObjects[i].GetComponent<SphereCollider>().enabled = change;
+            }
+            if (NormalObjects[i].GetComponent<MeshRenderer>() != null)
+            {
+                NormalObjects[i].GetComponent<MeshRenderer>().enabled = change;
+            }
+            if (NormalObjects[i].GetComponent<SkinnedMeshRenderer>() != null)
+            {
+                NormalObjects[i].GetComponent<SkinnedMeshRenderer>().enabled = change;
+            }
+            if (NormalObjects[i].GetComponent<ParticleSystem>() != null)
+            {
+                var emits = NormalObjects[i].GetComponent<ParticleSystem>().emission;
+                emits.enabled = change;
             }
         }
     }
