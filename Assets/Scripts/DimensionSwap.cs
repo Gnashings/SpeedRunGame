@@ -10,6 +10,7 @@ public class DimensionSwap : MonoBehaviour
     public GameObject[] AltObjects;
     public GameObject[] NormalObjects;
     public GameObject[] AltCollectable;
+    public GameObject[] Switches;
     PlayerController player;
 
     void Awake()
@@ -19,7 +20,7 @@ public class DimensionSwap : MonoBehaviour
         AltObjects = GameObject.FindGameObjectsWithTag("Alt Object");
         NormalObjects = GameObject.FindGameObjectsWithTag("Normal World Only");
         AltCollectable = GameObject.FindGameObjectsWithTag("Alt Collect");
-
+        Switches = GameObject.FindGameObjectsWithTag("Switch");
         player = gameObject.GetComponent<PlayerController>();
     }
 
@@ -58,6 +59,10 @@ public class DimensionSwap : MonoBehaviour
             {
                 AltObjects[i].GetComponent<SphereCollider>().enabled = change;
             }
+            if (AltObjects[i].GetComponent<BoxCollider>() != null)
+            {
+                AltObjects[i].GetComponent<BoxCollider>().enabled = change;
+            }
             if (AltObjects[i].GetComponent<MeshRenderer>() != null)
             {
                 AltObjects[i].GetComponent<MeshRenderer>().enabled = change;
@@ -73,7 +78,24 @@ public class DimensionSwap : MonoBehaviour
             }
         }
     }
-
+    void ShowSwitches(bool change)
+    {
+        for (int i = 0; i < Switches.Length; i++)
+        {
+            if (Switches[i].GetComponent<SphereCollider>() != null)
+            {
+                AltObjects[i].GetComponent<SphereCollider>().enabled = change;
+            }
+            if (Switches[i].GetComponent<BoxCollider>() != null)
+            {
+                Switches[i].GetComponent<BoxCollider>().enabled = change;
+            }
+            if (Switches[i].GetComponent<MaterialChange>() != null)
+            {
+                Switches[i].GetComponent<MaterialChange>().enabled = change;
+            }
+        }
+    }
     void ShowAltWorldCollectable(bool change)
     {
         for (int i = 0; i < AltCollectable.Length; i++)

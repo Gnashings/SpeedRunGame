@@ -6,15 +6,24 @@ public class MaterialChange : MonoBehaviour
 {
     [HideInInspector] public bool check;
     MeshRenderer meshRenderer;
+    SkinnedMeshRenderer skinnedMeshRenderer;
     [Tooltip("Place normal material in index 0, alt material in index 1")]
     public Material[] materials;
 
     void Start()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
-        meshRenderer.enabled = true;
-        meshRenderer.sharedMaterial = materials[0];
-
+        if (meshRenderer.GetComponent<MeshRenderer>() != null)
+        {
+            meshRenderer = GetComponent<MeshRenderer>();
+            meshRenderer.enabled = true;
+            meshRenderer.sharedMaterial = materials[0];
+        }
+        else if (skinnedMeshRenderer.GetComponent<MeshRenderer>() != null)
+        {
+            skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
+            skinnedMeshRenderer.enabled = true;
+            skinnedMeshRenderer.sharedMaterial = materials[0];
+        }
         if (materials.Length < 2 && meshRenderer != null)
         {
             Debug.LogError("Please add materials to: " + gameObject);
@@ -29,9 +38,25 @@ void Update()
     {
         if (check == false)
         {
-            meshRenderer.sharedMaterial = materials[0];
+            if (meshRenderer.GetComponent<MeshRenderer>() != null)
+            {
+                meshRenderer.sharedMaterial = materials[0];
+            }
+            else if (skinnedMeshRenderer.GetComponent<MeshRenderer>() != null)
+            {
+                skinnedMeshRenderer.sharedMaterial = materials[0];
+            }
         }
         else
-            meshRenderer.sharedMaterial = materials[1];
+        {
+            if (meshRenderer.GetComponent<MeshRenderer>() != null)
+            {
+                meshRenderer.sharedMaterial = materials[1];
+            }
+            else if (skinnedMeshRenderer.GetComponent<MeshRenderer>() != null)
+            {
+                skinnedMeshRenderer.sharedMaterial = materials[1];
+            }
+        }
     }
 }

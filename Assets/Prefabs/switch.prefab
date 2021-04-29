@@ -124,9 +124,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1472101345036533651}
   - component: {fileID: 6098468250289171979}
+  - component: {fileID: 1452763070178055475}
   m_Layer: 0
   m_Name: Switch
-  m_TagString: Untagged
+  m_TagString: Switch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -203,6 +204,22 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.027712896, y: 0.013761401, z: 0.000000014901161}
     m_Extent: {x: 0.17375791, y: 0.16477734, z: 0.10514369}
   m_DirtyAABB: 0
+--- !u!114 &1452763070178055475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030848546596618622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a06661f9511aae4685d66fcf8765b12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  check: 0
+  materials:
+  - {fileID: 2100000, guid: e66f7acb3fefb3e42a103f96f2071046, type: 2}
+  - {fileID: 2100000, guid: 64a3c91d31f2ae84c81a0872641c2740, type: 2}
 --- !u!1 &6267501294666693006
 GameObject:
   m_ObjectHideFlags: 0
