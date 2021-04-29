@@ -532,11 +532,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5193959644050897970, guid: 38fc81b20f700c7459b427b296489893,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38fc81b20f700c7459b427b296489893, type: 3}
 --- !u!4 &169701249 stripped
@@ -1350,17 +1345,17 @@ PrefabInstance:
     - target: {fileID: 3925767717807755244, guid: 508a6baec5010ea41aab99ac5bf092f8,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.12218325
+      value: 0.12218327
       objectReference: {fileID: 0}
     - target: {fileID: 3925767717807755244, guid: 508a6baec5010ea41aab99ac5bf092f8,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000017077465
+      value: 0.000000017077465
       objectReference: {fileID: 0}
     - target: {fileID: 3925767717807755244, guid: 508a6baec5010ea41aab99ac5bf092f8,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000021023316
+      value: -0.0000000021023319
       objectReference: {fileID: 0}
     - target: {fileID: 3925767717807755244, guid: 508a6baec5010ea41aab99ac5bf092f8,
         type: 3}
@@ -1375,12 +1370,12 @@ PrefabInstance:
     - target: {fileID: 3925767717881788062, guid: 508a6baec5010ea41aab99ac5bf092f8,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000042856403
+      value: 0.0000000042856407
       objectReference: {fileID: 0}
     - target: {fileID: 3925767717881788062, guid: 508a6baec5010ea41aab99ac5bf092f8,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 3.7015158e-10
+      value: -3.701516e-10
       objectReference: {fileID: 0}
     - target: {fileID: 3925767717881788062, guid: 508a6baec5010ea41aab99ac5bf092f8,
         type: 3}
@@ -4847,10 +4842,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1803275421, guid: 3243f719bf8eca5448b54c4891020aca, type: 3}
-      propertyPath: altCollectItem.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 432375105861583561, guid: 3243f719bf8eca5448b54c4891020aca,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5201,35 +5192,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 361202199, guid: 39362bc39781e214287beac8078d226a, type: 3}
-      propertyPath: distanceToGround
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 361202199, guid: 39362bc39781e214287beac8078d226a, type: 3}
-      propertyPath: gravityValue
-      value: -30
-      objectReference: {fileID: 0}
-    - target: {fileID: 361202199, guid: 39362bc39781e214287beac8078d226a, type: 3}
-      propertyPath: jumpHeight
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 361202199, guid: 39362bc39781e214287beac8078d226a, type: 3}
-      propertyPath: riftDamage
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 361202199, guid: 39362bc39781e214287beac8078d226a, type: 3}
-      propertyPath: healAmount
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 361202199, guid: 39362bc39781e214287beac8078d226a, type: 3}
-      propertyPath: HPUpAmount
-      value: 65
-      objectReference: {fileID: 0}
-    - target: {fileID: 1414929503786416544, guid: 39362bc39781e214287beac8078d226a,
-        type: 3}
-      propertyPath: m_SkinWidth
-      value: 0.06
-      objectReference: {fileID: 0}
     - target: {fileID: 1414929503786416545, guid: 39362bc39781e214287beac8078d226a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5289,16 +5251,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4255925925130875340, guid: 39362bc39781e214287beac8078d226a,
-        type: 3}
-      propertyPath: totalHealthDecrease
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4255925925130875340, guid: 39362bc39781e214287beac8078d226a,
-        type: 3}
-      propertyPath: totalHealthLimit
-      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39362bc39781e214287beac8078d226a, type: 3}

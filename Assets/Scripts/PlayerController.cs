@@ -489,7 +489,7 @@ public class PlayerController : MonoBehaviour
             itemTotal.text = LevelStats.Checkpoints.ToString();
         }
 
-        if (other.gameObject.name.Equals("Heal"))
+        if (other.gameObject.name.Equals("medkit_anim"))
         {
             Destroy(other.gameObject);
             Heal();
@@ -505,7 +505,6 @@ public class PlayerController : MonoBehaviour
         {
             Damaged(droneDamage);
             hitStun = true;
-            Debug.Log("pogg");
         }
     }
 
