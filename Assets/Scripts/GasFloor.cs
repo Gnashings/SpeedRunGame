@@ -17,10 +17,4 @@ public class GasFloor : MonoBehaviour
         transform.root.Translate(Vector3.down * -speed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        PlayerController playerInfo = other.transform.GetComponent<PlayerController>();
-        playerInfo.YouDie();
-    }
-
 }

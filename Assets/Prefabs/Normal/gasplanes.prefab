@@ -4856,6 +4856,7 @@ GameObject:
   - component: {fileID: 1601422953432093623}
   - component: {fileID: 7080985417391977787}
   - component: {fileID: 760456800163190497}
+  - component: {fileID: 1545124097}
   m_Layer: 0
   m_Name: gasplanes
   m_TagString: Untagged
@@ -4872,7 +4873,7 @@ Transform:
   m_GameObject: {fileID: 952961851259728482}
   m_LocalRotation: {x: 0, y: 0, z: 0.00034904052, w: 0.99999994}
   m_LocalPosition: {x: -31.3, y: -9.43, z: 63.6}
-  m_LocalScale: {x: 20.73602, y: 20.73602, z: 20.73602}
+  m_LocalScale: {x: 42.755596, y: 42.755596, z: 42.755596}
   m_Children:
   - {fileID: 142127342794880005}
   m_Father: {fileID: 0}
@@ -5036,4 +5037,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcb31298232b9614c81ff0218094f6ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 2
+  killBox: {fileID: 0}
+--- !u!65 &1545124097
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952961851259728482}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.6702042, y: 3, z: 2.6702044}
+  m_Center: {x: 0, y: -1.35, z: 0}

@@ -17709,31 +17709,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.04
       objectReference: {fileID: 0}
-    - target: {fileID: 464514446998759640, guid: d2c9bc8ec41b4fd40aed118576c74799,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 42.755596
-      objectReference: {fileID: 0}
-    - target: {fileID: 464514446998759640, guid: d2c9bc8ec41b4fd40aed118576c74799,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 42.755596
-      objectReference: {fileID: 0}
-    - target: {fileID: 464514446998759640, guid: d2c9bc8ec41b4fd40aed118576c74799,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 42.755596
-      objectReference: {fileID: 0}
-    - target: {fileID: 760456800163190497, guid: d2c9bc8ec41b4fd40aed118576c74799,
-        type: 3}
-      propertyPath: speed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 760456800163190497, guid: d2c9bc8ec41b4fd40aed118576c74799,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 952961851259728482, guid: d2c9bc8ec41b4fd40aed118576c74799,
         type: 3}
       propertyPath: m_Name
@@ -17741,30 +17716,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 952961851259728482, guid: d2c9bc8ec41b4fd40aed118576c74799,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_TagString
+      value: Kill Box
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2c9bc8ec41b4fd40aed118576c74799, type: 3}
---- !u!1 &1545124096 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 952961851259728482, guid: d2c9bc8ec41b4fd40aed118576c74799,
-    type: 3}
-  m_PrefabInstance: {fileID: 1545124095}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1545124097
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1545124096}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.6702042, y: 0.035735898, z: 2.6702044}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1551401114 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5521976999613660355, guid: 53c9b7c2804659d479af7a2acb661956,
@@ -19279,6 +19235,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5966924230637268733, guid: abd23300a41b4ae42b446d58f850dafe,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abd23300a41b4ae42b446d58f850dafe, type: 3}
 --- !u!4 &1742107069 stripped
@@ -19963,6 +19924,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 361202199, guid: 39362bc39781e214287beac8078d226a, type: 3}
+      propertyPath: gasDamage
+      value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: 361202201, guid: 39362bc39781e214287beac8078d226a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1414929503786416545, guid: 39362bc39781e214287beac8078d226a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20022,6 +19991,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255925925130875340, guid: 39362bc39781e214287beac8078d226a,
+        type: 3}
+      propertyPath: totalHealthLimit
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255925925130875340, guid: 39362bc39781e214287beac8078d226a,
+        type: 3}
+      propertyPath: totalHealthDecrease
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39362bc39781e214287beac8078d226a, type: 3}

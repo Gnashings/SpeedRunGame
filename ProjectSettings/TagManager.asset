@@ -19,6 +19,9 @@ TagManager:
   - Kill Box
   - Alt Object
   - Alt Collect
+  - Heal
+  - Serum
+  - MaxHealthBar
   layers:
   - Default
   - TransparentFX

@@ -1,8 +1,15 @@
-﻿using UnityEditorInternal;
+﻿using System.Security.AccessControl;
+using System.Xml.Schema;
+using TMPro;
+using UnityEditor.Rendering;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
+using Slider = UnityEngine.UI.Slider;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(InputActionReference))]
@@ -22,7 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerAnimation playerAnim;
     
     Transform cameraMainTransform;
-    public Transform detectPlayerSphere;
+    [HideInInspector] public Transform detectPlayerSphere;
     public float radius = 5f;                                           //radius of detection
 
     [Header("STATES")]
@@ -31,19 +38,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isFalling = false;
     [SerializeField] private bool isRunning = false;
     [SerializeField] public bool slowed = false;
-    [SerializeField] private bool inPortalRange = false;
     [SerializeField] private bool inSwitchRange = false;
     [SerializeField] private bool timeCheat = false;
     [SerializeField] public bool canPhase = false;
     [SerializeField] public bool hitStun = false;
+    [HideInInspector] public bool reaching = false;
 
 #pragma warning restore 0649
     //[Header("UI ELEMENTS")]
+    Slider healthbar;
     Slider rechargeOne;
     Slider rechargeTwo;
     Text scoreText;
     Text itemTotal;
     Text Dialog;
+    Text hpText;
     RawImage chargeOne;
     RawImage chargeTwo;
     RawImage worldSwapUI;
@@ -62,10 +71,11 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Divided by this value.")]
     [SerializeField] private float slowBy = 2f;
     [SerializeField] private float totalTimeSlowed = 3f;
-    public float distanceToGround = 1f;
+    [SerializeField] public float distanceToGround = 1f;
     private float timeSlowed;
     private Vector3 teleport;
     int GroundLayer;
+
     [Header("TIME SLOW")]
     [SerializeField] private float slowdownTimer = 2f;
     [SerializeField] private float slowdownFactor = 0.05f;
@@ -81,13 +91,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float droneDamage;
     [SerializeField] float gasDamage;
     [SerializeField] float riftDamage;
+    [SerializeField] public float healAmount;
+    [SerializeField] public float HPUpAmount;
+
 
     private Vector3 portalEntrancePosition;
     private bool sendOff;                                           //teleports the player to another world
     private float timeInRift;
     private bool kickOut = false;
-    public bool reaching = false;
     bool hitSwitch = false;
+    float jumptimer = 0.0f;
+    float jumptime = .15f;
+    bool dialogOn = false;
 
     private void Awake()
     {
@@ -95,12 +110,13 @@ public class PlayerController : MonoBehaviour
         playerAnim = gameObject.GetComponent<PlayerAnimation>();
         playerActions = gameObject.GetComponent<PlayerActions>();
         cameraMainTransform = Camera.main.transform;
-        
         GroundLayer = LayerMask.GetMask("Ground");
 
 
         //Canvas UI
-        scoreText = GameObject.Find("Canvas/Text").GetComponent<Text>();
+        healthbar = GameObject.Find("Canvas/HealthBar").GetComponent<Slider>();
+        hpText = GameObject.Find("Canvas/TotalHPText").GetComponent<Text>();
+        //scoreText = GameObject.Find("Canvas/Text").GetComponent<Text>();
         rechargeOne = GameObject.Find("Canvas/TimeDilation Slider").GetComponent<Slider>();
         rechargeTwo = GameObject.Find("Canvas/TimeDilation Slider2").GetComponent<Slider>();
         chargeOne = GameObject.Find("Canvas/Charge One").GetComponent<RawImage>();
@@ -124,15 +140,22 @@ public class PlayerController : MonoBehaviour
         worldSwapUI.enabled = false;
         Physics.IgnoreLayerCollision(0, 9);
         Physics.GetIgnoreLayerCollision(8, 10);
+
+        healthbar.minValue = 0;
+        healthbar.maxValue = 100;
+        healthbar.value = 100;
+
+        float hptemp = GetComponent<PlayerStats>().TotalHealth;
+        hpText.text = hptemp.ToString();
     }
 
     private void FixedUpdate()
     {
-        UpdateUITImer();
+        //UpdateUITImer();
 
         if (crossed == true)
         {
-            CountDownRiftTime();
+            DimensionSwapPower();
         }
         if (slowed == true)
         {
@@ -142,30 +165,17 @@ public class PlayerController : MonoBehaviour
         {
             isJumping = false;
         }
-        
-
-        if (sendOff == true)
+        UpdateHealthUI();
+        if(dialogOn == true)
         {
-            if (inPortalRange == true)
-            {
-                TeleportPlayer();
-            }
-            else
-                sendOff = false;
+            DialogBoxClear();
         }
-        if (kickOut == true)
-        {
-            KickPlayerFromRift();
-        }
-
-
     }
 
     void Update()
     {
         HandleTimeEvents();
         ChargeTimePower();
-        
         if (hitStun == false)
         {
             Move();
@@ -184,10 +194,9 @@ public class PlayerController : MonoBehaviour
             reaching = false;
         }
 
-        if (actionThree.action.triggered && inPortalRange == true)
+        if (actionThree.action.triggered)
         {
             WorldSwapPower();
-            crossed = true;
         }
 
         if (actionOne.action.triggered && timeCheat == false)
@@ -263,10 +272,6 @@ public class PlayerController : MonoBehaviour
         Debug.Log("returned");
     }
 
-    float jumptimer = 0.0f;
-    float jumptime = .15f;
-
-
     private void Move()
     {
         groundedPlayer = OnGround();
@@ -279,7 +284,6 @@ public class PlayerController : MonoBehaviour
         Vector3 move = new Vector3(movement.x, 0, movement.y);
         move = cameraMainTransform.forward * move.z + cameraMainTransform.right * move.x;
         move.y = 0;
-
         if (slowed == true)
         {
             controller.Move(move * Time.unscaledDeltaTime * playerSpeed/slowBy);
@@ -364,6 +368,21 @@ public class PlayerController : MonoBehaviour
             hitStun = false;
         }
     }
+    float diaTimer = 0.0f;
+    float diaTime = 5.0f;
+    private void DialogBoxClear()
+    {
+        if(dialogOn == true)
+        {
+            diaTimer += Time.unscaledDeltaTime;
+            if(diaTimer >= diaTime)
+            {
+                dialogOn = false;
+                Dialog.text = "";
+                diaTimer = 0.0f;
+            }
+        }
+    }
 
     //calculates and sets time for player UI
     private void UpdateUITImer()
@@ -410,6 +429,11 @@ public class PlayerController : MonoBehaviour
         rechargeTwo.value = rechargeTwo.value + Time.unscaledDeltaTime;
     }
 
+    public void UpdateHealthUI()
+    {
+        healthbar.value = GetComponent<PlayerStats>().Health;
+    }
+
     //checks to see if the time power is able to be used
     public bool TimePower()
     {
@@ -427,6 +451,21 @@ public class PlayerController : MonoBehaviour
             return timeCheat = false;
     }
 
+    private void Heal()
+    {
+        GetComponent<PlayerStats>().HealPlayer(healAmount);
+    }
+
+    private void Stim()
+    {
+        GetComponent<PlayerStats>().StimPlayer(HPUpAmount);
+        dialogOn = true;
+        float hptemp = GetComponent<PlayerStats>().TotalHealth;
+        hpText.text = hptemp.ToString();
+        Dialog.text = "Your total health increased!";
+        healthbar.maxValue += HPUpAmount;
+    }
+
     private void PhasePower()
     {
         canPhase = !canPhase;
@@ -434,38 +473,11 @@ public class PlayerController : MonoBehaviour
 
     private void WorldSwapPower()
     {
-        sendOff = true;
+        crossed = !crossed;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        /**
-        if (other.tag.Equals("Phase Enter") && canPhase)
-        {
-            GameObject entrance = other.gameObject;
-            GameObject exit = entrance.transform.parent.GetChild(0).gameObject;
-
-            teleport = exit.transform.position;
-
-            Debug.Log("crossed");
-            crossed = true;
-            //tbr
-            //playerSpeed = playerSpeed * 5;
-        }
-        **/
-
-        if (other.tag.Equals("Portal"))
-        {
-            inPortalRange = true;
-            worldSwapUI.enabled = true;
-            GameObject portalEntrance = other.gameObject;
-            GameObject PortalExit = portalEntrance.transform.parent.GetChild(0).gameObject;
-
-            Dialog.text = "press E to shift to another world";
-            teleport = PortalExit.transform.position;
-            portalEntrancePosition = portalEntrance.transform.position;
-        }
-
         if (other.tag.Equals("Collectible"))
         {
             Destroy(other.transform.parent.gameObject);
@@ -476,6 +488,18 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(other.transform.parent.gameObject);
             itemTotal.text = LevelStats.Checkpoints.ToString();
+        }
+
+        if (other.tag.Equals("Heal"))
+        {
+            Destroy(other.gameObject);
+            Heal();
+        }
+
+        if (other.tag.Equals("Serum"))
+        {
+            Destroy(other.gameObject);
+            Stim();
         }
 
         if (other.tag.Equals("Enemy"))
@@ -498,7 +522,7 @@ public class PlayerController : MonoBehaviour
                 hitSwitch = true;
             }
         }
-        if (other.tag.Equals("Gas"))
+        if (other.gameObject.name.Equals("gasplanes"))
         {
             Damaged(gasDamage);
         }
@@ -507,7 +531,6 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         worldSwapUI.enabled = false;
-        inPortalRange = false;
         inSwitchRange = false;
         hitSwitch = false;
         Dialog.text = "";
@@ -521,10 +544,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void DimensionSwapPower()
+    {
+        Damaged(riftDamage);
+    }
+
     private void Damaged(float damage)
     {
-        GetComponent<PlayerStats>().Health -= damage;
+        GetComponent<PlayerStats>().Health -= damage * Time.fixedDeltaTime;
+        if(GetComponent<PlayerStats>().Health <= 0)
+        {
+            YouDie();
+        }    
     }
+
 
     public void YouDie()
     {

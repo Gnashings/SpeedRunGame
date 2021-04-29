@@ -6,10 +6,10 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     [Header("Health")]
-    public float Health;
-    public float TotalHealth;
-
-
+    [SerializeField] public float Health;
+    [SerializeField] public float TotalHealth;
+    [SerializeField] public float totalHealthDecrease = 10f;
+    [SerializeField] public float totalHealthLimit = 90f;
     void Awake()
     {
         if (LevelStats.FirstSpawn == false)
@@ -33,6 +33,21 @@ public class PlayerStats : MonoBehaviour
         
     }
 
+    public void HealPlayer(float heal)
+    {
+        if (Health + heal > TotalHealth)
+        {
+            Health = TotalHealth;
+        }
+        else
+            Health += heal;
+    }
+
+    public void StimPlayer(float stim)
+    {
+        TotalHealth += stim;
+    }
+
     void FirstSpawnInit()
     {
         LevelStats.FirstSpawn = true;
@@ -44,8 +59,8 @@ public class PlayerStats : MonoBehaviour
 
     public void GetSavedHealth()
     {
-        Health = LevelStats.Health;
         TotalHealth = LevelStats.TotalHealth;
+        Health = LevelStats.TotalHealth;
     }
 
     public void UpdateHealth()
@@ -56,8 +71,9 @@ public class PlayerStats : MonoBehaviour
 
     void OnDestroy()
     {
-        LevelStats.Health = Health;
-        LevelStats.TotalHealth = TotalHealth;
-        UnityEngine.Debug.Log("lmfao");
+        if (LevelStats.TotalHealth > totalHealthLimit)
+        {
+            LevelStats.TotalHealth = LevelStats.TotalHealth - totalHealthDecrease;
+        }
     }
 }

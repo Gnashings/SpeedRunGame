@@ -532,6 +532,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5193959644050897970, guid: 38fc81b20f700c7459b427b296489893,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38fc81b20f700c7459b427b296489893, type: 3}
 --- !u!4 &169701249 stripped
@@ -1390,12 +1395,12 @@ PrefabInstance:
     - target: {fileID: 3925767718032440594, guid: 508a6baec5010ea41aab99ac5bf092f8,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000017639554
+      value: 0.000000017639547
       objectReference: {fileID: 0}
     - target: {fileID: 3925767718032440594, guid: 508a6baec5010ea41aab99ac5bf092f8,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000018464854
+      value: -0.0000000018464847
       objectReference: {fileID: 0}
     - target: {fileID: 3925767718032440594, guid: 508a6baec5010ea41aab99ac5bf092f8,
         type: 3}
@@ -4385,7 +4390,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595675291}
-  m_LocalRotation: {x: 0.104109846, y: -0.00000003449211, z: 0.0000000036105887, w: 0.99456584}
+  m_LocalRotation: {x: 0.104109846, y: 0.000000034492107, z: -0.0000000036105885,
+    w: 0.99456584}
   m_LocalPosition: {x: 296.6, y: 25.28, z: 214.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4757,6 +4763,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966924230637268733, guid: abd23300a41b4ae42b446d58f850dafe,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abd23300a41b4ae42b446d58f850dafe, type: 3}
@@ -5200,7 +5211,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 361202199, guid: 39362bc39781e214287beac8078d226a, type: 3}
       propertyPath: jumpHeight
-      value: 10
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 361202199, guid: 39362bc39781e214287beac8078d226a, type: 3}
+      propertyPath: riftDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 361202199, guid: 39362bc39781e214287beac8078d226a, type: 3}
+      propertyPath: healAmount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 361202199, guid: 39362bc39781e214287beac8078d226a, type: 3}
+      propertyPath: HPUpAmount
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 1414929503786416544, guid: 39362bc39781e214287beac8078d226a,
         type: 3}
@@ -5266,6 +5289,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255925925130875340, guid: 39362bc39781e214287beac8078d226a,
+        type: 3}
+      propertyPath: totalHealthDecrease
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255925925130875340, guid: 39362bc39781e214287beac8078d226a,
+        type: 3}
+      propertyPath: totalHealthLimit
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39362bc39781e214287beac8078d226a, type: 3}

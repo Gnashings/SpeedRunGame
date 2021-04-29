@@ -5,7 +5,7 @@ using UnityEngine;
 public static class LevelStats
 {
     private static float health, totalHealth;
-    private static int items, switches, checkpoints;
+    private static int items, switches, checkpoints, deaths;
     private static bool levelOne, levelTwo, levelThree, firstSpawn;
 
     public static float Health
@@ -65,7 +65,17 @@ public static class LevelStats
             checkpoints = value;
         }
     }
-
+    public static int Deaths
+    {
+        get
+        {
+            return deaths;
+        }
+        set
+        {
+            deaths = value;
+        }
+    }
     public static bool LevelOneCompleted
     {
         get

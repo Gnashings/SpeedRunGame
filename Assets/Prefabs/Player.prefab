@@ -114,16 +114,16 @@ MonoBehaviour:
   isFalling: 0
   isRunning: 0
   slowed: 0
-  inPortalRange: 0
   inSwitchRange: 0
   timeCheat: 0
   canPhase: 0
   hitStun: 0
+  reaching: 0
   itemCount: 0
   switchCount: 0
   objCount: 0
   playerSpeed: 10
-  jumpHeight: 30
+  jumpHeight: 15
   gravityValue: -30
   rotationSpeed: 20
   playerVelocity: {x: 0, y: 0, z: 0}
@@ -138,8 +138,9 @@ MonoBehaviour:
   allowedTimeInRift: 5
   droneDamage: 0
   gasDamage: 0
-  riftDamage: 0
-  reaching: 0
+  riftDamage: 5
+  healAmount: 20
+  HPUpAmount: 65
 --- !u!114 &4255925925130875340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,11 +150,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1414929503786416606}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b218d75ec857c094dbfde4091dbd7624, type: 3}
+  m_Script: {fileID: 11500000, guid: 717652e0e19d96e489757218d6e77429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 0
   TotalHealth: 0
+  totalHealthDecrease: 10
+  totalHealthLimit: 90
 --- !u!114 &5278854794869442794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   KillBoxes: []
   Swappable: []
+  AltObjects: []
 --- !u!114 &317496749
 MonoBehaviour:
   m_ObjectHideFlags: 0
