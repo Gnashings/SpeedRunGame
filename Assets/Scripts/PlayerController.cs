@@ -54,6 +54,9 @@ public class PlayerController : MonoBehaviour
     RawImage chargeOne;
     RawImage chargeTwo;
     RawImage worldSwapUI;
+    RawImage frozenScreen;
+    RawImage gasScreen;
+    RawImage altScreen;
     public int itemCount;
     public int switchCount;
     public int objCount;
@@ -102,6 +105,12 @@ public class PlayerController : MonoBehaviour
     float jumptime = .15f;
     bool dialogOn = false;
 
+    //sound
+    public AudioSource healSound;
+    public AudioSource stimSound;
+    public AudioSource altSound;
+
+
     private void Awake()
     {
         controller = gameObject.GetComponent<CharacterController>();
@@ -121,6 +130,9 @@ public class PlayerController : MonoBehaviour
         worldSwapUI = GameObject.Find("Canvas/Worldswap UI").GetComponent<RawImage>();
         itemTotal = GameObject.Find("Canvas/Item Total").GetComponent<Text>();
         Dialog = GameObject.Find("Canvas/Dialog").GetComponent<Text>();
+        frozenScreen = GameObject.Find("Canvas/FrozenScreen").GetComponent<RawImage>();
+        gasScreen = GameObject.Find("Canvas/GasScreen").GetComponent<RawImage>();
+        altScreen = GameObject.Find("Canvas/AltWorldScreen").GetComponent<RawImage>();
 
         //Canvas UI set value
         rechargeOne.value = 0.0f;
@@ -144,6 +156,11 @@ public class PlayerController : MonoBehaviour
 
         float hptemp = GetComponent<PlayerStats>().TotalHealth;
         hpText.text = hptemp.ToString();
+
+        healSound = GetComponent<AudioSource>();
+
+        gasScreen.enabled = false;
+        altScreen.enabled = false;
     }
 
     private void FixedUpdate()
@@ -214,6 +231,8 @@ public class PlayerController : MonoBehaviour
     {
         if (timeCheat == true)
         {
+            frozenScreen.enabled = true;
+
             SlowDownTime();
             if (timeWarpCountdown <= slowdownTimer)
             {
@@ -228,6 +247,8 @@ public class PlayerController : MonoBehaviour
 
         if (timeCheat == false)
         {
+            frozenScreen.enabled = false;
+
             ResumeTime();
         }
     }
@@ -450,11 +471,15 @@ public class PlayerController : MonoBehaviour
 
     private void Heal()
     {
+        healSound.Play();
+        
         GetComponent<PlayerStats>().HealPlayer(healAmount);
     }
 
     private void Stim()
     {
+        stimSound.Play();
+
         GetComponent<PlayerStats>().StimPlayer(HPUpAmount);
         dialogOn = true;
         float hptemp = GetComponent<PlayerStats>().TotalHealth;
@@ -471,6 +496,16 @@ public class PlayerController : MonoBehaviour
     private void WorldSwapPower()
     {
         crossed = !crossed;
+
+        if(crossed == true)
+        {
+            altScreen.enabled = true;
+            altSound.Play();
+        }
+        else
+        {
+            altScreen.enabled = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -520,6 +555,8 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.name.Equals("gasplanes"))
         {
+            gasScreen.enabled = true;
+
             Damaged(gasDamage);
         }
     }
