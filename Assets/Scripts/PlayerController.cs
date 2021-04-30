@@ -381,7 +381,8 @@ public class PlayerController : MonoBehaviour
 
     private void HitStun()
     {
-        playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.5f * gravityValue);
+        //Fix or Remove, it LITERALLY sends the player into Orbit if hit by multiple
+        //playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.5f * gravityValue);
         isJumping = true;
         if (OnGround() == true)
         {
@@ -510,12 +511,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private bool Collected = false;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Collectible"))
         {
             Destroy(other.transform.parent.gameObject);
-            itemTotal.text = LevelStats.Items.ToString();
+            
+            Collected = true;
+            if (Collected)
+            {
+                Debug.Log(LevelStats.Items);
+                Collected = false;
+            }
+            itemTotal.text = itemCount.ToString();
         }
 
         if (other.tag.Equals("Checkpoint"))
