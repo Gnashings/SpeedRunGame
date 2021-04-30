@@ -127,7 +127,7 @@ MonoBehaviour:
   switchCount: 0
   objCount: 0
   playerSpeed: 10
-  jumpHeight: 15
+  jumpHeight: 17
   gravityValue: -30
   rotationSpeed: 20
   playerVelocity: {x: 0, y: 0, z: 0}
@@ -140,11 +140,11 @@ MonoBehaviour:
   maxChargeValue: 10
   crossed: 0
   allowedTimeInRift: 5
-  droneDamage: 0
+  droneDamage: 50
   gasDamage: 5
   riftDamage: 5
-  healAmount: 20
-  HPUpAmount: 65
+  healAmount: 25
+  HPUpAmount: 20
   healSound: {fileID: 1878264955}
   stimSound: {fileID: 1878264956}
   altSound: {fileID: 537217607}

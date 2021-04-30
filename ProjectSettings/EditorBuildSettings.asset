@@ -38,4 +38,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ScoutTest.unity
     guid: 78b0e03fb31b5d7499864ead7c376884
+  - enabled: 1
+    path: Assets/Scenes/FinalEscape.unity
+    guid: 9398c781de6e5e54d89476d41a32e4bc
+  - enabled: 1
+    path: Assets/Scenes/EscapedScreen.unity
+    guid: 3ee8df67c53215248b6bc8d68e5f72aa
   m_configObjects: {}

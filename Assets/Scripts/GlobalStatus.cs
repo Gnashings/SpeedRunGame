@@ -72,11 +72,12 @@ public class GlobalStatus : MonoBehaviour
         {
             LevelOne = true;
             SceneManager.LoadScene("WinScreen");
-
+            LevelStats.LevelOneCompleted = true;
         }
         else
             playerInfo.switchCount++;
         Debug.Log(playerInfo.switchCount);
+        
     }
 
     public void CountCollectables()
@@ -85,7 +86,7 @@ public class GlobalStatus : MonoBehaviour
         {
             LevelTwo = true;
             SceneManager.LoadScene("WinScreen");
-
+            LevelStats.LevelThreeCompleted = true;
         }
         else
             playerInfo.itemCount++;
@@ -98,6 +99,7 @@ public class GlobalStatus : MonoBehaviour
         {
             LevelThree = true;
             SceneManager.LoadScene("WinScreen");
+            LevelStats.LevelTwoCompleted = true;
         }
         else
             playerInfo.objCount++;
