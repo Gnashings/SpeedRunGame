@@ -599,6 +599,7 @@ public class PlayerController : MonoBehaviour
         {
             //kicks you out
             crossed = false;
+            altScreen.enabled = false;
         }
 
     }
