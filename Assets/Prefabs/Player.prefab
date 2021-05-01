@@ -106,6 +106,8 @@ MonoBehaviour:
     type: 3}
   actionThree: {fileID: -6127550513790377464, guid: e6500109ad5072f40acb8083760ed4be,
     type: 3}
+  actionFour: {fileID: -8287669964141209637, guid: e6500109ad5072f40acb8083760ed4be,
+    type: 3}
   jumpControl: {fileID: 3252600319625496365, guid: e6500109ad5072f40acb8083760ed4be,
     type: 3}
   controller: {fileID: 1414929503786416544}
@@ -139,7 +141,7 @@ MonoBehaviour:
   timeReset: 2
   maxChargeValue: 10
   crossed: 0
-  allowedTimeInRift: 5
+  allowedTimeInRift: 40
   droneDamage: 50
   gasDamage: 5
   riftDamage: 5

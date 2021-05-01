@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public InputActionReference actionOne;
     [SerializeField] public InputActionReference actionTwo;
     [SerializeField] public InputActionReference actionThree;
+    [SerializeField] public InputActionReference actionFour;
     [SerializeField] public InputActionReference jumpControl;
     [SerializeField] private CharacterController controller;
     [SerializeField] private PlayerActions playerActions;
@@ -198,7 +199,7 @@ public class PlayerController : MonoBehaviour
         else
             HitStun();
         
-        if (actionThree.action.triggered && inSwitchRange && reaching != true)
+        if (actionFour.action.triggered && inSwitchRange && reaching != true)
         {
             reaching = true;
             playerAnim.IsReaching();
@@ -558,7 +559,7 @@ public class PlayerController : MonoBehaviour
         if (other.tag.Equals("Switch"))
         {
             inSwitchRange = true;
-            Dialog.text = "press E to shift to flip switch";
+            Dialog.text = "press F to shift to flip switch";
             if (reaching == true && hitSwitch == false)
             {
                 other.gameObject.BroadcastMessage("Confirm");
@@ -627,6 +628,7 @@ public class PlayerController : MonoBehaviour
         actionOne.action.Enable();
         actionTwo.action.Enable();
         actionThree.action.Enable();
+        actionFour.action.Enable();
         jumpControl.action.Enable();
     }
 
@@ -636,6 +638,7 @@ public class PlayerController : MonoBehaviour
         actionOne.action.Disable();
         actionTwo.action.Disable();
         actionThree.action.Disable();
+        actionFour.action.Disable();
         jumpControl.action.Disable();
     }
 
