@@ -559,7 +559,7 @@ public class PlayerController : MonoBehaviour
         if (other.tag.Equals("Switch"))
         {
             inSwitchRange = true;
-            Dialog.text = "press F to shift to flip switch";
+            Dialog.text = "press F to flip switch";
             if (reaching == true && hitSwitch == false)
             {
                 other.gameObject.BroadcastMessage("Confirm");
