@@ -25,7 +25,7 @@ public class HubLogic : MonoBehaviour
         ShutLevelDoors();
         OpenFinalDoor();
         ResetPlayerCollectibles();
-        door4.SetActive(false);
+        
     }
 
     public void Update()
@@ -54,6 +54,10 @@ public class HubLogic : MonoBehaviour
         if(LevelStats.LevelOneCompleted == true && LevelStats.LevelTwoCompleted == true && LevelStats.LevelThreeCompleted == true)
         {
             door4.SetActive(true);
+        }
+        else
+        {
+            door4.SetActive(false);
         }
     }
     
