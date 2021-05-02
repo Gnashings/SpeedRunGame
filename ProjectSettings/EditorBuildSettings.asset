@@ -21,8 +21,14 @@ EditorBuildSettings:
     path: Assets/Scenes/LoseScreen.unity
     guid: a8c62115cf53e724cb3b274a6a0797bf
   - enabled: 1
-    path: Assets/Scenes/WinScreen.unity
+    path: Assets/Scenes/WinScreenLogic.unity
+    guid: 81a91bcb2685bcd4083303ac2c3bb3d5
+  - enabled: 1
+    path: Assets/Scenes/WinScreenSpeed.unity
     guid: 4d89f65819f6efc41935cc3fa8a03e60
+  - enabled: 1
+    path: Assets/Scenes/WinScreenScout.unity
+    guid: dc0c1c8e1a6fcc045a8aef3661db51d8
   - enabled: 1
     path: Assets/Scenes/THEHUB.unity
     guid: 55c0b726c06f9d94b8cee2bf221ce99f

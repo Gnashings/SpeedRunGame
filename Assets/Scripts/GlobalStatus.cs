@@ -52,15 +52,15 @@ public class GlobalStatus : MonoBehaviour
     {
         if (LevelOne == true)
         {
-            //SceneManager.LoadScene("WinScreen");
+            SceneManager.LoadScene("WinScreenLogic");
         }
         if (LevelTwo == true)
         {
-            //SceneManager.LoadScene("WinScreen");
+            SceneManager.LoadScene("WinScreenSpeed");
         }
         if (LevelThree == true)
         {
-            SceneManager.LoadScene("WinScreen");
+            SceneManager.LoadScene("WinScreenScout");
         }
     }
 

@@ -25,7 +25,6 @@ public class HubLogic : MonoBehaviour
         ShutLevelDoors();
         OpenFinalDoor();
         ResetPlayerCollectibles();
-        
     }
 
     public void Update()
