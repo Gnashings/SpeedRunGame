@@ -403,6 +403,28 @@
                     "action": "ActionFour",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a018b63a-12a9-4d1d-9785-f49ef57f9ab6",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ActionFour",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "21747cd8-45e0-45f3-8636-39731f6f98e5",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ActionFour",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
