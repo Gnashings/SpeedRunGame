@@ -664,14 +664,14 @@ MonoBehaviour:
     "Space" To Jump
 
 
-    "1"
+    "Q"
     For Time Dilation
 
 
-    "2" For Phase Shifting
+    "E" For Dimension Swap
 
 
-    "E" to Interact'
+    "F" to Interact'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -701,8 +701,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 40.29
+  m_fontSizeBase: 40.29
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1361,7 +1361,7 @@ MonoBehaviour:
     "Y" For Time Dilation
 
 
-    "B" For Phase Shifting
+    "B" For Deimension Swap
 
 
     "X" To
@@ -1395,8 +1395,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 40.29
+  m_fontSizeBase: 40.29
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1439,7 +1439,7 @@ MonoBehaviour:
   m_margin: {x: -87.03954, y: 0, z: -248.26237, w: -604.22266}
   m_textInfo:
     textComponent: {fileID: 2012070753}
-    characterCount: 132
+    characterCount: 133
     spriteCount: 0
     spaceCount: 28
     wordCount: 23
