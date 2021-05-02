@@ -543,8 +543,8 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log(LevelStats.Items);
                 Collected = false;
+                itemTotal.text = LevelStats.Items.ToString();
             }
-            
         }
 
         if (other.tag.Equals("Checkpoint"))

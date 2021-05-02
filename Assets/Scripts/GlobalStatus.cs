@@ -77,8 +77,8 @@ public class GlobalStatus : MonoBehaviour
         }
         else
             playerInfo.switchCount++;
-        itemTotal.text = playerInfo.switchCount.ToString();
-        Debug.Log(playerInfo.switchCount);
+            itemTotal.text = playerInfo.switchCount.ToString();
+            Debug.Log(playerInfo.switchCount);
         
     }
 
@@ -92,12 +92,14 @@ public class GlobalStatus : MonoBehaviour
         }
         else
             playerInfo.itemCount++;
-        Debug.Log(playerInfo.itemCount);
+            itemTotal.text = playerInfo.itemCount.ToString();
+
+            Debug.Log(playerInfo.itemCount);
     }
 
     void CountCheckpoints()
     {
-        if (playerInfo.objCount == 3)
+        if (playerInfo.objCount == 4)
         {
             LevelThree = true;
             SceneManager.LoadScene("WinScreen");
