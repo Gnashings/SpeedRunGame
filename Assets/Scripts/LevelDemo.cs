@@ -193,14 +193,14 @@ public class LevelDemo : MonoBehaviour
         if (usingCheckpoints == true && LevelStats.Checkpoints == checkpoints.Length)
         {
             LevelStats.LevelTwoCompleted = true;
-            SceneManager.LoadScene("WinScreen");
+            SceneManager.LoadScene("WinScreenSpeed");
             Debug.Log("COLLECT CONDITION MET " + LevelStats.Checkpoints);
         }
 
         if (usingItems == true && LevelStats.Items == totalCollectables)
         {
             LevelStats.LevelThreeCompleted = true;
-            SceneManager.LoadScene("WinScreen");
+            SceneManager.LoadScene("WinScreenScout");
             Debug.Log("ITEM CONDITION MET " + LevelStats.Items);
         }
     }

@@ -56,11 +56,11 @@ public class GlobalStatus : MonoBehaviour
         }
         if (LevelTwo == true)
         {
-            SceneManager.LoadScene("WinScreenSpeed");
+            //SceneManager.LoadScene("WinScreenSpeed");
         }
         if (LevelThree == true)
         {
-            SceneManager.LoadScene("WinScreenScout");
+           // SceneManager.LoadScene("WinScreenScout");
         }
     }
 
@@ -87,7 +87,7 @@ public class GlobalStatus : MonoBehaviour
         if(playerInfo.itemCount == 3)
         {
             LevelTwo = true;
-            SceneManager.LoadScene("WinScreen");
+            SceneManager.LoadScene("WinScreenScout");
             LevelStats.LevelThreeCompleted = true;
         }
         else
@@ -102,7 +102,7 @@ public class GlobalStatus : MonoBehaviour
         if (playerInfo.objCount == 4)
         {
             LevelThree = true;
-            SceneManager.LoadScene("WinScreen");
+            SceneManager.LoadScene("WinScreenSpeed");
             LevelStats.LevelTwoCompleted = true;
         }
         else
