@@ -23,6 +23,7 @@ public class GlobalStatus : MonoBehaviour
 
     public Scene currentScene;
     Text confirm;
+    Text itemTotal;
     GameObject player;
     PlayerController playerInfo;
 
@@ -39,7 +40,7 @@ public class GlobalStatus : MonoBehaviour
             Destroy(gameObject);
         }
         */
-
+        itemTotal = GameObject.Find("Canvas/Item Total").GetComponent<Text>();
         player = GameObject.Find("Player");
         playerInfo = player.GetComponent<PlayerController>();
         LevelOne = false;
@@ -76,6 +77,7 @@ public class GlobalStatus : MonoBehaviour
         }
         else
             playerInfo.switchCount++;
+        itemTotal.text = playerInfo.switchCount.ToString();
         Debug.Log(playerInfo.switchCount);
         
     }

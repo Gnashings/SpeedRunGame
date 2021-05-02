@@ -9,6 +9,7 @@ public class DimensionSwap : MonoBehaviour
     public GameObject[] Swappable;
     public GameObject[] AltObjects;
     public GameObject[] NormalObjects;
+    public GameObject[] NormalHealth;
     public GameObject[] AltCollectable;
     public GameObject[] Switches;
     PlayerController player;
@@ -19,6 +20,7 @@ public class DimensionSwap : MonoBehaviour
         Swappable = GameObject.FindGameObjectsWithTag("Swappable");
         AltObjects = GameObject.FindGameObjectsWithTag("Alt Object");
         NormalObjects = GameObject.FindGameObjectsWithTag("Normal World Only");
+        NormalHealth = GameObject.FindGameObjectsWithTag("Heal");
         AltCollectable = GameObject.FindGameObjectsWithTag("Alt Collect");
         Switches = GameObject.FindGameObjectsWithTag("Switch");
         player = gameObject.GetComponent<PlayerController>();
@@ -34,6 +36,7 @@ public class DimensionSwap : MonoBehaviour
             ShutDownKillBoxes(false);
             ShowAltWorldObjects(true);
             NormalWorldOnly(false);
+            HPNormalWorldOnly(false);
             ShowAltWorldCollectable(true);
         }
 
@@ -43,6 +46,7 @@ public class DimensionSwap : MonoBehaviour
             ShutDownKillBoxes(true);
             ShowAltWorldObjects(false);
             NormalWorldOnly(true);
+            HPNormalWorldOnly(true);
             ShowAltWorldCollectable(false);
         }
     }
@@ -137,6 +141,7 @@ public class DimensionSwap : MonoBehaviour
 
     void NormalWorldOnly(bool change)
     {
+        
         for (int i = 0; i < NormalObjects.Length; i++)
         {
             if (NormalObjects[i].GetComponent<MeshCollider>() != null)
@@ -151,13 +156,32 @@ public class DimensionSwap : MonoBehaviour
             {
                 NormalObjects[i].GetComponent<MeshRenderer>().enabled = change;
             }
-            if (NormalObjects[i].GetComponent<SkinnedMeshRenderer>() != null)
-            {
-                NormalObjects[i].GetComponent<SkinnedMeshRenderer>().enabled = change;
-            }
             if (NormalObjects[i].GetComponent<ParticleSystem>() != null)
             {
                 var emits = NormalObjects[i].GetComponent<ParticleSystem>().emission;
+                emits.enabled = change;
+            }
+        }
+    }
+
+    void HPNormalWorldOnly(bool change)
+    {
+
+        for (int i = 0; i < NormalHealth.Length; i++)
+        {
+            
+            if (NormalHealth[i].GetComponent<SphereCollider>() != null)
+            {
+                NormalHealth[i].GetComponent<SphereCollider>().enabled = change;
+            }
+                
+            if (NormalHealth[i].GetComponent<SkinnedMeshRenderer>() != null)
+            {
+                NormalHealth[i].GetComponent<SkinnedMeshRenderer>().enabled = change;
+            }
+            if (NormalHealth[i].GetComponent<ParticleSystem>() != null)
+            {
+                var emits = NormalHealth[i].GetComponent<ParticleSystem>().emission;
                 emits.enabled = change;
             }
         }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5419881107754852220}
   m_Layer: 0
   m_Name: medkit2
-  m_TagString: Normal World Only
+  m_TagString: Heal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5099548463406058530}
   m_Layer: 0
   m_Name: joint1
-  m_TagString: Untagged
+  m_TagString: Heal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 23695622}
   m_Layer: 0
   m_Name: medkit_anim
-  m_TagString: Normal World Only
+  m_TagString: Heal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 603488757}
   m_Layer: 0
   m_Name: Particle System
-  m_TagString: Normal World Only
+  m_TagString: Heal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5018,7 +5018,7 @@ GameObject:
   - component: {fileID: 5880913133413572462}
   m_Layer: 0
   m_Name: Particle System (1)
-  m_TagString: Normal World Only
+  m_TagString: Heal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
