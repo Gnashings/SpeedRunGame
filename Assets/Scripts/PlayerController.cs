@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public bool canPhase = false;
     [SerializeField] public bool hitStun = false;
     [HideInInspector] public bool reaching = false;
+    [HideInInspector] public bool paperReaching = false;
 
 #pragma warning restore 0649
     //[Header("UI ELEMENTS")]
@@ -58,6 +59,7 @@ public class PlayerController : MonoBehaviour
     RawImage frozenScreen;
     RawImage gasScreen;
     RawImage altScreen;
+    RawImage paper;
     public int itemCount;
     public int switchCount;
     public int objCount;
@@ -136,6 +138,7 @@ public class PlayerController : MonoBehaviour
         frozenScreen = GameObject.Find("Canvas/FrozenScreen").GetComponent<RawImage>();
         gasScreen = GameObject.Find("Canvas/GasScreen").GetComponent<RawImage>();
         altScreen = GameObject.Find("Canvas/AltWorldScreen").GetComponent<RawImage>();
+        paper = GameObject.Find("Canvas/Paper").GetComponent<RawImage>();
 
         //Canvas UI set value
         rechargeOne.value = 0.0f;
@@ -164,6 +167,7 @@ public class PlayerController : MonoBehaviour
 
         gasScreen.enabled = false;
         altScreen.enabled = false;
+        paper.enabled = false;
     }
 
     private void FixedUpdate()
@@ -590,6 +594,16 @@ public class PlayerController : MonoBehaviour
 
             Damaged(gasDamage);
         }
+
+        if (other.gameObject.name.Equals("paper"))
+        {
+            Dialog.text = "press 'F' to interact";
+
+            if (actionFour.action.triggered && paper.enabled == false)
+            {
+                paper.enabled = true;
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -598,6 +612,7 @@ public class PlayerController : MonoBehaviour
         inSwitchRange = false;
         hitSwitch = false;
         Dialog.text = "";
+        paper.enabled = false;
     }
 
     private void TeleportPlayer()
