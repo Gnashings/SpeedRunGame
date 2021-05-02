@@ -112,6 +112,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource altSound;
     public AudioSource freezeSound;
 
+    private bool setFirstButton = false;
 
     private void Awake()
     {
@@ -192,6 +193,23 @@ public class PlayerController : MonoBehaviour
     {
         HandleTimeEvents();
         ChargeTimePower();
+        if (PauseManager2.paused)
+        {
+            FreeMouse();
+            if (setFirstButton == false)
+            {
+                //myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(GameObject.Find("Slider"));
+                setFirstButton = true;
+            }
+            //mouseSens = SensitivitySlider.value;
+            return;
+        }
+        if (PauseManager2.paused == false)
+        {
+            LockMouse();
+            setFirstButton = false;
+        }
+
         if (hitStun == false)
         {
             Move();
@@ -526,7 +544,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(LevelStats.Items);
                 Collected = false;
             }
-            itemTotal.text = LevelStats.Items.ToString();
+            
         }
 
         if (other.tag.Equals("Checkpoint"))
@@ -642,12 +660,6 @@ public class PlayerController : MonoBehaviour
         jumpControl.action.Disable();
     }
 
-    private void LockMouse()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
     public void StopReaching()
     {
         playerAnim.NotReaching();
@@ -669,6 +681,19 @@ public class PlayerController : MonoBehaviour
         bool r;
         r = Physics.CheckSphere(transform.position, distanceToGround, GroundLayer);
         return r;
+    }
+
+
+    private void FreeMouse()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    private void LockMouse()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }
 

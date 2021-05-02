@@ -1,0 +1,55 @@
+{
+    "name": "PauseActions",
+    "maps": [
+        {
+            "name": "Pause",
+            "id": "ed4ca4b1-f473-4916-8bdf-3037a176e810",
+            "actions": [
+                {
+                    "name": "PauseButtons",
+                    "type": "Button",
+                    "id": "a7db1a19-a2dc-4a12-85b0-304480399bbd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ecebdb24-6add-4a30-97a5-304003c4b8ec",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PauseButtons",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5aba49db-cf4a-415e-8f66-6fc5b9bf1a60",
+                    "path": "<XInputController>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PauseButtons",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6b38c5ac-7d3f-4f70-9705-3d703015961a",
+                    "path": "<DualShockGamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PauseButtons",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
