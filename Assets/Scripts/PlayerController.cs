@@ -3,6 +3,7 @@ using System.Xml.Schema;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -113,6 +114,11 @@ public class PlayerController : MonoBehaviour
     public AudioSource stimSound;
     public AudioSource altSound;
     public AudioSource freezeSound;
+    public AudioSource jumpSound;
+    public AudioSource jump2Sound;
+    bool hasPlayed_1 = false;
+    bool hasPlayed_2 = false;
+
 
     private bool setFirstButton = false;
 
@@ -191,6 +197,7 @@ public class PlayerController : MonoBehaviour
         {
             DialogBoxClear();
         }
+       
     }
 
     void Update()
@@ -247,6 +254,16 @@ public class PlayerController : MonoBehaviour
             PhasePower();
         }
         Forces();
+        if (!hasPlayed_1)
+        {
+            jumpSound.Play();
+            hasPlayed_1 = true;
+        }
+        if (hasPlayed_1 && !hasPlayed_2)
+        {
+            jump2Sound.Play();
+            hasPlayed_2 = true;
+        }
 
     }
 
@@ -400,6 +417,8 @@ public class PlayerController : MonoBehaviour
     {
         playerVelocity.y += Mathf.Sqrt(jumpHeight * -5.0f * gravityValue);
         isJumping = true;
+        jumpSound.Play();
+        jump2Sound.Play();
     }
 
     private void HitStun()

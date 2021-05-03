@@ -72,6 +72,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_19533FBC: 1
+    - Vector1_2887A7FC: 5
+    - Vector1_CE554335: 2
     - _Brightness: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -100,6 +103,8 @@ Material:
     - _VertexColor: 0
     - _ZWrite: 1
     m_Colors:
+    - Color_D32891C: {r: 0, g: 0.2708898, b: 1, a: 0}
+    - Color_EC7CDBD8: {r: 0.0621499, g: 0.05809891, b: 0.9622642, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DepthGradientDeep: {r: 0, g: 0.14901961, b: 0.76862746, a: 1}
     - _DepthGradientShallow: {r: 0.25380915, g: 0.47638044, b: 0.9150943, a: 0.7254902}
