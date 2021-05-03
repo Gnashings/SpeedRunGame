@@ -13639,6 +13639,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CheckPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 3481116887341847934, guid: d5f4cc7fee5c1d043bd9797e0842daeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6096608951081494377, guid: d5f4cc7fee5c1d043bd9797e0842daeb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -55289,6 +55294,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CheckPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 3481116887341847934, guid: d5f4cc7fee5c1d043bd9797e0842daeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6096608951081494377, guid: d5f4cc7fee5c1d043bd9797e0842daeb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -59405,6 +59415,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CheckPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 3481116887341847934, guid: d5f4cc7fee5c1d043bd9797e0842daeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6096608951081494377, guid: d5f4cc7fee5c1d043bd9797e0842daeb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -59473,6 +59488,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CheckPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3481116887341847934, guid: d5f4cc7fee5c1d043bd9797e0842daeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6096608951081494377, guid: d5f4cc7fee5c1d043bd9797e0842daeb,
         type: 3}
@@ -59674,6 +59694,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1803275421, guid: 3243f719bf8eca5448b54c4891020aca, type: 3}
       propertyPath: totalRequiredCollectables
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803275421, guid: 3243f719bf8eca5448b54c4891020aca, type: 3}
+      propertyPath: totalNormalCollectables
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 432375105861583561, guid: 3243f719bf8eca5448b54c4891020aca,

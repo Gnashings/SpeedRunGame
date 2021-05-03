@@ -94,7 +94,7 @@ public class LevelDemo : MonoBehaviour
             }
         }
 
-        altCollectItem = GameObject.FindGameObjectsWithTag("Alt Collect");
+        /*altCollectItem = GameObject.FindGameObjectsWithTag("Alt Collect");
         if (altCollectItem != null)
         {
             //if(altCollectItem[0].GetComponent<SphereCollider>() != null)
@@ -105,7 +105,7 @@ public class LevelDemo : MonoBehaviour
             {
                 altCollectItem[0].GetComponent<MonoBehaviour>().enabled = false;
             }
-        }
+        }*/
 
         altObjects = GameObject.FindGameObjectsWithTag("Alt Object");
         if (altObjects != null)
