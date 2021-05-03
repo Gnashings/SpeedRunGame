@@ -12,6 +12,8 @@ public class DimensionSwap : MonoBehaviour
     public GameObject[] NormalHealth;
     public GameObject[] AltCollectable;
     public GameObject[] Switches;
+    public GameObject[] SerumAltObjects;
+
     PlayerController player;
 
     void Awake()
@@ -23,6 +25,7 @@ public class DimensionSwap : MonoBehaviour
         NormalHealth = GameObject.FindGameObjectsWithTag("Heal");
         AltCollectable = GameObject.FindGameObjectsWithTag("Alt Collect");
         Switches = GameObject.FindGameObjectsWithTag("Switch");
+        SerumAltObjects = GameObject.FindGameObjectsWithTag("Serum");
         player = gameObject.GetComponent<PlayerController>();
     }
 
@@ -38,6 +41,7 @@ public class DimensionSwap : MonoBehaviour
             NormalWorldOnly(false);
             HPNormalWorldOnly(false);
             ShowAltWorldCollectable(true);
+            ShowSerumAltObjects(true);
         }
 
         if (player.crossed == false)
@@ -48,6 +52,7 @@ public class DimensionSwap : MonoBehaviour
             NormalWorldOnly(true);
             HPNormalWorldOnly(true);
             ShowAltWorldCollectable(false);
+            ShowSerumAltObjects(false);
         }
     }
 
@@ -123,6 +128,31 @@ public class DimensionSwap : MonoBehaviour
             if (AltCollectable[i].GetComponent<ParticleSystem>() != null)
             {
                 var emits = AltCollectable[i].GetComponent<ParticleSystem>().emission;
+                emits.enabled = change;
+            }
+        }
+    }
+
+    void ShowSerumAltObjects(bool change)
+    {
+        for (int i = 0; i < SerumAltObjects.Length; i++)
+        {
+            Debug.Log(SerumAltObjects[i]);
+            if (SerumAltObjects[i].GetComponent<MeshCollider>() != null)
+            {
+                SerumAltObjects[i].GetComponent<MeshCollider>().enabled = change;
+            }
+            if (SerumAltObjects[i].GetComponent<SphereCollider>() != null)
+            {
+                SerumAltObjects[i].GetComponent<SphereCollider>().enabled = change;
+            }
+            if (SerumAltObjects[i].GetComponent<SkinnedMeshRenderer>() != null)
+            {
+                SerumAltObjects[i].GetComponent<SkinnedMeshRenderer>().enabled = change;
+            }
+            if (SerumAltObjects[i].GetComponent<ParticleSystem>() != null)
+            {
+                var emits = SerumAltObjects[i].GetComponent<ParticleSystem>().emission;
                 emits.enabled = change;
             }
         }
