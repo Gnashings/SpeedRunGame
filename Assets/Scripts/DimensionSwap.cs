@@ -12,6 +12,7 @@ public class DimensionSwap : MonoBehaviour
     public GameObject[] NormalHealth;
     public GameObject[] AltCollectable;
     public GameObject[] Switches;
+
     PlayerController player;
 
     void Awake()

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5193959644050897970}
   m_Layer: 0
   m_Name: Serum
-  m_TagString: Alt Collect
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 3553414067005214650}
   m_Layer: 0
   m_Name: serum
-  m_TagString: Alt Collect
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 9143169790681987791}
   m_Layer: 0
   m_Name: Particle System
-  m_TagString: Alt Collect
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5018,7 +5018,7 @@ GameObject:
   - component: {fileID: 6134845729464722856}
   m_Layer: 0
   m_Name: Particle System (1)
-  m_TagString: Alt Collect
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

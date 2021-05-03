@@ -94,7 +94,7 @@ public class LevelDemo : MonoBehaviour
             }
         }
 
-        altCollectItem = GameObject.FindGameObjectsWithTag("Alt Collect");
+        /*altCollectItem = GameObject.FindGameObjectsWithTag("Alt Collect");
         if (altCollectItem != null)
         {
             //if(altCollectItem[0].GetComponent<SphereCollider>() != null)
@@ -105,7 +105,7 @@ public class LevelDemo : MonoBehaviour
             {
                 altCollectItem[0].GetComponent<MonoBehaviour>().enabled = false;
             }
-        }
+        }*/
 
         altObjects = GameObject.FindGameObjectsWithTag("Alt Object");
         if (altObjects != null)
@@ -193,14 +193,14 @@ public class LevelDemo : MonoBehaviour
         if (usingCheckpoints == true && LevelStats.Checkpoints == checkpoints.Length)
         {
             LevelStats.LevelTwoCompleted = true;
-            SceneManager.LoadScene("WinScreen");
+            SceneManager.LoadScene("WinScreenSpeed");
             Debug.Log("COLLECT CONDITION MET " + LevelStats.Checkpoints);
         }
 
         if (usingItems == true && LevelStats.Items == totalCollectables)
         {
             LevelStats.LevelThreeCompleted = true;
-            SceneManager.LoadScene("WinScreen");
+            SceneManager.LoadScene("WinScreenScout");
             Debug.Log("ITEM CONDITION MET " + LevelStats.Items);
         }
     }

@@ -10,12 +10,9 @@ public class PauseManager2 : MonoBehaviour
     public GameObject PauseMenu;
     PauseAction action;
 
-    public bool m_IgnoreTimeScale;
-
     private void Awake()
     {
         action = new PauseAction();
-
     }
 
     private void OnEnable()
@@ -41,10 +38,8 @@ public class PauseManager2 : MonoBehaviour
             PauseGame();
     }
     public void PauseGame()
-    {
+    {        
         Time.timeScale = 0;
-        //m_IgnoreTimeScale = 0;
-
 
         AudioListener.pause = true;
         paused = true;
@@ -58,6 +53,5 @@ public class PauseManager2 : MonoBehaviour
         AudioListener.pause = false;
         paused = false;
         PauseMenu.SetActive(false);
-        
     }
 }

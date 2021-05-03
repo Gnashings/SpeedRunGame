@@ -61,6 +61,9 @@ public class PlayerController : MonoBehaviour
     RawImage gasScreen;
     RawImage altScreen;
     RawImage paper;
+    RawImage page1;
+    RawImage page2;
+    RawImage page3;
     public int itemCount;
     public int switchCount;
     public int objCount;
@@ -145,6 +148,9 @@ public class PlayerController : MonoBehaviour
         gasScreen = GameObject.Find("Canvas/GasScreen").GetComponent<RawImage>();
         altScreen = GameObject.Find("Canvas/AltWorldScreen").GetComponent<RawImage>();
         paper = GameObject.Find("Canvas/Paper").GetComponent<RawImage>();
+        page1 = GameObject.Find("Canvas/Page1").GetComponent<RawImage>();
+        page2 = GameObject.Find("Canvas/Page2").GetComponent<RawImage>();
+        page3 = GameObject.Find("Canvas/Page3").GetComponent<RawImage>();
 
         //Canvas UI set value
         rechargeOne.value = 0.0f;
@@ -174,6 +180,9 @@ public class PlayerController : MonoBehaviour
         gasScreen.enabled = false;
         altScreen.enabled = false;
         paper.enabled = false;
+        page1.enabled = false;
+        page2.enabled = false;
+        page3.enabled = false;
     }
 
     private void FixedUpdate()
@@ -623,6 +632,36 @@ public class PlayerController : MonoBehaviour
                 paper.enabled = true;
             }
         }
+
+        if (other.gameObject.name.Equals("page1"))
+        {
+            Dialog.text = "press 'F' to interact";
+
+            if (actionFour.action.triggered && page1.enabled == false)
+            {
+                page1.enabled = true;
+            }
+        }
+
+        if (other.gameObject.name.Equals("page2"))
+        {
+            Dialog.text = "press 'F' to interact";
+
+            if (actionFour.action.triggered && page2.enabled == false)
+            {
+                page2.enabled = true;
+            }
+        }
+
+        if (other.gameObject.name.Equals("page3"))
+        {
+            Dialog.text = "press 'F' to interact";
+
+            if (actionFour.action.triggered && page3.enabled == false)
+            {
+                page3.enabled = true;
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -632,6 +671,9 @@ public class PlayerController : MonoBehaviour
         hitSwitch = false;
         Dialog.text = "";
         paper.enabled = false;
+        page1.enabled = false;
+        page2.enabled = false;
+        page3.enabled = false;
     }
 
     private void TeleportPlayer()
